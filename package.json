@@ -13,6 +13,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@fontsource/roboto": "^5.0.12",
     "dlx": "^0.2.1",
     "eslint-plugin-react": "^7.34.1",
     "init": "^0.1.2",
