@@ -85,5 +85,5 @@ function PrivateAppRoutes() {
   }
   const isAuthenticated = !isError
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
+  return isAuthenticated ? <Outlet /> : <Navigate to={'/sign-in'} />
 }
