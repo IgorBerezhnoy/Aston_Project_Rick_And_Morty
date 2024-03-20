@@ -26,7 +26,28 @@ export interface ICharacter {
 }
 
 export class CharactersApi extends ServicePrototype {
-  static async getCharacters(page: number) {
+  static async getCharacterById(id: number) {
+    const result: IResult<ICharacter> = {
+      errorMessage: '',
+      hasError: false,
+      data: null,
+    }
+
+    try {
+      const response = await api.get<ICharacter>(`/character/${id}`)
+      const character = response.data
+
+      result.data = character
+    } catch (error) {
+      const err = error as AxiosError<IError>
+
+      this._handlerError(result, err)
+    }
+
+    return result
+  }
+
+  static async getCharacterPage(page: number) {
     const result: IResult<ICharacter[]> = {
       errorMessage: '',
       hasError: false,
@@ -38,6 +59,27 @@ export class CharactersApi extends ServicePrototype {
       const characters = response.data.results
 
       result.data = characters
+    } catch (error) {
+      const err = error as AxiosError<IError>
+
+      this._handlerError(result, err)
+    }
+
+    return result
+  }
+
+  static async getCharactersById(id: number[]) {
+    const result: IResult<ICharacter[]> = {
+      errorMessage: '',
+      hasError: false,
+      data: null,
+    }
+
+    try {
+      const response = await api.get<ICharacter[]>(`/character/${id}`)
+      const character = response.data
+
+      result.data = character
     } catch (error) {
       const err = error as AxiosError<IError>
 
