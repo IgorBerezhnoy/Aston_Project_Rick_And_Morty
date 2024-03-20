@@ -1,0 +1,68 @@
+.container {
+  width: 100%;
+  max-width: 420px;
+  margin: 80px auto 0;
+  padding: 33px 36px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.title {
+  margin-bottom: 27px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.forgotPassword {
+  cursor: pointer;
+
+  display: flex;
+  justify-content: flex-end;
+
+  width: 100%;
+  margin-bottom: 66px;
+
+  color: inherit;
+  text-align: right;
+  text-decoration: none;
+
+  &:hover {
+    color: #4c4c4c;
+    transition: all 0.3s;
+  }
+}
+
+.text {
+  color: var(--color-light-900);
+  text-align: center;
+}
+
+.signUp {
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-500);
+  text-decoration-color: var(--color-accent-500);
+
+  &:hover {
+    color: #4c4c4c;
+    transition: all 0.3s;
+  }
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
