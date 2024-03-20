@@ -1,3 +1,9 @@
+import { AppRouter } from '@/router'
+
 export function App() {
-  return <div>Test</div>
+  return (
+    <div>
+      <AppRouter />
+    </div>
+  )
 }
