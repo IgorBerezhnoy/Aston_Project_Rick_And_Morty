@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/button'
-import { Card } from '@/components/card'
 import { TextField } from '@/components/textField'
 
 import s from './sign-in-page.module.scss'
 
+import { CardBg } from '../../components/cardBg'
+
 export const SignInPage = () => {
   return (
-    <Card className={s.container}>
+    <CardBg className={s.container}>
       <h2 className={s.title}>Sign in</h2>
       <form className={s.form}>
         <TextField label={'Email'} name={'email'} placeholder={'email'} />
@@ -28,6 +29,6 @@ export const SignInPage = () => {
           </Link>
         </div>
       </div>
-    </Card>
+    </CardBg>
   )
 }
