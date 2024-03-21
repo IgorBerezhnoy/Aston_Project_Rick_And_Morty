@@ -17,6 +17,7 @@
     "axios": "^1.6.8",
     "clsx": "^2.1.0",
     "dlx": "^0.2.1",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.34.1",
     "init": "^0.1.2",
     "react": "^18.2.0",
