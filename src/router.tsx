@@ -9,6 +9,8 @@ import {
 import { SignInPage } from '@/page/sign-in-page'
 import { SignUpPage } from '@/page/sign-up-page'
 
+import { SearchPage } from './page/search-page'
+
 const publicRouters: RouteObject[] = [
   {
     element: <SignInPage />,
@@ -34,7 +36,7 @@ const privateRoutes: RouteObject[] = [
     path: '/character/:id',
   },
   {
-    element: <h1>Search</h1>,
+    element: <SearchPage />,
     path: '/search/:query',
   },
   {

@@ -1,10 +1,9 @@
-/* eslint-disable perfectionist/sort-interfaces */
 import axios, { AxiosError } from 'axios'
 
 export interface IInfo {
   count: number
-  pages: number
   next: null | string
+  pages: number
   prev: null | string
 }
 
@@ -18,9 +17,9 @@ export interface IError {
 }
 
 export interface IResult<T> {
+  data: T | null
   errorMessage: string
   hasError: boolean
-  data: T | null
 }
 
 export const api = axios.create({
