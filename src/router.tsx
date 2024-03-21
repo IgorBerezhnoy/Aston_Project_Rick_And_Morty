@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import {
   Navigate,
@@ -7,7 +8,8 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { selectAuth } from '@/features/auth/authSlice'
+import { login, selectAuth } from '@/features/auth/authSlice'
+import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { SignInPage } from '@/page/sign-in-page'
 import { SignUpPage } from '@/page/sign-up-page'
 
@@ -83,6 +85,22 @@ function Layout() {
 }
 
 function PrivateAppRoutes() {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser')
+
+    if (!currentUser) {
+      return
+    } // TODO Пока заглушка
+    const currentUserObj = JSON.parse(currentUser)
+    const email = currentUserObj?.email
+
+    if (!currentUserObj || !email) {
+      return
+    } // TODO Пока заглушка
+    dispatch(login({ email: email }))
+  }, [])
   const { isAuth } = useSelector(selectAuth)
 
   return isAuth ? <Outlet /> : <Navigate to={'/sign-in'} />
