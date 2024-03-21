@@ -5,13 +5,13 @@ import { FC } from 'react'
 
 import { ICharacter } from '@/service/ResoursesService/CharactersApi'
 
-import './card.modules.scss'
+import './characterCard.modules.scss'
 
-export interface ICard {
+export interface ICharacterCard {
   char: ICharacter
 }
 
-export const Card: FC<ICard> = ({ char }) => {
+export const CharacterCard: FC<ICharacterCard> = ({ char }) => {
   const { species, name, origin, image } = char
 
   return (
