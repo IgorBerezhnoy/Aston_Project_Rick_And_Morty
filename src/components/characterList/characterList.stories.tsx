@@ -1,4 +1,3 @@
-/* eslint-disable perfectionist/sort-objects */
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { CharacterList } from './'
@@ -16,91 +15,91 @@ export const Default: Story = {
   args: {
     chars: [
       {
-        id: 1,
-        name: 'Rick Sanchez',
-        status: 'Alive',
-        species: 'Human',
-        type: '',
-        gender: 'Male',
-        origin: {
-          name: 'Earth',
-          url: 'https://rickandmortyapi.com/api/location/1',
-        },
-        location: {
-          name: 'Earth',
-          url: 'https://rickandmortyapi.com/api/location/20',
-        },
-        image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+        created: '2017-11-04T18:48:46.250Z',
         episode: [
           'https://rickandmortyapi.com/api/episode/1',
           'https://rickandmortyapi.com/api/episode/2',
         ],
-        url: 'https://rickandmortyapi.com/api/character/1',
-        created: '2017-11-04T18:48:46.250Z',
-      },
-      {
-        id: 2,
-        name: 'Morty Smith',
-        status: 'Alive',
-        species: 'Human',
-        type: '',
         gender: 'Male',
-        origin: {
-          name: 'Earth',
-          url: 'https://rickandmortyapi.com/api/location/1',
-        },
+        id: 1,
+        image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
         location: {
           name: 'Earth',
           url: 'https://rickandmortyapi.com/api/location/20',
         },
-        image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
+        name: 'Rick Sanchez',
+        origin: {
+          name: 'Earth',
+          url: 'https://rickandmortyapi.com/api/location/1',
+        },
+        species: 'Human',
+        status: 'Alive',
+        type: '',
+        url: 'https://rickandmortyapi.com/api/character/1',
+      },
+      {
+        created: '2017-11-04T18:50:21.651Z',
         episode: [
           'https://rickandmortyapi.com/api/episode/1',
           'https://rickandmortyapi.com/api/episode/2',
           // ...
         ],
-        url: 'https://rickandmortyapi.com/api/character/2',
-        created: '2017-11-04T18:50:21.651Z',
-      },
-      {
-        id: 183,
-        name: 'Johnny Depp',
-        status: 'Alive',
-        species: 'Human',
-        type: '',
         gender: 'Male',
-        origin: {
-          name: 'Earth (C-500A)',
-          url: 'https://rickandmortyapi.com/api/location/23',
-        },
-        location: {
-          name: 'Earth (C-500A)',
-          url: 'https://rickandmortyapi.com/api/location/23',
-        },
-        image: 'https://rickandmortyapi.com/api/character/avatar/183.jpeg',
-        episode: ['https://rickandmortyapi.com/api/episode/8'],
-        url: 'https://rickandmortyapi.com/api/character/183',
-        created: '2017-12-29T18:51:29.693Z',
-      },
-      {
-        id: 361,
-        name: 'Toxic Rick',
-        status: 'Dead',
-        species: 'Humanoid',
-        type: "Rick's Toxic Side",
-        gender: 'Male',
-        origin: {
-          name: 'Alien Spa',
-          url: 'https://rickandmortyapi.com/api/location/64',
-        },
+        id: 2,
+        image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
         location: {
           name: 'Earth',
           url: 'https://rickandmortyapi.com/api/location/20',
         },
-        image: 'https://rickandmortyapi.com/api/character/avatar/361.jpeg',
-        episode: ['https://rickandmortyapi.com/api/episode/27'],
-        url: 'https://rickandmortyapi.com/api/character/361',
+        name: 'Morty Smith',
+        origin: {
+          name: 'Earth',
+          url: 'https://rickandmortyapi.com/api/location/1',
+        },
+        species: 'Human',
+        status: 'Alive',
+        type: '',
+        url: 'https://rickandmortyapi.com/api/character/2',
+      },
+      {
+        created: '2017-12-29T18:51:29.693Z',
+        episode: ['https://rickandmortyapi.com/api/episode/8'],
+        gender: 'Male',
+        id: 183,
+        image: 'https://rickandmortyapi.com/api/character/avatar/183.jpeg',
+        location: {
+          name: 'Earth (C-500A)',
+          url: 'https://rickandmortyapi.com/api/location/23',
+        },
+        name: 'Johnny Depp',
+        origin: {
+          name: 'Earth (C-500A)',
+          url: 'https://rickandmortyapi.com/api/location/23',
+        },
+        species: 'Human',
+        status: 'Alive',
+        type: '',
+        url: 'https://rickandmortyapi.com/api/character/183',
+      },
+      {
         created: '2018-01-10T18:20:41.703Z',
+        episode: ['https://rickandmortyapi.com/api/episode/27'],
+        gender: 'Male',
+        id: 361,
+        image: 'https://rickandmortyapi.com/api/character/avatar/361.jpeg',
+        location: {
+          name: 'Earth',
+          url: 'https://rickandmortyapi.com/api/location/20',
+        },
+        name: 'Toxic Rick',
+        origin: {
+          name: 'Alien Spa',
+          url: 'https://rickandmortyapi.com/api/location/64',
+        },
+        species: 'Humanoid',
+        status: 'Dead',
+        type: "Rick's Toxic Side",
+        url: 'https://rickandmortyapi.com/api/character/361',
       },
     ],
   },

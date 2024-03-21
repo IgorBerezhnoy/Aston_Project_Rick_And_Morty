@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-curly-brace-presence */
-/* eslint-disable perfectionist/sort-objects */
-/* eslint-disable perfectionist/sort-jsx-props */
 import { FC } from 'react'
 
 import { ICharacter } from '@/service/ResoursesService/CharactersApi'
@@ -15,10 +12,10 @@ export interface ICharacterList {
 
 export const CharacterList: FC<ICharacterList> = ({ chars }) => {
   return (
-    <section className="character">
-      <ul className="character__list">
+    <section className={'character'}>
+      <ul className={'character__list'}>
         {chars.map(char => (
-          <CharacterCard key={char.id} char={char} />
+          <CharacterCard char={char} key={char.id} />
         ))}
       </ul>
     </section>
