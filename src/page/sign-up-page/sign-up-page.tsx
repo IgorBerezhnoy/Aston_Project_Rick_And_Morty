@@ -1,9 +1,11 @@
 import { ChangeEvent, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Link, Navigate } from 'react-router-dom'
 
 import { Button } from '@/components/button'
 import { CardBg } from '@/components/cardBg'
 import { TextField } from '@/components/textField'
+import { selectAuth } from '@/features/auth/authSlice'
 
 import s from './sign-up-page.module.scss'
 
@@ -11,6 +13,8 @@ export const SignUpPage = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [secondPassword, setSecondPassword] = useState<string>('')
+  const { isAuth } = useSelector(selectAuth)
+
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value)
   }
@@ -24,7 +28,11 @@ export const SignUpPage = () => {
     if (password !== secondPassword) {
       return // TODO Пока заглушка
     }
-    localStorage.setItem('user', JSON.stringify({ email, password }))
+    localStorage.setItem(email, JSON.stringify({ email, password }))
+  }
+
+  if (isAuth) {
+    return <Navigate to={'/'} />
   }
 
   return (

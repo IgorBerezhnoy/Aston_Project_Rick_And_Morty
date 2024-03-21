@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux'
 import {
   Navigate,
   Outlet,
@@ -6,6 +7,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { selectAuth } from '@/features/auth/authSlice'
 import { SignInPage } from '@/page/sign-in-page'
 import { SignUpPage } from '@/page/sign-up-page'
 
@@ -81,12 +83,7 @@ function Layout() {
 }
 
 function PrivateAppRoutes() {
-  const { isError, isLoading } = { isError: false, isLoading: false }
+  const { isAuth } = useSelector(selectAuth)
 
-  if (isLoading) {
-    return <h1>Loading...</h1>
-  }
-  const isAuthenticated = !isError
-
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/sign-in'} />
+  return isAuth ? <Outlet /> : <Navigate to={'/sign-in'} />
 }

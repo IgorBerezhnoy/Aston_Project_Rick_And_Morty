@@ -1,15 +1,20 @@
 import { ChangeEvent, MouseEvent, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Link, Navigate } from 'react-router-dom'
 
 import { Button } from '@/components/button'
 import { CardBg } from '@/components/cardBg'
 import { TextField } from '@/components/textField'
+import { login, selectAuth } from '@/features/auth/authSlice'
+import { useAppDispatch } from '@/hooks/useAppDispatch'
 
 import s from './sign-in-page.module.scss'
 
 export const SignInPage = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const dispatch = useAppDispatch()
+  const { isAuth } = useSelector(selectAuth)
 
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value)
@@ -17,11 +22,23 @@ export const SignInPage = () => {
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.currentTarget.value)
   }
-  const getItem = () => localStorage.getItem('user')
   const signInHandler = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
+    const user = localStorage.getItem(email)
 
-    console.log(getItem())
+    if (!user) {
+      return null
+    }
+    const userObj = JSON.parse(user)
+
+    if (userObj.email === email && userObj.password === password) {
+      dispatch(login({ email }))
+      localStorage.setItem('currentUser', JSON.stringify({ email, password }))
+    }
+  }
+
+  if (isAuth) {
+    return <Navigate to={'/'} />
   }
 
   return (
