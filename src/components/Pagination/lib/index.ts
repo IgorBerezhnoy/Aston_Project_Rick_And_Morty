@@ -1,1 +1,1 @@
-export { usePagination } from './usePagination'
+export { usePagination } from '@/components/Pagination/lib/usePagination'
