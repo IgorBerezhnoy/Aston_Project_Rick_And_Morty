@@ -45,6 +45,7 @@ export class CharactersApi extends ServicePrototype {
   }
 
   static async getCharacterPage(page: number) {
+
     const result: IResult<IResponse<ICharacter[]>> = {
       data: null,
       errorMessage: '',
