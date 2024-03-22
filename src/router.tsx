@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import {
   Navigate,
   Outlet,
@@ -6,16 +8,18 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { SignInPage } from '@/page/sign-in-page'
-import { SignUpPage } from '@/page/sign-up-page'
+import { login, selectAuth } from '@/features/auth/authSlice'
+import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { SignInPageContainer } from '@/page/sign-in-page'
+import { SignUpPageContainer } from '@/page/sign-up-page'
 
 const publicRouters: RouteObject[] = [
   {
-    element: <SignInPage />,
+    element: <SignInPageContainer />,
     path: '/sign-in',
   },
   {
-    element: <SignUpPage />,
+    element: <SignUpPageContainer />,
     path: '/sign-up',
   },
   {
@@ -81,12 +85,23 @@ function Layout() {
 }
 
 function PrivateAppRoutes() {
-  const { isError, isLoading } = { isError: false, isLoading: false }
+  const dispatch = useAppDispatch()
 
-  if (isLoading) {
-    return <h1>Loading...</h1>
-  }
-  const isAuthenticated = !isError
+  useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser')
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/sign-in'} />
+    if (!currentUser) {
+      return
+    } // TODO Пока заглушка
+    const currentUserObj = JSON.parse(currentUser)
+    const email = currentUserObj?.email
+
+    if (!currentUserObj || !email) {
+      return
+    } // TODO Пока заглушка
+    dispatch(login({ email: email }))
+  }, [])
+  const { isAuth } = useSelector(selectAuth)
+
+  return isAuth ? <Outlet /> : <Navigate to={'/sign-in'} />
 }
