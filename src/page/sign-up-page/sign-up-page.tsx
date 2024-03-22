@@ -1,40 +1,21 @@
-import { ChangeEvent, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link, Navigate } from 'react-router-dom'
+import { ChangeEvent } from 'react'
+import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/button'
 import { CardBg } from '@/components/cardBg'
 import { TextField } from '@/components/textField'
-import { selectAuth } from '@/features/auth/authSlice'
 
-import s from './sign-up-page.module.scss'
+import s from '@/page/sign-up-page/sign-up-page.module.scss'
 
-export const SignUpPage = () => {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [secondPassword, setSecondPassword] = useState<string>('')
-  const { isAuth } = useSelector(selectAuth)
-
-  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.currentTarget.value)
-  }
-  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.currentTarget.value)
-  }
-  const onSecondChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setSecondPassword(e.currentTarget.value)
-  }
-  const signUpHandler = () => {
-    if (password !== secondPassword) {
-      return // TODO Пока заглушка
-    }
-    localStorage.setItem(email, JSON.stringify({ email, password }))
-  }
-
-  if (isAuth) {
-    return <Navigate to={'/'} />
-  }
-
+export const SignUpPage = ({
+  email,
+  onChangeEmail,
+  onChangePassword,
+  onSecondChangePassword,
+  password,
+  secondPassword,
+  signUpHandler,
+}: Props) => {
   return (
     <CardBg className={s.container}>
       <h2 className={s.title}>Sign in</h2>
@@ -74,4 +55,14 @@ export const SignUpPage = () => {
       </div>
     </CardBg>
   )
+}
+
+interface Props {
+  email: string
+  onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void
+  onChangePassword: (e: ChangeEvent<HTMLInputElement>) => void
+  onSecondChangePassword: (e: ChangeEvent<HTMLInputElement>) => void
+  password: string
+  secondPassword: string
+  signUpHandler: () => void
 }

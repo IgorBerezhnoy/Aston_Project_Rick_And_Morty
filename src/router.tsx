@@ -10,16 +10,16 @@ import {
 
 import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
-import { SignInPage } from '@/page/sign-in-page'
-import { SignUpPage } from '@/page/sign-up-page'
+import { SignInPageContainer } from '@/page/sign-in-page'
+import { SignUpPageContainer } from '@/page/sign-up-page'
 
 const publicRouters: RouteObject[] = [
   {
-    element: <SignInPage />,
+    element: <SignInPageContainer />,
     path: '/sign-in',
   },
   {
-    element: <SignUpPage />,
+    element: <SignUpPageContainer />,
     path: '/sign-up',
   },
   {

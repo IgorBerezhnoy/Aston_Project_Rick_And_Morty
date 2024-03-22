@@ -1,46 +1,19 @@
-import { ChangeEvent, MouseEvent, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link, Navigate } from 'react-router-dom'
+import { ChangeEvent, MouseEvent } from 'react'
+import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/button'
 import { CardBg } from '@/components/cardBg'
 import { TextField } from '@/components/textField'
-import { login, selectAuth } from '@/features/auth/authSlice'
-import { useAppDispatch } from '@/hooks/useAppDispatch'
 
-import s from './sign-in-page.module.scss'
+import s from '@/page/sign-in-page/sign-in-page.module.scss'
 
-export const SignInPage = () => {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const dispatch = useAppDispatch()
-  const { isAuth } = useSelector(selectAuth)
-
-  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.currentTarget.value)
-  }
-  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.currentTarget.value)
-  }
-  const signInHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    const user = localStorage.getItem(email)
-
-    if (!user) {
-      return null
-    }
-    const userObj = JSON.parse(user)
-
-    if (userObj.email === email && userObj.password === password) {
-      dispatch(login({ email }))
-      localStorage.setItem('currentUser', JSON.stringify({ email, password }))
-    }
-  }
-
-  if (isAuth) {
-    return <Navigate to={'/'} />
-  }
-
+export const SignInPage = ({
+  email,
+  onChangeEmail,
+  onChangePassword,
+  password,
+  signInHandler,
+}: Props) => {
   return (
     <CardBg className={s.container}>
       <h2 className={s.title}>Sign in</h2>
@@ -72,4 +45,12 @@ export const SignInPage = () => {
       </div>
     </CardBg>
   )
+}
+
+interface Props {
+  email: string
+  onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void
+  onChangePassword: (e: ChangeEvent<HTMLInputElement>) => void
+  password: string
+  signInHandler: (e: MouseEvent<HTMLButtonElement>) => void
 }
