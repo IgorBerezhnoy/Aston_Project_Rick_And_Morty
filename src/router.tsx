@@ -15,6 +15,8 @@ import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { SignInPageContainer } from '@/page/sign-in-page'
 import { SignUpPageContainer } from '@/page/sign-up-page'
 
+import { SearchPage } from './page/search-page'
+
 const publicRouters: RouteObject[] = [
   {
     element: <SignInPageContainer />,
@@ -40,7 +42,7 @@ const privateRoutes: RouteObject[] = [
     path: '/character/:id',
   },
   {
-    element: <h1>Search</h1>,
+    element: <SearchPage />,
     path: '/search/:query',
   },
   {
