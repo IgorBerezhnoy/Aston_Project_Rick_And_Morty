@@ -4,9 +4,16 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { CharacterList } from '@/components/characterList'
 import { Pagination } from '@/components/pagination'
 import { CharactersApi, ICharacter } from '@/service/ResoursesService/CharactersApi'
+import { IInfo } from '@/service/ServicePrototype'
 
 export const SearchPage: FC = () => {
   const [chars, setChars] = useState<ICharacter[]>([])
+  const [info, setInfo] = useState<IInfo>({
+    count: 826,
+    next: null,
+    pages: 42,
+    prev: null,
+  })
   const { query } = useParams()
   const navigate = useNavigate()
 
@@ -26,7 +33,8 @@ export const SearchPage: FC = () => {
     const resObject = await CharactersApi.getCharacterPage(page)
 
     if (resObject.data) {
-      setChars(resObject.data)
+      setChars(resObject.data.results)
+      setInfo(resObject.data.info)
     }
   }
 
@@ -36,15 +44,17 @@ export const SearchPage: FC = () => {
     getCharacters(page)
   }, [currentPage])
 
+  const pageSize = Math.ceil(info.count / info.pages)
+
   return (
     <>
       <CharacterList chars={chars} />
       <Pagination
         currentPage={currentPage()}
         onPageChange={handleClick}
-        pageSize={20}
+        pageSize={pageSize}
         stepValue={5}
-        totalCount={826}
+        totalCount={info.count}
       />
     </>
   )
