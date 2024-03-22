@@ -21,21 +21,21 @@ type Story = StoryObj<typeof meta>
 export const LogOut: Story = {
   args: {
     children: (
-      <>
+      <div className={s.wrapper}>
         <div className={s.logo}>
           <a href={'/'}>
             <Logo />
           </a>
         </div>
         <Button className={s.button}>Sign In</Button>
-      </>
+      </div>
     ),
   },
 }
 export const LogIn: Story = {
   args: {
     children: (
-      <>
+      <div className={s.wrapper}>
         <div className={s.logo}>
           <a href={'/'}>
             <Logo />
@@ -43,7 +43,7 @@ export const LogIn: Story = {
         </div>
         <Avatar className={s.avatar} name={'Nick'} size={52} />
         {/*// TODO: Чуть позже доюавлю дропдаун с навигацией */}
-      </>
+      </div>
     ),
   },
 }

@@ -1,8 +1,8 @@
 import { FC, useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { Pagination } from '@/components/Pagination'
 import { CharacterList } from '@/components/characterList'
-import { Pagination } from '@/components/pagination'
 import { CharactersApi, ICharacter } from '@/service/ResoursesService/CharactersApi'
 import { IInfo } from '@/service/ServicePrototype'
 
