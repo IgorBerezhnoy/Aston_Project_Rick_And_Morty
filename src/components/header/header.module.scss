@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 70px;
+  padding: 12px;
+
+  background: #171717;
+  border-bottom: 1px solid #333;
+}
+
+.logo {
+  width: 240px;
+  height: 60px;
+  padding-left: 15px;
+}
+
+.button {
+  margin-right: 16px;
+}
