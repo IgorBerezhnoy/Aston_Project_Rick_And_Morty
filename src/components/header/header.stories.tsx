@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Logo } from '@/assets/logo/logo'
+import { Avatar } from '@/components/avatar'
 import { Button } from '@/components/button'
 
 import s from './header.module.scss'
@@ -27,6 +28,21 @@ export const LogOut: Story = {
           </a>
         </div>
         <Button className={s.button}>Sign In</Button>
+      </>
+    ),
+  },
+}
+export const LogIn: Story = {
+  args: {
+    children: (
+      <>
+        <div className={s.logo}>
+          <a href={'/'}>
+            <Logo />
+          </a>
+        </div>
+        <Avatar className={s.avatar} name={'Nick'} size={52} />
+        {/*// TODO: Чуть позже доюавлю дропдаун с навигацией */}
       </>
     ),
   },

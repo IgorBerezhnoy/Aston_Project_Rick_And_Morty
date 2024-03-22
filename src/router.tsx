@@ -8,6 +8,8 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { MainHeader } from '@/components/header/mainHeader'
+import { Page } from '@/components/page'
 import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { SignInPageContainer } from '@/page/sign-in-page'
@@ -69,17 +71,14 @@ export const AppRouter = () => {
 }
 
 function Layout() {
-  // const { data, isError, isLoading } = useGetMeQuerySate()
-  //
-  // const user = isError ? undefined : data
+  const { email, isAuth } = useSelector(selectAuth)
 
   return (
     <>
-      <div>
-        {/*TODO в будущем компоннта пайдж*/}
-        <header>header</header>
+      <Page>
+        <MainHeader isAuth={isAuth} name={email ?? ''} />
         <Outlet />
-      </div>
+      </Page>
     </>
   )
 }
