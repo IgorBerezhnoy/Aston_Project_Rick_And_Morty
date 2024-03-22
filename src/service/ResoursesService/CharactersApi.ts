@@ -1,9 +1,6 @@
-/* eslint-disable perfectionist/sort-named-imports */
-/* eslint-disable perfectionist/sort-objects */
-/* eslint-disable perfectionist/sort-interfaces */
 import { AxiosError } from 'axios'
 
-import { IResponse, IError, IResult, ServicePrototype, api } from '../ServicePrototype'
+import { IError, IResponse, IResult, ServicePrototype, api } from '../ServicePrototype'
 
 interface ILocation {
   name: string
@@ -11,26 +8,26 @@ interface ILocation {
 }
 
 export interface ICharacter {
-  id: number
-  name: string
-  status: string
-  species: string
-  type: string
-  gender: string
-  origin: ILocation
-  location: ILocation
-  image: string
-  episode: string[]
-  url: string
   created: string
+  episode: string[]
+  gender: string
+  id: number
+  image: string
+  location: ILocation
+  name: string
+  origin: ILocation
+  species: string
+  status: string
+  type: string
+  url: string
 }
 
 export class CharactersApi extends ServicePrototype {
   static async getCharacterById(id: number) {
     const result: IResult<ICharacter> = {
+      data: null,
       errorMessage: '',
       hasError: false,
-      data: null,
     }
 
     try {
@@ -48,15 +45,15 @@ export class CharactersApi extends ServicePrototype {
   }
 
   static async getCharacterPage(page: number) {
-    const result: IResult<ICharacter[]> = {
+    const result: IResult<IResponse<ICharacter[]>> = {
+      data: null,
       errorMessage: '',
       hasError: false,
-      data: null,
     }
 
     try {
       const response = await api.get<IResponse<ICharacter[]>>(`/character/?page=${page}`)
-      const characters = response.data.results
+      const characters = response.data
 
       result.data = characters
     } catch (error) {
@@ -70,9 +67,9 @@ export class CharactersApi extends ServicePrototype {
 
   static async getCharactersById(id: number[]) {
     const result: IResult<ICharacter[]> = {
+      data: null,
       errorMessage: '',
       hasError: false,
-      data: null,
     }
 
     try {

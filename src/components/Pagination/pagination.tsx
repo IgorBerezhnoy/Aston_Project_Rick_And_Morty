@@ -84,7 +84,7 @@ export const Pagination = ({
       >
         <ChevronLeftFilled />
       </button>
-      {paginationItems.map((num, index) => {
+      {paginationItems.map((num: '...' | number, index: number) => {
         if (num === '...') {
           return (
             <span className={classNames.dots} key={index} tabIndex={-1}>
