@@ -1,0 +1,85 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  &:has(input:focus) {
+    border-radius: 5px;
+    outline: 2px solid var(--color-accent-200);
+  }
+
+  &:hover,
+  &:active {
+    .label {
+      color: var(--color-accent-500);
+    }
+
+    .input {
+      border-bottom: 1px solid var(--color-accent-500);
+    }
+  }
+}
+
+.input {
+  height: 24px;
+
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-gray-500);
+
+  transition: all 0.3s;
+
+  &:disabled {
+    color: var(--color-gray-500);
+    background: transparent;
+  }
+
+  &:focus-visible {
+    outline: transparent;
+  }
+}
+
+.label {
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-700);
+  transition: all 0.3s;
+}
+
+.disabled {
+  color: var(--color-gray-500);
+
+  &:hover {
+    color: var(--color-gray-500);
+
+    .input {
+      border-bottom: 1px solid var(--color-gray-500);
+    }
+
+    .label {
+      color: var(--color-gray-500);
+    }
+  }
+}
+
+.errorMessage {
+  font-size: var(--font-size-xs);
+  color: var(--color-error-500);
+}
+
+.error {
+  .label {
+    color: var(--color-error-500);
+  }
+
+  &:hover .label {
+    color: var(--color-error-500);
+  }
+
+  .input {
+    color: var(--color-error-500);
+    border-bottom: 1px solid var(--color-error-500);
+  }
+
+  &:hover .input {
+    border-bottom: 1px solid var(--color-error-500);
+  }
+}
