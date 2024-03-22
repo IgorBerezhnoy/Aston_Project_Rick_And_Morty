@@ -1,0 +1,31 @@
+button {
+  all: unset;
+}
+
+.CheckboxRoot {
+  background-color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+.CheckboxRoot:hover {
+  background-color: #F4F0FE;
+}
+.CheckboxRoot:focus {
+  box-shadow: 0 0 0 2px black;
+}
+
+.CheckboxIndicator {
+  color: #6550B9;
+}
+
+.Label {
+  color: black;
+  padding-left: 15px;
+  font-size: 15px;
+  line-height: 1;
+}
