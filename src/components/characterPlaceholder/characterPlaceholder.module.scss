@@ -1,5 +1,5 @@
 .placeholder {
-  &-conteiner {
+  &Conteiner {
     overflow: hidden;
     position: fixed;
     left: 0;
@@ -8,7 +8,7 @@
     top: 0;
   }
 
-  &-name {
+  &Name {
     color: rgba(0, 0, 0, 0.1);
     font-size: 600px;
     text-transform: uppercase;

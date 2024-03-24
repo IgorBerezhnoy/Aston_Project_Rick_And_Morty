@@ -1,13 +1,13 @@
-import './characterPlaceholder.scss'
+import s from './characterPlaceholder.module.scss'
 
-export interface Placeholder {
+export type Placeholder = {
   name: string
 }
 
-export const CharacterPlaceholder = (placeholderText: Placeholder) => {
+export const CharacterPlaceholder = ({ name }: Placeholder) => {
   return (
-    <div className={'placeholder-conteiner'}>
-      <h1 className={'placeholder-name'}>{placeholderText.name}</h1>
+    <div className={s.placeholderConteiner}>
+      <h1 className={s.placeholderName}>{name}</h1>
     </div>
   )
 }

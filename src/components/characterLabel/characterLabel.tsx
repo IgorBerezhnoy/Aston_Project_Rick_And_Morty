@@ -1,9 +1,9 @@
-import './characterLabel.scss'
+import s from './characterLabel.module.scss'
 
-export interface Label {
+export type Label = {
   text: string
 }
 
-export const CharacterLabel = (labelText: Label) => {
-  return <h3 className={'character-label'}>{labelText.text}</h3>
+export const CharacterLabel = ({ text }: Label) => {
+  return <h3 className={s.characterLabel}>{text}</h3>
 }

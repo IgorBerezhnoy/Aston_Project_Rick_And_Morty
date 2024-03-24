@@ -1,19 +1,19 @@
 .character {
-  &-page {
+  &Page {
     margin: 0;
     font-family: system-ui;
     overflow-x: hidden;
   }
-  &-content-conteiner {
+  &ContentConteiner {
     max-width: 1440px;
     margin: 0 auto;
   }
-  &-name-container {
+  &NameContainer {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  &-name {
+  &Name {
     position: relative;
     font-size: 30px;
     & h2:after {
@@ -27,16 +27,16 @@
       top: 50%;
     }
   }
-  &-image-container {
+  &ImageContainer {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  &-image {
+  &Image {
     max-width: 100%;
     border-radius: 50%;
   }
-  &-labels {
+  &Labels {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;

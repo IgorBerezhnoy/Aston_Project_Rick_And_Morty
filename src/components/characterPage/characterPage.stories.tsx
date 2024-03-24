@@ -35,14 +35,6 @@ const rickData = {
   url: 'https://rickandmortyapi.com/api/character/1',
 }
 
-const WidthDefault = () => {
-  return (
-    <div>
-      <CharacterPage char={rickData} />
-    </div>
-  )
-}
-
 export const Default: Story = {
-  render: () => <WidthDefault />,
+  render: () => <CharacterPage char={rickData} />,
 }

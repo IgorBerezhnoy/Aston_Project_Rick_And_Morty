@@ -1,34 +1,34 @@
 import { ICharacter } from '@/service/ResoursesService/CharactersApi'
 
-import './characterPage.scss'
+import s from './characterPage.module.scss'
 
 import { CharacterLabel } from '../characterLabel'
 import { CharacterPlaceholder } from '../characterPlaceholder'
 
-export interface ICharacterPage {
+export type ICharacterPage = {
   char: ICharacter
 }
 
 export const CharacterPage = ({ char }: ICharacterPage) => {
   return (
-    <div className={'character-page'}>
+    <div className={s.characterName}>
       <CharacterPlaceholder name={char.name} />
-      <div className={'character-content-conteiner'}>
-        <div className={'character-name-container'}>
-          <div className={'character-name'}>
+      <div className={s.characterContentConteiner}>
+        <div className={s.characterNameContainer}>
+          <div className={s.characterName}>
             <h2>{char.name}</h2>
           </div>
         </div>
 
-        <div className={'character-image-container'}>
-          <img alt={char.name} className={'character-image'} src={char.image} />
+        <div className={s.characterImageContainer}>
+          <img alt={char.name} className={s.characterImage} src={char.image} />
         </div>
 
-        <div className={'character-labels'}>
+        <div className={s.characterLabels}>
           <CharacterLabel text={`Gender: ${char.gender}`} />
           <CharacterLabel text={`Species: ${char.species}`} />
           <CharacterLabel text={`Status: ${char.status}`} />
-          <CharacterLabel text={`Origin: ${char.origin}`} />
+          <CharacterLabel text={`Origin: ${char.origin.name}`} />
           <CharacterLabel text={`Last location: ${char.location.name}`} />
         </div>
       </div>
