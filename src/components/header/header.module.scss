@@ -1,0 +1,36 @@
+.header {
+  height: 70px;
+  padding: 5px;
+  background: #171717;
+  border-bottom: 1px solid #333;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  width: 240px;
+  height: 60px;
+  padding-left: 15px;
+}
+
+.button {
+  margin-right: 16px;
+}
+
+.avatar {
+  margin-right: 38px;
+}
+
+.storybook {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
