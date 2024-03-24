@@ -2,9 +2,9 @@ import { ChangeEvent, useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
+import { urlPaths } from '@/enum'
 import { selectAuth } from '@/features/auth/authSlice'
 import { SignUpPage } from '@/page/sign-up-page/sign-up-page'
-import { urlPath } from '@/router'
 
 export const SignUpPageContainer = () => {
   const [email, setEmail] = useState<string>('')
@@ -40,10 +40,10 @@ export const SignUpPageContainer = () => {
   }, [email, password, secondPassword])
 
   if (isRegister) {
-    return <Navigate to={urlPath.signIn} />
+    return <Navigate to={urlPaths.signIn} />
   }
   if (isAuth) {
-    return <Navigate to={urlPath.root} />
+    return <Navigate to={urlPaths.root} />
   }
 
   return (

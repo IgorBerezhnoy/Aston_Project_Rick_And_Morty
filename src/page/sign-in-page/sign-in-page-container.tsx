@@ -1,10 +1,10 @@
 import { ChangeEvent, MouseEvent, useCallback, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 
+import { urlPaths } from '@/enum/urlPaths'
 import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-appDispatch'
 import { SignInPage } from '@/page/sign-in-page/sign-in-page'
-import { urlPath } from '@/router'
 
 export const SignInPageContainer = () => {
   const [email, setEmail] = useState<string>('')
@@ -43,7 +43,7 @@ export const SignInPageContainer = () => {
   )
 
   if (isAuth) {
-    return <Navigate to={urlPath.root} />
+    return <Navigate to={urlPaths.root} />
   }
 
   return (

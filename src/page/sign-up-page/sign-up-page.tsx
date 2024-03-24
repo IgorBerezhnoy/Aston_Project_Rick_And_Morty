@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { CardBg } from '@/components/cardBg'
 import { TextField } from '@/components/textField'
-import { urlPath } from '@/router'
+import { urlPaths } from '@/enum'
 
 import s from '@/page/sign-up-page/sign-up-page.module.scss'
 
@@ -60,7 +60,7 @@ export const SignUpPage = memo(
         <div className={s.footer}>
           <div className={s.text}>Already have an account?</div>
           <div className={s.signUp}>
-            <Link to={urlPath.signIn}>
+            <Link to={urlPaths.signIn}>
               <span>Sign In</span>
             </Link>
           </div>
