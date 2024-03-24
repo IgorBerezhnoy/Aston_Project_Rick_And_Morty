@@ -1,4 +1,5 @@
 export enum urlPaths {
+  api = 'https://rickandmortyapi.com/api',
   chapterId = '/character/:id',
   error = '*',
   favorites = '/favorites',

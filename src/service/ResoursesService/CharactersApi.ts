@@ -1,21 +1,21 @@
 import { AxiosError } from 'axios'
 
-import { IError, IResponse, IResult, ServicePrototype, api } from '../ServicePrototype'
+import { Error, Response, Result, ServicePrototype, api } from '../ServicePrototype'
 
-interface ILocation {
+interface Location {
   name: string
   url: string
 }
 
-export interface ICharacter {
+export interface Character {
   created: string
   episode: string[]
   gender: string
   id: number
   image: string
-  location: ILocation
+  location: Location
   name: string
-  origin: ILocation
+  origin: Location
   species: string
   status: string
   type: string
@@ -24,19 +24,19 @@ export interface ICharacter {
 
 export class CharactersApi extends ServicePrototype {
   static async getCharacterById(id: number) {
-    const result: IResult<ICharacter> = {
+    const result: Result<Character> = {
       data: null,
       errorMessage: '',
       hasError: false,
     }
 
     try {
-      const response = await api.get<ICharacter>(`/character/${id}`)
+      const response = await api.get<Character>(`/character/${id}`)
       const character = response.data
 
       result.data = character
     } catch (error) {
-      const err = error as AxiosError<IError>
+      const err = error as AxiosError<Error>
 
       this._handlerError(result, err)
     }
@@ -45,20 +45,19 @@ export class CharactersApi extends ServicePrototype {
   }
 
   static async getCharacterPage(page: number) {
-
-    const result: IResult<IResponse<ICharacter[]>> = {
+    const result: Result<Response<Character[]>> = {
       data: null,
       errorMessage: '',
       hasError: false,
     }
 
     try {
-      const response = await api.get<IResponse<ICharacter[]>>(`/character/?page=${page}`)
+      const response = await api.get<Response<Character[]>>(`/character/?page=${page}`)
       const characters = response.data
 
       result.data = characters
     } catch (error) {
-      const err = error as AxiosError<IError>
+      const err = error as AxiosError<Error>
 
       this._handlerError(result, err)
     }
@@ -67,19 +66,19 @@ export class CharactersApi extends ServicePrototype {
   }
 
   static async getCharactersById(id: number[]) {
-    const result: IResult<ICharacter[]> = {
+    const result: Result<Response<Character[]>> = {
       data: null,
       errorMessage: '',
       hasError: false,
     }
 
     try {
-      const response = await api.get<ICharacter[]>(`/character/${id}`)
+      const response = await api.get<Response<Character[]>>(`/character/${id}`)
       const character = response.data
 
       result.data = character
     } catch (error) {
-      const err = error as AxiosError<IError>
+      const err = error as AxiosError<Error>
 
       this._handlerError(result, err)
     }
