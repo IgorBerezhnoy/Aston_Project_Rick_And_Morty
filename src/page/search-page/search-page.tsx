@@ -3,17 +3,19 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { CharacterList } from '@/components/characterList'
 import { Pagination } from '@/components/pagination'
-import { CharactersApi, ICharacter } from '@/service/ResoursesService/CharactersApi'
-import { IInfo } from '@/service/ServicePrototype'
+import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
+import { Info } from '@/service/ServicePrototype'
+
+const baseInfo = {
+  count: 826,
+  next: null,
+  pages: 42,
+  prev: null,
+}
 
 export const SearchPage: FC = () => {
-  const [chars, setChars] = useState<ICharacter[]>([])
-  const [info, setInfo] = useState<IInfo>({
-    count: 826,
-    next: null,
-    pages: 42,
-    prev: null,
-  })
+  const [chars, setChars] = useState<Character[]>([])
+  const [info, setInfo] = useState<Info>(baseInfo)
   const { query } = useParams()
   const navigate = useNavigate()
 

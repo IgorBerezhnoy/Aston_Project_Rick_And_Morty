@@ -1,11 +1,11 @@
 import { FC } from 'react'
 
-import { ICharacter } from '@/service/ResoursesService/CharactersApi'
+import { Character } from '@/service/ResoursesService/CharactersApi'
 
 import './characterCard.modules.scss'
 
 export interface ICharacterCard {
-  char: ICharacter
+  char: Character
 }
 
 export const CharacterCard: FC<ICharacterCard> = ({ char }) => {

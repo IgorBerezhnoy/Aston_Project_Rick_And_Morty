@@ -10,6 +10,7 @@ import {
 
 import { MainHeader } from '@/components/header/mainHeader'
 import { Page } from '@/components/page'
+import { urlPaths } from '@/enum/urlPaths'
 import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch } from '@/hooks/use-appDispatch'
 import { SignInPageContainer } from '@/page/sign-in-page'
@@ -17,52 +18,41 @@ import { SignUpPageContainer } from '@/page/sign-up-page'
 
 import { SearchPage } from './page/search-page'
 
-export const urlPath = Object.freeze({
-  chapterId: '/character/:id',
-  error: '*',
-  favorites: '/favorites',
-  history: '/history',
-  root: '/',
-  search: '/search/:query',
-  signIn: '/sign-in',
-  signUp: '/sign-up',
-})
-
 const publicRouters: RouteObject[] = [
   {
     element: <SignInPageContainer />,
-    path: urlPath.signIn,
+    path: urlPaths.signIn,
   },
   {
     element: <SignUpPageContainer />,
-    path: urlPath.signUp,
+    path: urlPaths.signUp,
   },
   {
     element: <h1>404</h1>,
-    path: urlPath.error,
+    path: urlPaths.error,
   },
 ]
 const privateRoutes: RouteObject[] = [
   {
     element: <h1>Main</h1>,
-    path: urlPath.root,
+    path: urlPaths.root,
   },
 
   {
     element: <h1>Character</h1>,
-    path: urlPath.chapterId,
+    path: urlPaths.chapterId,
   },
   {
     element: <SearchPage />,
-    path: urlPath.search,
+    path: urlPaths.search,
   },
   {
     element: <h1>history</h1>,
-    path: urlPath.history,
+    path: urlPaths.history,
   },
   {
     element: <h1>favorites</h1>,
-    path: urlPath.favorites,
+    path: urlPaths.favorites,
   },
 ]
 
@@ -115,5 +105,5 @@ function PrivateAppRoutes() {
   }, [])
   const { isAuth } = useSelector(selectAuth)
 
-  return isAuth ? <Outlet /> : <Navigate to={urlPath.signIn} />
+  return isAuth ? <Outlet /> : <Navigate to={urlPaths.signIn} />
 }
