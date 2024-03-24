@@ -5,9 +5,5 @@ export interface Label {
 }
 
 export const CharacterLabel = (labelText: Label) => {
-  return (
-    <div className={'characterLabel'}>
-      <h1 className={'labelText'}>{labelText.text}</h1>
-    </div>
-  )
+  return <h3 className={'character-label'}>{labelText.text}</h3>
 }
