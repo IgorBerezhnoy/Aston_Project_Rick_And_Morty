@@ -17,7 +17,7 @@ export const counterSlice = createSlice({
   initialState,
   name: 'auth',
   reducers: {
-    login: (state, action: PayloadAction<{ email: string }>) => {
+    login: (state, action: PayloadAction<LoginActionType>) => {
       state.email = action.payload.email
       state.isAuth = true
     },
@@ -25,7 +25,7 @@ export const counterSlice = createSlice({
       state.email = null
       state.isAuth = false
     },
-    setError: (state, action: PayloadAction<{ error: string }>) => {
+    setError: (state, action: PayloadAction<ErrorActionType>) => {
       state.error = action.payload.error
     },
   },
@@ -36,3 +36,5 @@ export const { login, logout, setError } = counterSlice.actions
 export const selectAuth = (state: RootState) => state.auth
 
 export default counterSlice.reducer
+type LoginActionType = { email: string }
+type ErrorActionType = { error: string }
