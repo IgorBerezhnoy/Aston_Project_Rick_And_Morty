@@ -78,8 +78,8 @@ function Layout() {
 
   return (
     <>
+      <MainHeader isAuth={isAuth} name={email ?? ''} />
       <Page>
-        <MainHeader isAuth={isAuth} name={email ?? ''} />
         <Outlet />
       </Page>
     </>
