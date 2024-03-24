@@ -5,21 +5,13 @@ import { Avatar } from '@/components/avatar'
 import { DropdownMenu } from '@/components/dropdownMenu/dropdownMenu'
 import { DropDownItem } from '@/components/dropdownMenu/lib/dropDownItem'
 import { DropdownSeparator } from '@/components/dropdownMenu/lib/dropdownSeparator'
-import { logout } from '@/features/auth/authSlice'
-import { useAppDispatch } from '@/hooks/use-appDispatch'
 import { urlPath } from '@/router'
 import { clsx } from 'clsx'
 
 import s from './dropdown.module.scss'
 
-type Props = { name: string }
-export const DropdownWithUser = ({ name }: Props) => {
-  const dispatch = useAppDispatch()
-  const logOutHandler = () => {
-    localStorage.removeItem('currentUser')
-    dispatch(logout())
-  }
-
+type Props = { logOutHandler: () => void; name: string }
+export const DropdownWithUser = ({ logOutHandler, name }: Props) => {
   return (
     <DropdownMenu
       classNameTrigger={s.triggerButton}
@@ -39,7 +31,7 @@ export const DropdownWithUser = ({ name }: Props) => {
         </DropDownItem>
         <DropdownSeparator />
         <DropDownItem>
-          <Link className={s.dropdownItem} to={urlPath.favorites}>
+          <Link className={s.dropdownItem} to={urlPath.root}>
             <HouseOutline className={s.icons} />
             <div>Home</div>
           </Link>
