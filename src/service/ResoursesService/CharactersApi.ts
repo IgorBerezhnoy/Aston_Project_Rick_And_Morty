@@ -1,4 +1,3 @@
-import { ISearch } from '@/page/search-page'
 import { AxiosError } from 'axios'
 
 import { Error, Response, Result, ServicePrototype, api } from '../ServicePrototype'
@@ -45,18 +44,15 @@ export class CharactersApi extends ServicePrototype {
     return result
   }
 
-  static async getCharacterPage(page: number, params: ISearch) {
+  static async getCharacterPage(page: number, params: string) {
     const result: Result<Response<Character[]>> = {
       data: null,
       errorMessage: '',
       hasError: false,
     }
-    const convertedParams = CharactersApi._getStringParams(params)
 
     try {
-      const response = await api.get<Response<Character[]>>(
-        `/character/?page=${page}${convertedParams}`
-      )
+      const response = await api.get<Response<Character[]>>(`/character/?page=${page}${params}`)
       const characters = response.data
 
       result.data = characters
@@ -88,17 +84,5 @@ export class CharactersApi extends ServicePrototype {
     }
 
     return result
-  }
-
-  static _getStringParams(params: ISearch) {
-    let str = ''
-
-    for (const param of Object.entries(params)) {
-      if (param[1] !== 'all') {
-        str += `&${param[0]}=${param[1]}`
-      }
-    }
-
-    return str
   }
 }
