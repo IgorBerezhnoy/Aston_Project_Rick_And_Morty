@@ -21,7 +21,10 @@ export const MainHeader = ({ isAuth, name }: Props) => {
           </a>
         </div>
         {isAuth ? (
-          <Avatar className={s.avatar} name={name} size={52} />
+          <div className={s.nameAndAvatar}>
+            <div className={s.name}>{name}</div>
+            <Avatar className={s.avatar} name={name} size={52} />
+          </div>
         ) : (
           <Button className={s.button}>Sign In</Button>
         )}
