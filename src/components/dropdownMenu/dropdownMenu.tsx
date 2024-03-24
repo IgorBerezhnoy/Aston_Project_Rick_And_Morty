@@ -11,9 +11,7 @@ type Props = {
   trigger: ReactNode
 } & ComponentPropsWithoutRef<typeof DropdownMenuRadix.Root>
 
-export const DropdownMenu = (props: Props) => {
-  const { children, classNameTrigger, trigger, ...rest } = props
-
+export const DropdownMenu = ({ children, classNameTrigger, trigger, ...rest }: Props) => {
   return (
     <div className={s.root}>
       <DropdownMenuRadix.Root {...rest}>

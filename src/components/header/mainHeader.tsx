@@ -1,6 +1,6 @@
 import { Logo } from '@/assets/logo/logo'
-import { Avatar } from '@/components/avatar'
 import { Button } from '@/components/button'
+import { DropdownWithUser } from '@/components/dropdownMenu/dropdownWithUser'
 import { Header } from '@/components/header/header'
 import { clsx } from 'clsx'
 
@@ -20,14 +20,7 @@ export const MainHeader = ({ isAuth, name }: Props) => {
             <Logo />
           </a>
         </div>
-        {isAuth ? (
-          <div className={s.nameAndAvatar}>
-            <div className={s.name}>{name}</div>
-            <Avatar className={s.avatar} name={name} size={52} />
-          </div>
-        ) : (
-          <Button className={s.button}>Sign In</Button>
-        )}
+        {isAuth ? <DropdownWithUser name={name} /> : <Button className={s.button}>Sign In</Button>}
       </div>
     </Header>
   )

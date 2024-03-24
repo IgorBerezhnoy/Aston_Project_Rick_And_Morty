@@ -53,6 +53,7 @@
   align-items: center;
   justify-content: flex-start;
 
+  color: var(--color-light-500);
   text-decoration: none;
 }
 
@@ -97,4 +98,14 @@
   margin-right: 10px;
   color: var(--color-light-500);
   border-bottom: 1px dashed var(--color-light-500);
+}
+
+.triggerButton {
+  background: transparent;
+  border: none;
+}
+
+.logOut {
+  background: transparent;
+  border: none;
 }

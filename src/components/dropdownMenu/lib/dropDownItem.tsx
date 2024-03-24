@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef } from 'react'
 import * as DropdownMenuRadix from '@radix-ui/react-dropdown-menu'
 import { clsx } from 'clsx'
 
-import s from './dropdown.module.scss'
+import s from '../dropdown.module.scss'
 
 type Props = ComponentPropsWithoutRef<typeof DropdownMenuRadix.Item>
 

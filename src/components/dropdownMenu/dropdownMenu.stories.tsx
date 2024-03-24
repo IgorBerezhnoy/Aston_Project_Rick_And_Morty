@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Bookmark, LogOut, SearchIcon } from '@/assets/icons'
 import { Avatar } from '@/components/avatar'
-import { DropDownItem } from '@/components/dropdownMenu/dropDownItem'
 import { DropdownMenu } from '@/components/dropdownMenu/dropdownMenu'
-import { DropdownSeparator } from '@/components/dropdownMenu/dropdownSeparator'
+import { DropDownItem } from '@/components/dropdownMenu/lib/dropDownItem'
+import { DropdownSeparator } from '@/components/dropdownMenu/lib/dropdownSeparator'
 
 import s from './dropdown.module.scss'
 

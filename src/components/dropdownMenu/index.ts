@@ -1,3 +1,3 @@
-export * from './dropDownItem'
+export * from './lib/dropDownItem'
 export * from './dropdownMenu'
-export * from './dropdownSeparator'
+export * from './lib/dropdownSeparator'
