@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { Character } from '@/service/ResoursesService/CharactersApi'
 
-import './characterCard.modules.scss'
+import s from './characterCard.module.scss'
 
 export interface ICharacterCard {
   char: Character
@@ -12,13 +12,13 @@ export const CharacterCard: FC<ICharacterCard> = ({ char }) => {
   const { image, name, origin, species } = char
 
   return (
-    <li className={'card'}>
-      <a className={'card__link'} href={'#'}>
-        <img alt={name} className={'card__image'} src={image} />
+    <li className={s.card}>
+      <a className={s.card__link} href={'#'}>
+        <img alt={name} className={s.card__image} src={image} />
       </a>
-      <h3 className={'card__title'}>{name}</h3>
-      <p className={'card__text'}>{species}</p>
-      <p className={'card__text'}>{origin.name}</p>
+      <h3 className={s.card__title}>{name}</h3>
+      <p className={s.card__text}>{species}</p>
+      <p className={s.card__text}>{origin.name}</p>
     </li>
   )
 }

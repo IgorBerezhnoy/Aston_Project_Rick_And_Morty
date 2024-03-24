@@ -31,6 +31,10 @@ const publicRouters: RouteObject[] = [
     element: <h1>404</h1>,
     path: urlPaths.error,
   },
+  {
+    element: <SearchPage />,
+    path: urlPaths.search,
+  },
 ]
 const privateRoutes: RouteObject[] = [
   {
@@ -41,10 +45,6 @@ const privateRoutes: RouteObject[] = [
   {
     element: <h1>Character</h1>,
     path: urlPaths.chapterId,
-  },
-  {
-    element: <SearchPage />,
-    path: urlPaths.search,
   },
   {
     element: <h1>history</h1>,

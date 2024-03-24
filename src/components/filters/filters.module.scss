@@ -7,7 +7,7 @@ button {
   position: relative;
 
   &Tittle {
-    letter-spacing: .05em;
+    letter-spacing: 0.05em;
 
     margin: 0;
   }
@@ -17,18 +17,18 @@ button {
     right: 0;
     top: 0;
 
-    transition: opacity .4s ease-in-out;
+    transition: opacity 0.4s ease-in-out;
 
     &:hover {
       cursor: pointer;
-      opacity: .6;
+      opacity: 0.6;
     }
   }
 
   &SubTittle {
     font-weight: 400;
     font-size: 1.1rem;
-    letter-spacing: .08em;
+    letter-spacing: 0.08em;
 
     margin: 25px 0 0;
   }
