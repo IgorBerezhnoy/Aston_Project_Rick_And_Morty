@@ -1,5 +1,3 @@
-import { JSX } from 'react'
-
 import { Logo } from '@/assets/logo/logo'
 import { Avatar } from '@/components/avatar'
 import { Button } from '@/components/button'
@@ -8,7 +6,12 @@ import { clsx } from 'clsx'
 
 import s from './header.module.scss'
 
-export const MainHeader = ({ isAuth, name }: Props): JSX.Element => {
+type Props = {
+  isAuth: boolean
+  name: string
+}
+
+export const MainHeader = ({ isAuth, name }: Props) => {
   return (
     <Header className={clsx(s.header)}>
       <div className={s.wrapper}>
@@ -25,9 +28,4 @@ export const MainHeader = ({ isAuth, name }: Props): JSX.Element => {
       </div>
     </Header>
   )
-}
-
-interface Props {
-  isAuth: boolean
-  name: string
 }

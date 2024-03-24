@@ -1,40 +1,49 @@
-import { ChangeEvent, MouseEvent, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { ChangeEvent, MouseEvent, useCallback, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 
 import { login, selectAuth } from '@/features/auth/authSlice'
-import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { useAppDispatch, useAppSelector } from '@/hooks/use-appDispatch'
 import { SignInPage } from '@/page/sign-in-page/sign-in-page'
+import { urlPath } from '@/router'
 
 export const SignInPageContainer = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const dispatch = useAppDispatch()
-  const { isAuth } = useSelector(selectAuth)
+  const { isAuth } = useAppSelector(selectAuth)
 
-  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.currentTarget.value)
-  }
-  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.currentTarget.value)
-  }
-  const signInHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    const user = localStorage.getItem(email)
+  const onChangeEmail = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setEmail(e.currentTarget.value)
+    },
+    [setEmail]
+  )
+  const onChangePassword = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setPassword(e.currentTarget.value)
+    },
+    [setPassword]
+  )
+  const signInHandler = useCallback(
+    (e: MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault()
+      const user = localStorage.getItem(email)
 
-    if (!user) {
-      return null
-    }
-    const userObj = JSON.parse(user)
+      if (!user) {
+        return null
+      }
+      const userObj = JSON.parse(user)
 
-    if (userObj.email === email && userObj.password === password) {
-      dispatch(login({ email }))
-      localStorage.setItem('currentUser', JSON.stringify({ email, password }))
-    }
-  }
+      if (userObj.email === email && userObj.password === password) {
+        dispatch(login({ email }))
+        localStorage.setItem('currentUser', JSON.stringify({ email, password }))
+      }
+    },
+    [email, password, dispatch]
+  )
 
   if (isAuth) {
-    return <Navigate to={'/'} />
+    return <Navigate to={urlPath.root} />
   }
 
   return (

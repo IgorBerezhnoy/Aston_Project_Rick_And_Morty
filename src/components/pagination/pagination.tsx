@@ -6,7 +6,7 @@ import {
   SkipNextFilled,
   SkipPreviousFilled,
 } from '@/assets/icons'
-import { usePagination } from '@/components/Pagination/lib/usePagination'
+import { usePagination } from '@/components/pagination/lib/use-pagination'
 import { clsx } from 'clsx'
 
 import s from './pagination.module.scss'
