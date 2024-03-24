@@ -1,0 +1,45 @@
+/* reset */
+button {
+  all: unset;
+}
+
+.RadioGroup {
+  position: relative;
+
+  &Tittle {
+    letter-spacing: .05em;
+
+    margin: 0;
+  }
+
+  &Button {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    transition: opacity .4s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      opacity: .6;
+    }
+  }
+
+  &SubTittle {
+    font-weight: 400;
+    font-size: 1.1rem;
+    letter-spacing: .08em;
+
+    margin: 25px 0 0;
+  }
+
+  &Root {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-right: 120px;
+  }
+}
