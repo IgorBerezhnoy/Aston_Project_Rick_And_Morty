@@ -2,19 +2,19 @@ import { FC } from 'react'
 
 import { Indicator, Item } from '@radix-ui/react-radio-group'
 
-import './radio.module.scss'
+import s from './radio.module.scss'
 
 interface IRadio {
-  labelText: string
+  value: string
 }
 
-export const Radio: FC<IRadio> = ({ labelText }) => (
+export const Radio: FC<IRadio> = ({ value }) => (
   <div style={{ alignItems: 'center', display: 'flex' }}>
-    <Item className={'RadioGroupItem'} id={'r1'} value={'default'}>
-      <Indicator className={'RadioGroupIndicator'} />
+    <Item className={s.RadioGroupItem} id={value} value={value}>
+      <Indicator className={s.RadioGroupIndicator} />
     </Item>
-    <label className={'Label'} htmlFor={'r1'}>
-      {labelText}
+    <label className={s.Label} htmlFor={value}>
+      {value}
     </label>
   </div>
 )
