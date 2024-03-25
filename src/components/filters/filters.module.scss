@@ -7,7 +7,7 @@ button {
   position: relative;
   color: white;
 
-  padding: 25px 0 0 70px;
+  padding: 25px 0 25px 70px;
 
   &Tittle {
     letter-spacing: 0.05em;
@@ -51,12 +51,12 @@ button {
 
 @media screen and (max-width: 1090px) {
   .RadioGroup {
-    padding: 25px 0 0 30px;
+    padding: 25px 0 25px 30px;
   }
 }
 
 @media screen and (max-width: 520px) {
   .RadioGroup {
-    padding: 25px 0 0 10px;
+    padding: 25px 0 25px 10px;
   }
 }

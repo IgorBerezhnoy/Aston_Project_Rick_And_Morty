@@ -21,6 +21,16 @@
   }
 
   &__search {
-    margin: 0 auto
+    margin: 0 auto;
+  }
+
+  &__button {
+    position: fixed;
+    bottom: 30px;
+    left: 50vw;
+
+    transform: translateX(-50%);
+
+    z-index: 2;
   }
 }
