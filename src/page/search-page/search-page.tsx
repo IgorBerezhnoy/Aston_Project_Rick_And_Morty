@@ -10,6 +10,8 @@ import useResourceFiltering from '@/hooks/use-resource-filtering'
 import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
 
+import s from './search-page.module.scss'
+
 const baseInfo = {
   count: 826,
   next: null,
@@ -82,11 +84,13 @@ export const SearchPage: FC = () => {
 
   return (
     <>
-      <Search clearValue={handleButtonClier} onChange={handleChange} value={search.name} />
-      <div style={{ display: 'flex', width: '100%' }}>
+      <section className={`${s.page__section} ${s.page__section_search}`}>
+        <Search clearValue={handleButtonClier} onChange={handleChange} value={search.name} />
+      </section>
+      <div className={s.page__container}>
         <Filters cbClier={handleButtonClier} cbRadio={handleSearch} state={search} />
-        <div style={{ width: '100%' }}>
-          <CharacterList chars={chars} />
+        <section className={s.page__section}>
+          <CharacterList chars={chars} style={{ marginTop: '65px' }} />
           <Pagination
             currentPage={currPage}
             onPageChange={setAnotherPage}
@@ -94,7 +98,7 @@ export const SearchPage: FC = () => {
             stepValue={5}
             totalCount={info.count}
           />
-        </div>
+        </section>
       </div>
     </>
   )

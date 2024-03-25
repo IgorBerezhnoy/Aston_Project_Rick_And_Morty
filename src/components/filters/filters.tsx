@@ -1,20 +1,21 @@
-import { FC } from 'react'
+import { CSSProperties, FC } from 'react'
 
 import { ISearch } from '@/page/search-page'
 import { Root } from '@radix-ui/react-radio-group'
 
 import s from './filters.module.scss'
 
-import { genders, statuses } from '../constants/constants'
+import { genders, statuses } from '../../constants/constants'
 import { Radio } from '../radio'
 
 interface IFilters {
   cbClier: () => void
   cbRadio: (name: string, value: string) => void
   state: ISearch
+  style?: CSSProperties
 }
 
-export const Filters: FC<IFilters> = ({ cbClier, cbRadio, state }) => {
+export const Filters: FC<IFilters> = ({ cbClier, cbRadio, state, ...arg }) => {
   const { gender, status } = state
 
   const handleStatus = (value: string) => cbRadio('status', value)
@@ -22,7 +23,7 @@ export const Filters: FC<IFilters> = ({ cbClier, cbRadio, state }) => {
   const handleClier = () => cbClier()
 
   return (
-    <article className={s.RadioGroup}>
+    <article className={`${s.RadioGroup}`} style={arg.style}>
       <h2 className={s.RadioGroupTittle}>Filters</h2>
       <button className={s.RadioGroupButton} onClick={handleClier} type={'button'}>
         Clier Filters

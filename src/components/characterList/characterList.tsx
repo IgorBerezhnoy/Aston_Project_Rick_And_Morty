@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { CSSProperties, FC } from 'react'
 
 import { Character } from '@/service/ResoursesService/CharactersApi'
 
@@ -8,16 +8,17 @@ import { CharacterCard } from '../characterCard'
 
 export interface ICharacterList {
   chars: Character[]
+  style?: CSSProperties
 }
 
-export const CharacterList: FC<ICharacterList> = ({ chars }) => {
+export const CharacterList: FC<ICharacterList> = ({ chars, ...arg }) => {
   return (
-    <section className={s.character}>
+    <div className={`${s.character}`} style={arg.style}>
       <ul className={s.character__list}>
         {chars.map(char => (
           <CharacterCard char={char} key={char.id} />
         ))}
       </ul>
-    </section>
+    </div>
   )
 }

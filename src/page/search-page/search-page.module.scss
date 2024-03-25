@@ -1,0 +1,26 @@
+.page {
+  &__section {
+    width: 100%;
+
+    &_search {
+      display: flex;
+      justify-content: center;
+
+      background-image: url('../../assets/background/search.jpg');
+      background-position: bottom;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      padding: 8vw 0;
+    }
+  }
+
+  &__container {
+    display: flex;
+    width: 100%;
+  }
+
+  &__search {
+    margin: 0 auto
+  }
+}

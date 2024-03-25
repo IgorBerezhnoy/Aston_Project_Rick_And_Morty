@@ -5,17 +5,22 @@ button {
 
 .RadioGroup {
   position: relative;
+  color: white;
+
+  padding: 25px 0 0 70px;
 
   &Tittle {
     letter-spacing: 0.05em;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #424242;
 
     margin: 0;
   }
 
   &Button {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 25px;
+    top: 25px;
 
     transition: opacity 0.4s ease-in-out;
 
@@ -30,7 +35,7 @@ button {
     font-size: 1.1rem;
     letter-spacing: 0.08em;
 
-    margin: 25px 0 0;
+    margin: 35px 0 0;
   }
 
   &Root {
@@ -41,5 +46,17 @@ button {
     margin-top: 15px;
     margin-left: 10px;
     margin-right: 120px;
+  }
+}
+
+@media screen and (max-width: 1090px) {
+  .RadioGroup {
+    padding: 25px 0 0 30px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .RadioGroup {
+    padding: 25px 0 0 10px;
   }
 }
