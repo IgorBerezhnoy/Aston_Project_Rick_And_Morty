@@ -11,7 +11,7 @@
   justify-content: space-between;
 
   width: 100%;
-  max-width: 1200px;
+  max-width: 1340px;
   margin: 0 auto;
 }
 
@@ -33,4 +33,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.nameAndAvatar {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  margin-right: 10px;
+  color: var(--color-light-500);
+  border-bottom: 1px dashed var(--color-light-500);
 }

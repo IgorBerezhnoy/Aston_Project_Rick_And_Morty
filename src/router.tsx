@@ -31,17 +31,16 @@ const publicRouters: RouteObject[] = [
     element: <h1>404</h1>,
     path: urlPaths.error,
   },
-  {
-    element: <SearchPage />,
-    path: urlPaths.search,
-  },
 ]
 const privateRoutes: RouteObject[] = [
   {
     element: <h1>Main</h1>,
     path: urlPaths.root,
   },
-
+  {
+    element: <SearchPage />,
+    path: urlPaths.search,
+  },
   {
     element: <h1>Character</h1>,
     path: urlPaths.chapterId,
@@ -78,8 +77,8 @@ function Layout() {
 
   return (
     <>
+      <MainHeader isAuth={isAuth} name={email ?? ''} />
       <Page>
-        <MainHeader isAuth={isAuth} name={email ?? ''} />
         <Outlet />
       </Page>
     </>
