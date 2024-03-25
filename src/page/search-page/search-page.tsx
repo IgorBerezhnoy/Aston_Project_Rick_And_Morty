@@ -1,10 +1,12 @@
-import { ChangeEvent, FC, useCallback, useEffect, useMemo, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { CharacterList } from '@/components/characterList'
 import { Filters } from '@/components/filters'
 import { Pagination } from '@/components/pagination'
 import { Search } from '@/components/search'
+import useResourceFiltering from '@/hooks/use-resource-filtering'
 import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
 
@@ -13,12 +15,6 @@ const baseInfo = {
   next: null,
   pages: 42,
   prev: null,
-}
-
-const baseSearch = {
-  gender: 'all',
-  name: '',
-  status: 'all',
 }
 
 export interface ISearch {
@@ -33,20 +29,10 @@ export const SearchPage: FC = () => {
   const { query } = useParams()
   const navigate = useNavigate()
 
-  const [search, setSearch] = useState(baseSearch)
+  const { handleButtonClier, handleChange, handleSearch, search, urlParams } =
+    useResourceFiltering()
 
-  function handleSearch(name: string, value: string) {
-    setSearch({
-      ...search,
-      [name]: value,
-    })
-  }
-
-  function handleButtonClier() {
-    setSearch(baseSearch)
-  }
-
-  const currentPage = useCallback(() => {
+  const currPage = useMemo(() => {
     if (query === undefined) {
       return 1
     }
@@ -54,28 +40,16 @@ export const SearchPage: FC = () => {
     return +query
   }, [query])
 
-  const stringParams = useMemo(() => {
-    let str = ''
-
-    for (const param of Object.entries(search)) {
-      if (param[1] !== 'all' && param[1] !== '') {
-        str += `&${param[0]}=${param[1]}`
-      }
-    }
-
-    return str
-  }, [search])
-
-  const handleClick = useCallback(
+  const setAnotherPage = useCallback(
     (nextPage: number) => {
-      navigate(`/search/${nextPage}${stringParams}`)
+      navigate(`/search/${nextPage}`)
     },
-    [navigate, stringParams]
+    [navigate]
   )
 
   const setCharacters = useCallback(
     async (page: number) => {
-      const resObject = await CharactersApi.getCharacterPage(page, stringParams)
+      const resObject = await CharactersApi.getCharacterPage(page, urlParams)
 
       if (resObject.data) {
         setChars(resObject.data.results)
@@ -90,27 +64,19 @@ export const SearchPage: FC = () => {
         })
       }
     },
-    [stringParams]
+    [urlParams]
   )
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleSearch('name', e.currentTarget.value)
-  }
+  useEffect(() => {
+    setCharacters(currPage)
+  }, [currPage])
 
   useEffect(() => {
-    const page = currentPage()
-
-    setCharacters(page)
-  }, [currentPage])
-
-  useEffect(() => {
-    const page = currentPage()
-
-    if (page === 1) {
+    if (currPage === 1) {
       setCharacters(1)
     }
-    handleClick(1)
-  }, [stringParams])
+    setAnotherPage(1)
+  }, [urlParams])
 
   const pageSize = Math.ceil(info.count / info.pages)
 
@@ -122,8 +88,8 @@ export const SearchPage: FC = () => {
         <div style={{ width: '100%' }}>
           <CharacterList chars={chars} />
           <Pagination
-            currentPage={currentPage()}
-            onPageChange={handleClick}
+            currentPage={currPage}
+            onPageChange={setAnotherPage}
             pageSize={pageSize}
             stepValue={5}
             totalCount={info.count}
