@@ -5,7 +5,7 @@ import { Avatar } from '@/components/avatar'
 import { DropdownMenu } from '@/components/dropdownMenu/dropdownMenu'
 import { DropDownItem } from '@/components/dropdownMenu/lib/dropDownItem'
 import { DropdownSeparator } from '@/components/dropdownMenu/lib/dropdownSeparator'
-import { urlPath } from '@/router'
+import { urlPaths } from '@/enum'
 import { clsx } from 'clsx'
 
 import s from './dropdown.module.scss'
@@ -31,21 +31,21 @@ export const DropdownWithUser = ({ logOutHandler, name }: Props) => {
         </DropDownItem>
         <DropdownSeparator />
         <DropDownItem>
-          <Link className={s.dropdownItem} to={urlPath.root}>
+          <Link className={s.dropdownItem} to={urlPaths.root}>
             <HouseOutline className={s.icons} />
             <div>Home</div>
           </Link>
         </DropDownItem>
         <DropdownSeparator />{' '}
         <DropDownItem>
-          <Link className={s.dropdownItem} to={urlPath.favorites}>
+          <Link className={s.dropdownItem} to={urlPaths.favorites}>
             <Bookmark className={s.icons} />
             <div>Favorites</div>
           </Link>
         </DropDownItem>
         <DropdownSeparator />
         <DropDownItem>
-          <Link className={s.dropdownItem} to={urlPath.history}>
+          <Link className={s.dropdownItem} to={urlPaths.history}>
             <SearchIcon className={s.icons} />
             <div>History</div>
           </Link>
