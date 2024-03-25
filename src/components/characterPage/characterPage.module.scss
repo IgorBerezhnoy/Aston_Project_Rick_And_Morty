@@ -1,0 +1,44 @@
+.character {
+  &Page {
+    margin: 0;
+    font-family: system-ui;
+    overflow-x: hidden;
+  }
+  &ContentConteiner {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  &NameContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &Name {
+    position: relative;
+    font-size: 30px;
+    & h2:after {
+      content: '';
+      width: 87px;
+      height: 6px;
+      background-color: #f7391c;
+      display: inline-flex;
+      position: absolute;
+      left: calc(100% + 5px);
+      top: 50%;
+    }
+  }
+  &ImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &Image {
+    max-width: 100%;
+    border-radius: 50%;
+  }
+  &Labels {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
