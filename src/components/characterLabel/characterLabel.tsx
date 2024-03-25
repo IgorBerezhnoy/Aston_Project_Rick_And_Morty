@@ -1,9 +1,9 @@
 import s from './characterLabel.module.scss'
 
-export type Label = {
+type LabelProps = {
   text: string
 }
 
-export const CharacterLabel = ({ text }: Label) => {
+export const CharacterLabel = ({ text }: LabelProps) => {
   return <h3 className={s.characterLabel}>{text}</h3>
 }

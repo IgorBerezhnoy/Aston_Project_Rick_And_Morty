@@ -1,15 +1,15 @@
-import { ICharacter } from '@/service/ResoursesService/CharactersApi'
+import { Character } from '@/service/ResoursesService/CharactersApi'
 
 import s from './characterPage.module.scss'
 
 import { CharacterLabel } from '../characterLabel'
 import { CharacterPlaceholder } from '../characterPlaceholder'
 
-export type ICharacterPage = {
-  char: ICharacter
+type CharacterPageProps = {
+  char: Character
 }
 
-export const CharacterPage = ({ char }: ICharacterPage) => {
+export const CharacterPage = ({ char }: CharacterPageProps) => {
   return (
     <div className={s.characterName}>
       <CharacterPlaceholder name={char.name} />
