@@ -1,0 +1,22 @@
+.root {
+  position: relative;
+
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgb(87, 84, 84);
+  border-radius: 50%;
+  box-shadow: 0 2px 18px 0 rgb(88 88 88 / 35%);
+
+  .userName {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--color-light-500);
+  }
+
+  .image {
+    object-fit: cover;
+  }
+}

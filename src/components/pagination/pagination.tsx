@@ -6,7 +6,7 @@ import {
   SkipNextFilled,
   SkipPreviousFilled,
 } from '@/assets/icons'
-import { usePagination } from '@/components/pagination/lib'
+import { usePagination } from '@/components/pagination/lib/use-pagination'
 import { clsx } from 'clsx'
 
 import s from './pagination.module.scss'
@@ -84,7 +84,7 @@ export const Pagination = ({
       >
         <ChevronLeftFilled />
       </button>
-      {paginationItems.map((num, index) => {
+      {paginationItems.map((num: '...' | number, index: number) => {
         if (num === '...') {
           return (
             <span className={classNames.dots} key={index} tabIndex={-1}>

@@ -14,7 +14,7 @@ export interface TextFieldProps
 export const TextField = forwardRef<ElementRef<'input'>, TextFieldProps>(
   ({ className, classNameWrapper, disabled, errorMessage, label, ...rest }, ref): JSX.Element => {
     return (
-      <span
+      <div
         className={clsx(
           s.wrapper,
           disabled && s.disabled,
@@ -25,7 +25,7 @@ export const TextField = forwardRef<ElementRef<'input'>, TextFieldProps>(
         {label && <label className={clsx(s.label, disabled && s.disabled)}>{label}</label>}
         <input className={clsx(s.input, className)} disabled={disabled} {...rest} ref={ref} />
         {errorMessage && <span className={s.errorMessage}>{errorMessage}</span>}
-      </span>
+      </div>
     )
   }
 )

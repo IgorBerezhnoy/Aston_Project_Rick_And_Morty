@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import {
   Navigate,
   Outlet,
@@ -6,44 +8,51 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { SignInPage } from '@/page/sign-in-page'
-import { SignUpPage } from '@/page/sign-up-page'
+import { MainHeader } from '@/components/header/mainHeader'
+import { Page } from '@/components/page'
+import { urlPaths } from '@/enum/urlPaths'
+import { login, selectAuth } from '@/features/auth/authSlice'
+import { useAppDispatch } from '@/hooks/use-appDispatch'
+import { SignInPageContainer } from '@/page/sign-in-page'
+import { SignUpPageContainer } from '@/page/sign-up-page'
+
+import { SearchPage } from './page/search-page'
 
 const publicRouters: RouteObject[] = [
   {
-    element: <SignInPage />,
-    path: '/sign-in',
+    element: <SignInPageContainer />,
+    path: urlPaths.signIn,
   },
   {
-    element: <SignUpPage />,
-    path: '/sign-up',
+    element: <SignUpPageContainer />,
+    path: urlPaths.signUp,
   },
   {
     element: <h1>404</h1>,
-    path: '*',
+    path: urlPaths.error,
   },
 ]
 const privateRoutes: RouteObject[] = [
   {
     element: <h1>Main</h1>,
-    path: '/',
+    path: urlPaths.root,
   },
 
   {
     element: <h1>Character</h1>,
-    path: '/character/:id',
+    path: urlPaths.chapterId,
   },
   {
-    element: <h1>Search</h1>,
-    path: '/search/:query',
+    element: <SearchPage />,
+    path: urlPaths.search,
   },
   {
     element: <h1>history</h1>,
-    path: '/history ',
+    path: urlPaths.history,
   },
   {
     element: <h1>favorites</h1>,
-    path: '/favorites ',
+    path: urlPaths.favorites,
   },
 ]
 
@@ -65,28 +74,36 @@ export const AppRouter = () => {
 }
 
 function Layout() {
-  // const { data, isError, isLoading } = useGetMeQuerySate()
-  //
-  // const user = isError ? undefined : data
+  const { email, isAuth } = useSelector(selectAuth)
 
   return (
     <>
-      <div>
-        {/*TODO в будущем компоннта пайдж*/}
-        <header>header</header>
+      <MainHeader isAuth={isAuth} name={email ?? ''} />
+      <Page>
         <Outlet />
-      </div>
+      </Page>
     </>
   )
 }
 
 function PrivateAppRoutes() {
-  const { isError, isLoading } = { isError: false, isLoading: false }
+  const dispatch = useAppDispatch()
 
-  if (isLoading) {
-    return <h1>Loading...</h1>
-  }
-  const isAuthenticated = !isError
+  useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser')
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/sign-in'} />
+    if (!currentUser) {
+      return
+    } // TODO Пока заглушка
+    const currentUserObj = JSON.parse(currentUser)
+    const email = currentUserObj?.email
+
+    if (!currentUserObj || !email) {
+      return
+    } // TODO Пока заглушка
+    dispatch(login({ email: email }))
+  }, [])
+  const { isAuth } = useSelector(selectAuth)
+
+  return isAuth ? <Outlet /> : <Navigate to={urlPaths.signIn} />
 }

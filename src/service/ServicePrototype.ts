@@ -1,34 +1,34 @@
-/* eslint-disable perfectionist/sort-interfaces */
+import { urlPaths } from '@/enum'
 import axios, { AxiosError } from 'axios'
 
-export interface IInfo {
+export interface Info {
   count: number
-  pages: number
   next: null | string
+  pages: number
   prev: null | string
 }
 
-export interface IResponse<T> {
-  info: IInfo
+export interface Response<T> {
+  info: Info
   results: T
 }
 
-export interface IError {
+export interface Error {
   error: string
 }
 
-export interface IResult<T> {
+export interface Result<T> {
+  data: T | null
   errorMessage: string
   hasError: boolean
-  data: T | null
 }
 
 export const api = axios.create({
-  baseURL: 'https://rickandmortyapi.com/api',
+  baseURL: urlPaths.api,
 })
 
 export class ServicePrototype {
-  static _handlerError<T>(result: IResult<T>, err: AxiosError<IError>) {
+  static _handlerError<T>(result: Result<T>, err: AxiosError<Error>) {
     result.hasError = true
     if (err.response) {
       result.errorMessage = err.response.data.error
