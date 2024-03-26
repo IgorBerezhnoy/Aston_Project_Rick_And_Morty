@@ -71,3 +71,15 @@
 .disabledDots {
   color: var(--color-gray-300);
 }
+
+@media screen and (max-width: 570px) {
+  .root {
+    .dots {
+      display: none;
+    }
+  
+    .item {
+      display: none;
+    }
+  }
+}
