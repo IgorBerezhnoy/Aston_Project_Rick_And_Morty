@@ -8,18 +8,20 @@ type Props = {
 }
 
 export const CharacterLabels = ({ char }: Props) => {
-  const hashMap: { key: string; value: string }[] = [
-    { key: 'Gender: ', value: `${char.gender}` },
-    { key: 'Last location: ', value: `${char.location.name}` },
-    { key: 'Origin: ', value: `${char.origin.name}` },
-    { key: 'Species:', value: `${char.species}` },
-    { key: 'Status: ', value: `${char.status}` },
-  ]
+  const hashMap = new Map<string, string>([
+    ['Gender: ', `${char.gender}`],
+    ['Last location: ', `${char.location.name}`],
+    ['Origin: ', `${char.origin.name}`],
+    ['Species: ', `${char.species}`],
+    ['Status: ', `${char.status}`],
+  ])
+
+  const dataFromLabel = [...hashMap]
 
   return (
     <div className={s.characterLabels}>
-      {hashMap.map(props => (
-        <CharacterLabel key={props.key} text={`${props.key} ${props.value}`} />
+      {dataFromLabel.map(props => (
+        <CharacterLabel key={props[0]} text={`${props[0]} ${props[1]}`} />
       ))}
     </div>
   )
