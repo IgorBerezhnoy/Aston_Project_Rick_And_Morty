@@ -13,7 +13,7 @@ const schema = z.object({
   password: z.string().min(3),
 })
 
-type SignInData = z.infer<typeof schema>
+export type SignInData = z.infer<typeof schema>
 
 export const SignInPageContainer = () => {
   const dispatch = useAppDispatch()

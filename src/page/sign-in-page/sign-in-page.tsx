@@ -6,11 +6,12 @@ import { Button } from '@/components/button'
 import { CardBg } from '@/components/cardBg'
 import { ControlledTextField } from '@/components/controlled-textField'
 import { urlPaths } from '@/enum/urlPaths'
+import { SignInData } from '@/page/sign-in-page/sign-in-page-container'
 
 import s from '@/page/sign-in-page/sign-in-page.module.scss'
 
 type Props = {
-  control: Control<{ email: string; password: string }, any>
+  control: Control<SignInData>
   onSubmit: () => void
 }
 
