@@ -21,8 +21,13 @@ export const SearchPage: FC = () => {
   const query = useQuery()
   const navigate = useNavigate()
 
-  const { handleButtonClear, handleChange, handleSearch, search, urlParams } =
-    useResourceFiltering(query)
+  const { handleButtonClear, handleChange, handleSearch, search, urlParams } = useResourceFiltering(
+    {
+      gender: query.get('gender') || 'all',
+      name: query.get('name') || '',
+      status: query.get('status') || 'all',
+    }
+  )
 
   const currPage = useMemo(() => {
     const page = query.get('page')
