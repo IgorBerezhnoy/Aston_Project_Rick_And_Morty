@@ -20,6 +20,8 @@
     border: 1px solid var(--color-gray-300);
     border-radius: 4px;
 
+    color: var(--color-gray-300);
+
     transition:
       color 0.2s ease,
       background-color 0.2s ease;
@@ -58,6 +60,8 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
+
+    color: var(--color-gray-300);
 
     width: 36px;
     height: 36px;

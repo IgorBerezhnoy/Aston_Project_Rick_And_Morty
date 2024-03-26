@@ -5,11 +5,11 @@ import { Character } from '@/service/ResoursesService/CharactersApi'
 
 import s from './characterCard.module.scss'
 
-export interface ICharacterCard {
+type CharacterCardProps = {
   char: Character
 }
 
-export const CharacterCard: FC<ICharacterCard> = ({ char }) => {
+export const CharacterCard: FC<CharacterCardProps> = ({ char }) => {
   const { id, image, name, origin, species } = char
 
   return (

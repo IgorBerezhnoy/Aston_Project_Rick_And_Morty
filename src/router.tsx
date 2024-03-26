@@ -10,7 +10,7 @@ import {
 
 import { MainHeader } from '@/components/header/mainHeader'
 import { Page } from '@/components/page'
-import { urlPaths } from '@/enum/urlPaths'
+import { urlPaths } from '@/enums/enums'
 import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch } from '@/hooks/use-appDispatch'
 import { SignInPageContainer } from '@/page/sign-in-page'

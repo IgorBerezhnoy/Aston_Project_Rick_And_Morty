@@ -1,5 +1,4 @@
 export enum urlPaths {
-  api = 'https://rickandmortyapi.com/api',
   chapterId = '/character/:id',
   error = '*',
   favorites = '/favorites',
@@ -8,4 +7,10 @@ export enum urlPaths {
   search = '/search/:query',
   signIn = '/sign-in',
   signUp = '/sign-up',
+}
+
+export enum apiPaths {
+  base = 'https://rickandmortyapi.com/api',
+  character = '/character/',
+  page = '?page=',
 }

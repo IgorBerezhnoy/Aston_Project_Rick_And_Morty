@@ -3,8 +3,13 @@ button {
   all: unset;
 }
 
-.RadioGroup {
-  &Item {
+.radioGroup {
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item {
     background-color: white;
     width: 25px;
     height: 25px;
@@ -21,7 +26,7 @@ button {
     }
   }
 
-  &Indicator {
+  &__indicator {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,7 +45,7 @@ button {
   }
 }
 
-.Label {
+.label {
   font-size: 15px;
   line-height: 1;
   padding-left: 15px;

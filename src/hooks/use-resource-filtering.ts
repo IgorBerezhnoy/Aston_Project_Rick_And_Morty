@@ -1,4 +1,4 @@
-import { ChangeEvent, useMemo, useState } from 'react'
+import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 
 const baseSearch = {
   gender: 'all',
@@ -6,19 +6,28 @@ const baseSearch = {
   status: 'all',
 }
 
-function useResourceFiltering() {
+export type SearchProps = {
+  gender: string
+  name: string
+  status: string
+}
+
+export const useResourceFiltering = () => {
   const [search, setSearch] = useState(baseSearch)
 
-  const handleSearch = (name: string, value: string) => {
-    setSearch({
-      ...search,
-      [name]: value,
-    })
-  }
+  const handleSearch = useCallback(
+    (name: string, value: string) => {
+      setSearch({
+        ...search,
+        [name]: value,
+      })
+    },
+    [search]
+  )
 
-  const handleButtonClier = () => {
+  const handleButtonClear = useCallback(() => {
     setSearch(baseSearch)
-  }
+  }, [])
 
   const urlParams = useMemo(() => {
     let str = ''
@@ -32,17 +41,18 @@ function useResourceFiltering() {
     return str
   }, [search])
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleSearch('name', e.currentTarget.value)
-  }
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      handleSearch('name', e.currentTarget.value)
+    },
+    [handleSearch]
+  )
 
   return {
-    handleButtonClier,
+    handleButtonClear,
     handleChange,
     handleSearch,
     search,
     urlParams,
   }
 }
-
-export default useResourceFiltering

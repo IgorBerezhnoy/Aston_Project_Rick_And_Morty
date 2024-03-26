@@ -3,13 +3,13 @@ button {
   all: unset;
 }
 
-.RadioGroup {
+.radioGroup {
   position: relative;
   color: white;
 
   padding: 25px 0 25px 70px;
 
-  &Tittle {
+  &__tittle {
     letter-spacing: 0.05em;
     padding-bottom: 15px;
     border-bottom: 1px solid #424242;
@@ -17,7 +17,7 @@ button {
     margin: 0;
   }
 
-  &Button {
+  &__button {
     position: absolute;
     right: 25px;
     top: 25px;
@@ -30,15 +30,15 @@ button {
     }
   }
 
-  &SubTittle {
+  &__subTittle {
     font-weight: 400;
-    font-size: 1.1rem;
+    font-size: --font-size-l;
     letter-spacing: 0.08em;
 
     margin: 35px 0 0;
   }
 
-  &Root {
+  &__root {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -50,13 +50,13 @@ button {
 }
 
 @media screen and (max-width: 1090px) {
-  .RadioGroup {
+  .radioGroup {
     padding: 25px 0 25px 30px;
   }
 }
 
 @media screen and (max-width: 520px) {
-  .RadioGroup {
+  .radioGroup {
     padding: 25px 0 25px 10px;
   }
 }

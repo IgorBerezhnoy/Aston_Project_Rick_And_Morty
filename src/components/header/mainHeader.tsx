@@ -4,7 +4,7 @@ import { Logo } from '@/assets/logo/logo'
 import { Button } from '@/components/button'
 import { DropdownWithUserContainer } from '@/components/dropdownMenu/dropdownWithUserContainer'
 import { Header } from '@/components/header/header'
-import { urlPaths } from '@/enum'
+import { urlPaths } from '@/enums'
 import { clsx } from 'clsx'
 
 import s from './header.module.scss'
