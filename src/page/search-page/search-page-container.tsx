@@ -63,13 +63,13 @@ export const SearchPageContainer: FC<SearchPageContainerProps> = ({
         />
       </div>
       <Button
-        // eslint-disable-next-line react/no-children-prop
-        children={'Filters'}
         className={s.page__button}
         disabled={false}
         onClick={handleFilterPopup}
         variant={'secondary'}
-      />
+      >
+        Filters
+      </Button>
       <FiltersContainer
         cbClear={handleButtonClear}
         cbPopup={handleFilterPopup}

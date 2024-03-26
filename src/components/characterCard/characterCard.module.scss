@@ -41,7 +41,7 @@
 
   &__title {
     font-weight: 500;
-    font-size: --font-size-m;
+    font-size: var(--font-size-m);
     line-height: 16px;
     color: white;
 
@@ -50,7 +50,7 @@
 
   &__text {
     font-weight: 400;
-    font-size: --font-size-s;
+    font-size: var(--font-size-s);
     line-height: 13px;
     color: #8b8b8b;
 
