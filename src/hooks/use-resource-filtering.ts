@@ -12,8 +12,12 @@ export type SearchProps = {
   status: string
 }
 
-export const useResourceFiltering = () => {
-  const [search, setSearch] = useState(baseSearch)
+export const useResourceFiltering = (query: URLSearchParams) => {
+  const [search, setSearch] = useState({
+    gender: query.get('gender') || 'all',
+    name: query.get('name') || '',
+    status: query.get('status') || 'all',
+  })
 
   const handleSearch = useCallback(
     (name: string, value: string) => {

@@ -1,7 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
+import { useQuery } from '@/hooks/use-query'
 import { useResourceFiltering } from '@/hooks/use-resource-filtering'
 import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
@@ -18,53 +18,48 @@ const baseInfo = {
 export const SearchPage: FC = () => {
   const [chars, setChars] = useState<Character[]>([])
   const [info, setInfo] = useState<Info>(baseInfo)
-  const { query } = useParams()
+  const query = useQuery()
   const navigate = useNavigate()
 
   const { handleButtonClear, handleChange, handleSearch, search, urlParams } =
-    useResourceFiltering()
+    useResourceFiltering(query)
 
   const currPage = useMemo(() => {
-    if (query === undefined) {
+    const page = query.get('page')
+
+    if (page === null) {
       return 1
     }
 
-    return +query
+    return +page
   }, [query])
 
   const setAnotherPage = useCallback(
     (nextPage: number) => {
-      navigate(`/search/${nextPage}`)
+      navigate(`/search/?page=${nextPage}${urlParams}`)
     },
-    [navigate]
+    [navigate, urlParams]
   )
 
-  const setCharacters = useCallback(
-    async (page: number) => {
-      const resObject = await CharactersApi.getCharacterPage(page, urlParams)
+  const setCharacters = useCallback(async (params: string) => {
+    const resObject = await CharactersApi.getCharacterPage(params)
 
-      if (resObject.data) {
-        setChars(resObject.data.results)
-        setInfo(resObject.data.info)
-      } else {
-        setChars([])
-        setInfo(baseInfo)
-      }
-    },
-    [urlParams]
-  )
-
-  //Зависимости не менять, можете получить зацикленность
-  useEffect(() => {
-    setCharacters(currPage)
-  }, [currPage])
-
-  useEffect(() => {
-    if (currPage === 1) {
-      setCharacters(1)
+    if (resObject.data) {
+      setChars(resObject.data.results)
+      setInfo(resObject.data.info)
+    } else {
+      setChars([])
+      setInfo(baseInfo)
     }
+  }, [])
+
+  useEffect(() => {
+    setCharacters(query.toString())
+  }, [setCharacters, query])
+
+  useEffect(() => {
     setAnotherPage(1)
-  }, [urlParams])
+  }, [setAnotherPage])
 
   return (
     <SearchPageContainer

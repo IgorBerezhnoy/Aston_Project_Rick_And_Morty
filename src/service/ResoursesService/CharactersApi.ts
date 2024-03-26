@@ -45,7 +45,7 @@ export class CharactersApi extends ServicePrototype {
     return result
   }
 
-  static async getCharacterPage(page: number, params: string) {
+  static async getCharacterPage(params: string) {
     const result: Result<Response<Character[]>> = {
       data: null,
       errorMessage: '',
@@ -53,9 +53,7 @@ export class CharactersApi extends ServicePrototype {
     }
 
     try {
-      const response = await api.get<Response<Character[]>>(
-        `${apiPaths.character}${apiPaths.page}${page}${params}`
-      )
+      const response = await api.get<Response<Character[]>>(`${apiPaths.character}?${params}`)
       const characters = response.data
 
       result.data = characters

@@ -4,7 +4,7 @@ export enum urlPaths {
   favorites = '/favorites',
   history = '/history',
   root = '/',
-  search = '/search/:query',
+  search = '/search/',
   signIn = '/sign-in',
   signUp = '/sign-up',
 }
