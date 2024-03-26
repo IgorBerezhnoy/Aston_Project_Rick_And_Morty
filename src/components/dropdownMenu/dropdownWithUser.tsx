@@ -18,7 +18,7 @@ export const DropdownWithUser = ({ logOutHandler, name }: Props) => {
       trigger={
         <div className={s.nameAndAvatar}>
           <div className={s.name}>{name}</div>
-          <Avatar className={s.avatar} name={name} size={52} />
+          <Avatar className={s.avatar} name={name} size={52} />4
         </div>
       }
     >
