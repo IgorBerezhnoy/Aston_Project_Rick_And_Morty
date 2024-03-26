@@ -36,7 +36,7 @@ export const DropdownWithUser = ({ logOutHandler, name }: Props) => {
             <div>Home</div>
           </Link>
         </DropDownItem>
-        <DropdownSeparator />{' '}
+        <DropdownSeparator />
         <DropDownItem>
           <Link className={s.dropdownItem} to={urlPaths.favorites}>
             <Bookmark className={s.icons} />
