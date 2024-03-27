@@ -1,16 +1,11 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import {
-  Navigate,
-  Outlet,
-  RouteObject,
-  RouterProvider,
-  createBrowserRouter,
-} from 'react-router-dom'
+import { Outlet, RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import { MainHeader } from '@/components/header/mainHeader'
 import { Page } from '@/components/page'
 import { urlPaths } from '@/enum/urlPaths'
+import { selectApp } from '@/features/app/appSlice'
 import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch } from '@/hooks/use-appDispatch'
 import { SignInPageContainer } from '@/page/sign-in-page'
@@ -75,18 +70,7 @@ export const AppRouter = () => {
 
 function Layout() {
   const { email, isAuth } = useSelector(selectAuth)
-
-  return (
-    <>
-      <MainHeader isAuth={isAuth} name={email ?? ''} />
-      <Page>
-        <Outlet />
-      </Page>
-    </>
-  )
-}
-
-function PrivateAppRoutes() {
+  const { isLoading } = useSelector(selectApp)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -103,7 +87,23 @@ function PrivateAppRoutes() {
     } // TODO Пока заглушка
     dispatch(login({ email: email }))
   }, [])
+
+  return (
+    <>
+      <MainHeader isAuth={isAuth} isLoading={isLoading} name={email ?? ''} />
+      <Page>
+        <Outlet />
+      </Page>
+    </>
+  )
+}
+
+function PrivateAppRoutes() {
   const { isAuth } = useSelector(selectAuth)
 
-  return isAuth ? <Outlet /> : <Navigate to={urlPaths.signIn} />
+  return isAuth ? (
+    <Outlet />
+  ) : (
+    <h1>Данный раздел доступен только зарегистрированным пользователям </h1>
+  ) // TODO Пока заглушка
 }
