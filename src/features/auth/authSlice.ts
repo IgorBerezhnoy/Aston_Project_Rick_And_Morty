@@ -1,19 +1,19 @@
 import { RootState } from '@/app/store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-interface CounterState {
+interface AuthState {
   email: null | string
   error: null | string
   isAuth: boolean
 }
 
-const initialState: CounterState = {
+const initialState: AuthState = {
   email: null,
   error: null,
   isAuth: false,
 }
 
-export const counterSlice = createSlice({
+export const authSlice = createSlice({
   initialState,
   name: 'auth',
   reducers: {
@@ -31,10 +31,10 @@ export const counterSlice = createSlice({
   },
 })
 
-export const { login, logout, setError } = counterSlice.actions
+export const { login, logout, setError } = authSlice.actions
 
 export const selectAuth = (state: RootState) => state.auth
 
-export default counterSlice.reducer
+export default authSlice.reducer
 type LoginActionType = { email: string }
 type ErrorActionType = { error: string }

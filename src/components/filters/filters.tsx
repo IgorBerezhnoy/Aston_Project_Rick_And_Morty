@@ -1,12 +1,12 @@
 import { FC, memo } from 'react'
 
+import { GENDER, STATUS, genders, statuses } from '@/constants'
 import { SearchProps } from '@/hooks/use-resource-filtering'
 import { Root } from '@radix-ui/react-radio-group'
 import clsx from 'clsx'
 
 import s from './filters.module.scss'
 
-import { GENDER, STATUS, genders, statuses } from '../../constants/constants'
 import { Radio } from '../radio'
 
 export interface FiltersProps {
