@@ -1,12 +1,11 @@
 import { memo } from 'react'
 import { Control } from 'react-hook-form'
-import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/button'
 import { CardBg } from '@/components/cardBg'
 import { ControlledTextField } from '@/components/controlled-textField'
-import { urlPaths } from '@/enum'
-import { SignUpData } from '@/page/sign-up-page/sign-up-page-container'
+import { AuthFooter } from '@/page/sign-up-page/auth-footer'
+import { SignUpData } from '@/utils/validators/schemes'
 
 import s from '@/page/sign-up-page/sign-up-page.module.scss'
 
@@ -42,14 +41,7 @@ export const SignUpPage = memo(({ control, onSubmit }: Props) => {
         />
         <Button>Sign Up</Button>
       </form>
-      <div className={s.footer}>
-        <div className={s.text}>Already have an account?</div>
-        <div className={s.signUp}>
-          <Link to={urlPaths.signIn}>
-            <span>Sign In</span>
-          </Link>
-        </div>
-      </div>
+      <AuthFooter linkText={'Sign In'} text={'Already have an account?'} />
     </CardBg>
   )
 })
