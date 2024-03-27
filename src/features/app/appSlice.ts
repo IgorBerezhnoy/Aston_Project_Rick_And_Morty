@@ -23,13 +23,17 @@ export const appSlice = createSlice({
     setInitialized: (state, action: PayloadAction<InitializedActionType>) => {
       state.initialized = action.payload.status
     },
+    setLoading: (state, action: PayloadAction<IsLoadingActionType>) => {
+      state.isLoading = action.payload.status
+    },
   },
 })
 
-export const { setError, setInitialized } = appSlice.actions
+export const { setError, setInitialized, setLoading } = appSlice.actions
 
 export const selectApp = (state: RootState) => state.app
 
 export default appSlice.reducer
 type ErrorActionType = { error: string }
 type InitializedActionType = { status: boolean }
+type IsLoadingActionType = { status: boolean }
