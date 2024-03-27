@@ -10,7 +10,7 @@ import {
 
 import { MainHeader } from '@/components/header/mainHeader'
 import { Page } from '@/components/page'
-import { urlPaths } from '@/enum/urlPaths'
+import { urlPaths } from '@/enums/enums'
 import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch } from '@/hooks/use-appDispatch'
 import { SignInPageContainer } from '@/page/sign-in-page'
@@ -31,20 +31,19 @@ const publicRouters: RouteObject[] = [
     element: <h1>404</h1>,
     path: urlPaths.error,
   },
+  {
+    element: <SearchPage />,
+    path: urlPaths.search,
+  },
 ]
 const privateRoutes: RouteObject[] = [
   {
     element: <h1>Main</h1>,
     path: urlPaths.root,
   },
-
   {
     element: <h1>Character</h1>,
     path: urlPaths.chapterId,
-  },
-  {
-    element: <SearchPage />,
-    path: urlPaths.search,
   },
   {
     element: <h1>history</h1>,

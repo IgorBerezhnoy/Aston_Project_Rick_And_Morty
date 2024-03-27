@@ -3,9 +3,11 @@ import { Control } from 'react-hook-form'
 
 import { Button } from '@/components/button'
 import { CardBg } from '@/components/cardBg'
+
 import { ControlledTextField } from '@/components/controlled-textField'
 import { AuthFooter } from '@/page/sign-up-page/auth-footer'
 import { SignUpData } from '@/utils/validators/schemes'
+
 
 import s from '@/page/sign-up-page/sign-up-page.module.scss'
 

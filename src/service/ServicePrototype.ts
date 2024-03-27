@@ -1,4 +1,4 @@
-import { urlPaths } from '@/enum'
+import { apiPaths } from '@/enums'
 import axios, { AxiosError } from 'axios'
 
 export interface Info {
@@ -24,7 +24,7 @@ export interface Result<T> {
 }
 
 export const api = axios.create({
-  baseURL: urlPaths.api,
+  baseURL: apiPaths.base,
 })
 
 export class ServicePrototype {

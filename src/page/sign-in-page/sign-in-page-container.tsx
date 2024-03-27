@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
 
-import { urlPaths } from '@/enum/urlPaths'
+import { urlPaths } from '@/enums/enums'
 import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-appDispatch'
 import { SignInPage } from '@/page/sign-in-page/sign-in-page'

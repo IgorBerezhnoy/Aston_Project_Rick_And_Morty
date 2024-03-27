@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
-import { urlPaths } from '@/enum'
+import { urlPaths } from '@/enums'
 import { selectAuth } from '@/features/auth/authSlice'
 import { SignUpPage } from '@/page/sign-up-page/sign-up-page'
 import { SignUpData, schemaSignUpData } from '@/utils/validators/schemes'
