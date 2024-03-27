@@ -1,62 +1,81 @@
-import { FC, useCallback, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { ChangeEvent, FC, useState } from 'react'
 
-import { CharacterList } from '@/components/characterList'
-import { Pagination } from '@/components/pagination'
-import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
+import { Button } from '@/components/button'
+import { CharactersContainer } from '@/components/charactersContainer'
+import { Filters } from '@/components/filters'
+import { FiltersContainer } from '@/components/filtersContainer'
+import { Search } from '@/components/search'
+import { SearchProps } from '@/hooks/use-resource-filtering'
+import { Character } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
 
-const baseInfo = {
-  count: 826,
-  next: null,
-  pages: 42,
-  prev: null,
+import s from './search-page.module.scss'
+
+type SearchPageContainerProps = {
+  chars: Character[]
+  currPage: number
+  handleButtonClear: () => void
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleSearch: (name: string, value: string) => void
+  info: Info
+  search: SearchProps
+  setAnotherPage: (nextPage: number) => void
 }
 
-export const SearchPage: FC = () => {
-  const [chars, setChars] = useState<Character[]>([])
-  const [info, setInfo] = useState<Info>(baseInfo)
-  const { query } = useParams()
-  const navigate = useNavigate()
+export const SearchPage: FC<SearchPageContainerProps> = ({
+  chars,
+  currPage,
+  handleButtonClear,
+  handleChange,
+  handleSearch,
+  info,
+  search,
+  setAnotherPage,
+}) => {
+  const [isPopup, setIsPopup] = useState<boolean>(false)
 
-  const currentPage = useCallback(() => {
-    if (query === undefined) {
-      return 1
-    }
-
-    return +query
-  }, [query])
-
-  function handleClick(nextPage: number) {
-    navigate(`/search/${nextPage}`)
+  const handleFilterPopup = () => {
+    setIsPopup(!isPopup)
   }
-
-  async function getCharacters(page: number) {
-    const resObject = await CharactersApi.getCharacterPage(page)
-
-    if (resObject.data) {
-      setChars(resObject.data.results)
-      setInfo(resObject.data.info)
-    }
-  }
-
-  useEffect(() => {
-    const page = currentPage()
-
-    getCharacters(page)
-  }, [currentPage])
-
-  const pageSize = Math.ceil(info.count / info.pages)
 
   return (
     <>
-      <CharacterList chars={chars} />
-      <Pagination
-        currentPage={currentPage()}
-        onPageChange={handleClick}
-        pageSize={pageSize}
-        stepValue={5}
-        totalCount={info.count}
+      <section className={`${s.page__section} ${s.page__section_search}`}>
+        <Search
+          className={s.page__search}
+          clearValue={handleButtonClear}
+          onChange={handleChange}
+          value={search.name}
+        />
+      </section>
+      <div className={s.page__container}>
+        <Filters
+          cbClear={handleButtonClear}
+          cbRadio={handleSearch}
+          className={s.page__filters}
+          state={search}
+        />
+        <CharactersContainer
+          chars={chars}
+          currPage={currPage}
+          info={info}
+          setAnotherPage={setAnotherPage}
+        />
+      </div>
+      <Button
+        className={s.page__button}
+        disabled={false}
+        onClick={handleFilterPopup}
+        variant={'secondary'}
+      >
+        Filters
+      </Button>
+      <FiltersContainer
+        cbClear={handleButtonClear}
+        cbPopup={handleFilterPopup}
+        cbRadio={handleSearch}
+        isPopup={isPopup}
+        state={search}
       />
     </>
   )

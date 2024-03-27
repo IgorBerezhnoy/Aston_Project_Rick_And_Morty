@@ -1,9 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { MemoryRouter } from 'react-router-dom'
+
 import { CharacterCard } from '.'
 
 const meta: Meta<typeof CharacterCard> = {
   component: CharacterCard,
+  decorators: [
+    Story => (
+      <MemoryRouter initialEntries={['/']}>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
   tags: ['autodocs'],
   title: 'Components/UI/CharacterCard',
 } satisfies Meta<typeof CharacterCard>

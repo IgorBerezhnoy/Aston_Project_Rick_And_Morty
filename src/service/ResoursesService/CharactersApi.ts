@@ -1,3 +1,4 @@
+import { apiPaths } from '@/enums'
 import { AxiosError } from 'axios'
 
 import { Error, Response, Result, ServicePrototype, api } from '../ServicePrototype'
@@ -31,7 +32,7 @@ export class CharactersApi extends ServicePrototype {
     }
 
     try {
-      const response = await api.get<Character>(`/character/${id}`)
+      const response = await api.get<Character>(`${apiPaths.character}${id}`)
       const character = response.data
 
       result.data = character
@@ -44,7 +45,7 @@ export class CharactersApi extends ServicePrototype {
     return result
   }
 
-  static async getCharacterPage(page: number) {
+  static async getCharacterPage(params: string) {
     const result: Result<Response<Character[]>> = {
       data: null,
       errorMessage: '',
@@ -52,7 +53,7 @@ export class CharactersApi extends ServicePrototype {
     }
 
     try {
-      const response = await api.get<Response<Character[]>>(`/character/?page=${page}`)
+      const response = await api.get<Response<Character[]>>(`${apiPaths.character}?${params}`)
       const characters = response.data
 
       result.data = characters
@@ -73,7 +74,7 @@ export class CharactersApi extends ServicePrototype {
     }
 
     try {
-      const response = await api.get<Response<Character[]>>(`/character/${id}`)
+      const response = await api.get<Response<Character[]>>(`${apiPaths.character}${id}`)
       const character = response.data
 
       result.data = character

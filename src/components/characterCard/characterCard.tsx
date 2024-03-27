@@ -1,24 +1,26 @@
 import { FC } from 'react'
+import { Link } from 'react-router-dom'
 
+import { urlPaths } from '@/enums'
 import { Character } from '@/service/ResoursesService/CharactersApi'
 
-import './characterCard.modules.scss'
+import s from './characterCard.module.scss'
 
-export interface ICharacterCard {
+type CharacterCardProps = {
   char: Character
 }
 
-export const CharacterCard: FC<ICharacterCard> = ({ char }) => {
-  const { image, name, origin, species } = char
+export const CharacterCard: FC<CharacterCardProps> = ({ char }) => {
+  const { id, image, name, origin, species } = char
 
   return (
-    <li className={'card'}>
-      <a className={'card__link'} href={'#'}>
-        <img alt={name} className={'card__image'} src={image} />
-      </a>
-      <h3 className={'card__title'}>{name}</h3>
-      <p className={'card__text'}>{species}</p>
-      <p className={'card__text'}>{origin.name}</p>
+    <li className={s.card}>
+      <Link className={s.card__link} to={`${urlPaths.character}${id}`}>
+        <img alt={name} className={s.card__image} src={image} />
+      </Link>
+      <h3 className={s.card__title}>{name}</h3>
+      <p className={s.card__text}>{species}</p>
+      <p className={s.card__text}>{origin.name}</p>
     </li>
   )
 }

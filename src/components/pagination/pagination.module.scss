@@ -20,6 +20,8 @@
     border: 1px solid var(--color-gray-300);
     border-radius: 4px;
 
+    color: var(--color-gray-300);
+
     transition:
       color 0.2s ease,
       background-color 0.2s ease;
@@ -59,6 +61,8 @@
     align-items: flex-end;
     justify-content: center;
 
+    color: var(--color-gray-300);
+
     width: 36px;
     height: 36px;
   }
@@ -66,4 +70,16 @@
 
 .disabledDots {
   color: var(--color-gray-300);
+}
+
+@media screen and (max-width: 570px) {
+  .root {
+    .dots {
+      display: none;
+    }
+  
+    .item {
+      display: none;
+    }
+  }
 }

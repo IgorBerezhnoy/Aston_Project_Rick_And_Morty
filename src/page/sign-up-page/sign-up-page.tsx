@@ -1,71 +1,49 @@
-import { ChangeEvent, memo } from 'react'
-import { Link } from 'react-router-dom'
+import { memo } from 'react'
+import { Control } from 'react-hook-form'
 
 import { Button } from '@/components/button'
 import { CardBg } from '@/components/cardBg'
-import { TextField } from '@/components/textField'
-import { urlPaths } from '@/enum'
+
+import { ControlledTextField } from '@/components/controlled-textField'
+import { AuthFooter } from '@/page/sign-up-page/auth-footer'
+import { SignUpData } from '@/utils/validators/schemes'
+
 
 import s from '@/page/sign-up-page/sign-up-page.module.scss'
 
 type Props = {
-  email: string
-  onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void
-  onChangePassword: (e: ChangeEvent<HTMLInputElement>) => void
-  onSecondChangePassword: (e: ChangeEvent<HTMLInputElement>) => void
-  password: string
-  secondPassword: string
-  signUpHandler: () => void
+  control: Control<SignUpData>
+  onSubmit: () => void
 }
 
-export const SignUpPage = memo(
-  ({
-    email,
-    onChangeEmail,
-    onChangePassword,
-    onSecondChangePassword,
-    password,
-    secondPassword,
-    signUpHandler,
-  }: Props) => {
-    return (
-      <CardBg className={s.container}>
-        <h2 className={s.title}>Sign in</h2>
-        <form className={s.form}>
-          <TextField
-            label={'Email'}
-            name={'email'}
-            onChange={onChangeEmail}
-            placeholder={'email'}
-            value={email}
-          />
-          <TextField
-            label={'Password'}
-            name={'password'}
-            onChange={onChangePassword}
-            placeholder={'password'}
-            type={'password'}
-            value={password}
-          />
-          <TextField
-            label={'Confirm Password'}
-            name={'Confirm Password'}
-            onChange={onSecondChangePassword}
-            placeholder={'Confirm Password'}
-            type={'password'}
-            value={secondPassword}
-          />
-          <Button onClick={signUpHandler}>Sign Up</Button>
-        </form>
-        <div className={s.footer}>
-          <div className={s.text}>Already have an account?</div>
-          <div className={s.signUp}>
-            <Link to={urlPaths.signIn}>
-              <span>Sign In</span>
-            </Link>
-          </div>
-        </div>
-      </CardBg>
-    )
-  }
-)
+export const SignUpPage = memo(({ control, onSubmit }: Props) => {
+  return (
+    <CardBg className={s.container}>
+      <h2 className={s.title}>Sign in</h2>
+      <form className={s.form} onSubmit={onSubmit}>
+        <ControlledTextField
+          control={control}
+          label={'Email'}
+          name={'email'}
+          placeholder={'email'}
+        />
+        <ControlledTextField
+          control={control}
+          label={'Password'}
+          name={'password'}
+          placeholder={'password'}
+          type={'password'}
+        />
+        <ControlledTextField
+          control={control}
+          label={'Confirm Password'}
+          name={'confirmPassword'}
+          placeholder={'Confirm Password'}
+          type={'password'}
+        />
+        <Button>Sign Up</Button>
+      </form>
+      <AuthFooter linkText={'Sign In'} text={'Already have an account?'} />
+    </CardBg>
+  )
+})
