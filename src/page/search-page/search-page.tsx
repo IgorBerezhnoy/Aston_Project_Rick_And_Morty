@@ -1,6 +1,7 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { GENDER, STATUS } from '@/constants'
 import { useQuery } from '@/hooks/use-query'
 import { useResourceFiltering } from '@/hooks/use-resource-filtering'
 import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
@@ -23,9 +24,9 @@ export const SearchPage: FC = () => {
 
   const { handleButtonClear, handleChange, handleSearch, search, urlParams } = useResourceFiltering(
     {
-      gender: query.get('gender') || 'all',
+      gender: query.get(GENDER) || 'all',
       name: query.get('name') || '',
-      status: query.get('status') || 'all',
+      status: query.get(STATUS) || 'all',
     }
   )
 

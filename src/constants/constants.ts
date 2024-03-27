@@ -1,5 +1,7 @@
 export const genders = ['female', 'male', 'genderless', 'unknown', 'all']
 export const statuses = ['alive', 'dead', 'unknown', 'all']
+export const GENDER = 'gender'
+export const STATUS = 'status'
 
 export const testChars = [
   {

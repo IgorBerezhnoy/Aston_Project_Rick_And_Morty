@@ -1,5 +1,6 @@
 export enum urlPaths {
   chapterId = '/character/:id',
+  character = '/character/',
   error = '*',
   favorites = '/favorites',
   history = '/history',

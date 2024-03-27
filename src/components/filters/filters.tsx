@@ -6,7 +6,7 @@ import clsx from 'clsx'
 
 import s from './filters.module.scss'
 
-import { genders, statuses } from '../../constants/constants'
+import { GENDER, STATUS, genders, statuses } from '../../constants/constants'
 import { Radio } from '../radio'
 
 export interface FiltersProps {
@@ -19,8 +19,8 @@ export interface FiltersProps {
 export const Filters: FC<FiltersProps> = memo(({ cbClear: cbClear, cbRadio, className, state }) => {
   const { gender, status } = state
 
-  const handleStatus = (value: string) => cbRadio('status', value)
-  const handleGender = (value: string) => cbRadio('gender', value)
+  const handleStatus = (value: string) => cbRadio(STATUS, value)
+  const handleGender = (value: string) => cbRadio(GENDER, value)
 
   return (
     <article className={clsx(s.radioGroup, className)}>
@@ -32,7 +32,7 @@ export const Filters: FC<FiltersProps> = memo(({ cbClear: cbClear, cbRadio, clas
         <h3 className={s.radioGroup__subTittle}>Gender</h3>
         <Root
           className={s.radioGroup__root}
-          name={'gender'}
+          name={GENDER}
           onValueChange={handleGender}
           value={gender}
         >
@@ -43,7 +43,7 @@ export const Filters: FC<FiltersProps> = memo(({ cbClear: cbClear, cbRadio, clas
         <h3 className={s.radioGroup__subTittle}>Status</h3>
         <Root
           className={s.radioGroup__root}
-          name={'status'}
+          name={STATUS}
           onValueChange={handleStatus}
           value={status}
         >

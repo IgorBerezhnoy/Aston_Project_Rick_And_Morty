@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 
+import { urlPaths } from '@/enums'
 import { Character } from '@/service/ResoursesService/CharactersApi'
 
 import s from './characterCard.module.scss'
@@ -14,7 +15,7 @@ export const CharacterCard: FC<CharacterCardProps> = ({ char }) => {
 
   return (
     <li className={s.card}>
-      <Link className={s.card__link} to={`/character/${id}`}>
+      <Link className={s.card__link} to={`${urlPaths.character}${id}`}>
         <img alt={name} className={s.card__image} src={image} />
       </Link>
       <h3 className={s.card__title}>{name}</h3>
