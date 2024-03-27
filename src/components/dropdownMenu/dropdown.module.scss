@@ -1,0 +1,113 @@
+.trigger {
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.dropdownMenuContent {
+  position: relative;
+  top: 6px;
+  right: 25px;
+
+  margin: 8px;
+  padding: 16px;
+
+  color: white;
+
+  background-color: var(--color-dark-800);
+  border: 1px solid var(--color-dark-800);
+  border-radius: 4px;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    transform: rotate(45deg);
+
+    width: 16px;
+    height: 16px;
+
+    background: var(--color-dark-800);
+    border-top: 1px solid var(--color-dark-800);
+    border-left: 1px solid var(--color-dark-800);
+  }
+}
+
+.dropdownMenuItem {
+  outline: none;
+
+  :hover {
+    color: var(--color-gray-700);
+    transition: all 0.6s;
+  }
+}
+
+.dropdownItem {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+
+  color: var(--color-light-500);
+  text-decoration: none;
+}
+
+.userName {
+  margin-left: 15px;
+  border-bottom: 1px dashed var(--color-light-500);
+}
+
+.dropdownMenuSeparator {
+  height: 1.5px;
+  margin: 12px 0;
+  background-color: var(--color-gray-700);
+}
+
+.photoAndEmail {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 220px;
+  margin-bottom: 8px;
+}
+
+.icons {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+
+.storyBookTrigger {
+  margin: 0 50%;
+  background: transparent;
+  border: none;
+}
+
+.nameAndAvatar {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  margin-right: 10px;
+  color: var(--color-light-500);
+  border-bottom: 1px dashed var(--color-light-500);
+}
+
+.triggerButton {
+  background: transparent;
+  border: none;
+}
+
+.logOut {
+  cursor: pointer;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
