@@ -1,23 +1,25 @@
 import { FC } from 'react'
 
 import { Character } from '@/service/ResoursesService/CharactersApi'
+import clsx from 'clsx'
 
-import './characterList.modules.scss'
+import s from './characterList.module.scss'
 
 import { CharacterCard } from '../characterCard'
 
-export interface ICharacterList {
+type CharacterListProps = {
   chars: Character[]
+  className?: string
 }
 
-export const CharacterList: FC<ICharacterList> = ({ chars }) => {
+export const CharacterList: FC<CharacterListProps> = ({ chars, className }) => {
   return (
-    <section className={'character'}>
-      <ul className={'character__list'}>
+    <div className={clsx(s.character, className)}>
+      <ul className={s.character__list}>
         {chars.map(char => (
           <CharacterCard char={char} key={char.id} />
         ))}
       </ul>
-    </section>
+    </div>
   )
 }

@@ -1,0 +1,62 @@
+/* reset */
+button {
+  all: unset;
+}
+
+.radioGroup {
+  position: relative;
+  color: white;
+
+  padding: 25px 0 25px 70px;
+
+  &__tittle {
+    letter-spacing: 0.05em;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #424242;
+
+    margin: 0;
+  }
+
+  &__button {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+
+    transition: opacity 0.4s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+  }
+
+  &__subTittle {
+    font-weight: 400;
+    font-size: var(--font-size-l);
+    letter-spacing: 0.08em;
+
+    margin: 35px 0 0;
+  }
+
+  &__root {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-right: 120px;
+  }
+}
+
+@media screen and (max-width: 1090px) {
+  .radioGroup {
+    padding: 25px 0 25px 30px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .radioGroup {
+    padding: 25px 0 25px 10px;
+  }
+}

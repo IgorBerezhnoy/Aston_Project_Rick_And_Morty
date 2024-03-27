@@ -1,63 +1,82 @@
-import { FC, useCallback, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import { CharacterList } from '@/components/characterList'
-import { Pagination } from '@/components/pagination'
+import { GENDER, STATUS } from '@/constants'
+import { useQuery } from '@/hooks/use-query'
+import { useResourceFiltering } from '@/hooks/use-resource-filtering'
 import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
 
+import { SearchPageContainer } from './search-page-container'
+
 const baseInfo = {
-  count: 826,
+  count: 0,
   next: null,
-  pages: 42,
+  pages: 0,
   prev: null,
 }
 
 export const SearchPage: FC = () => {
   const [chars, setChars] = useState<Character[]>([])
   const [info, setInfo] = useState<Info>(baseInfo)
-  const { query } = useParams()
+  const query = useQuery()
   const navigate = useNavigate()
 
-  const currentPage = useCallback(() => {
-    if (query === undefined) {
+  const { handleButtonClear, handleChange, handleSearch, search, urlParams } = useResourceFiltering(
+    {
+      gender: query.get(GENDER) || 'all',
+      name: query.get('name') || '',
+      status: query.get(STATUS) || 'all',
+    }
+  )
+
+  const currPage = useMemo(() => {
+    const page = query.get('page')
+
+    if (page === null) {
       return 1
     }
 
-    return +query
+    return +page
   }, [query])
 
-  function handleClick(nextPage: number) {
-    navigate(`/search/${nextPage}`)
-  }
+  const setAnotherPage = useCallback(
+    (nextPage: number) => {
+      navigate(`/search/?page=${nextPage}${urlParams}`)
+    },
+    [navigate, urlParams]
+  )
 
-  async function getCharacters(page: number) {
-    const resObject = await CharactersApi.getCharacterPage(page)
+  const setCharacters = useCallback(async (params: string) => {
+    const resObject = await CharactersApi.getCharacterPage(params)
 
     if (resObject.data) {
       setChars(resObject.data.results)
       setInfo(resObject.data.info)
+    } else {
+      setChars([])
+      setInfo(baseInfo)
     }
-  }
+  }, [])
 
   useEffect(() => {
-    const page = currentPage()
+    setCharacters(query.toString())
+  }, [setCharacters, query])
 
-    getCharacters(page)
-  }, [currentPage])
-
-  const pageSize = Math.ceil(info.count / info.pages)
+  useEffect(() => {
+    setAnotherPage(1)
+  }, [setAnotherPage])
 
   return (
-    <>
-      <CharacterList chars={chars} />
-      <Pagination
-        currentPage={currentPage()}
-        onPageChange={handleClick}
-        pageSize={pageSize}
-        stepValue={5}
-        totalCount={info.count}
-      />
-    </>
+    <SearchPageContainer
+      chars={chars}
+      currPage={currPage}
+      handleButtonClear={handleButtonClear}
+      handleChange={handleChange}
+      handleSearch={handleSearch}
+      info={info}
+      search={search}
+      setAnotherPage={setAnotherPage}
+    />
   )
 }

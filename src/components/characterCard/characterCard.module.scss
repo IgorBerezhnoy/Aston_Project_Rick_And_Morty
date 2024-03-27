@@ -15,6 +15,14 @@
 
     width: 100%;
     height: calc(100% - 70px);
+
+    background-color: white;
+
+    transition: transform 0.5s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 
   &__image {
@@ -23,19 +31,26 @@
 
     object-position: center;
     object-fit: cover;
+
+    transition: opacity 0.5s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   &__title {
     font-weight: 500;
-    font-size: --font-size-m;
+    font-size: var(--font-size-m);
     line-height: 16px;
+    color: white;
 
     margin: 0;
   }
 
   &__text {
     font-weight: 400;
-    font-size: --font-size-s;
+    font-size: var(--font-size-s);
     line-height: 13px;
     color: #8b8b8b;
 

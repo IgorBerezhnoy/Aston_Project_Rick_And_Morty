@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Button } from '@/components/button'
 import { CardBg } from '@/components/cardBg'
 import { TextField } from '@/components/textField'
-import { urlPaths } from '@/enum/urlPaths'
+import { urlPaths } from '@/enums/enums'
 
 import s from '@/page/sign-in-page/sign-in-page.module.scss'
 
