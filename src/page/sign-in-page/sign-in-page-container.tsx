@@ -1,25 +1,18 @@
 import { useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
 
-import { urlPaths } from '@/enum/urlPaths'
+import { urlPaths } from '@/enums/enums'
 import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-appDispatch'
 import { SignInPage } from '@/page/sign-in-page/sign-in-page'
+import { SignInData, schemaSignInData } from '@/utils/validators/schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-
-const schema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(3),
-})
-
-export type SignInData = z.infer<typeof schema>
 
 export const SignInPageContainer = () => {
   const dispatch = useAppDispatch()
   const { isAuth } = useAppSelector(selectAuth)
   const { control, handleSubmit } = useForm<SignInData>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schemaSignInData),
   })
 
   const signInHandler = handleSubmit((data: SignInData) => {

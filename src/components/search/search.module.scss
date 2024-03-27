@@ -2,7 +2,9 @@
   cursor: pointer;
   position: relative;
   display: inline-block;
-  width: 740px;
+
+  max-width: 740px;
+  width: 100%;
 }
 
 .searchIcon {
@@ -19,10 +21,6 @@
   background: white;
   border: 1px solid var(--color-gray-500);
   border-radius: 8px;
-}
-
-.textFieldWrapper {
-  width: 740px;
 }
 
 .clearIcon {

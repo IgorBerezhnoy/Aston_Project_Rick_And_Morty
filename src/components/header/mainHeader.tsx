@@ -5,7 +5,7 @@ import { Button } from '@/components/button'
 import { DropdownWithUserContainer } from '@/components/dropdownMenu/dropdownWithUserContainer'
 import { Header } from '@/components/header/header'
 import { Liner } from '@/components/liner'
-import { urlPaths } from '@/enum'
+import { urlPaths } from '@/enums'
 import { clsx } from 'clsx'
 
 import s from './header.module.scss'

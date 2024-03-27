@@ -1,25 +1,22 @@
 import { CloseIcon, SearchIcon } from '@/assets/icons'
 import { TextField, TextFieldProps } from '@/components/textField'
+import clsx from 'clsx'
 
 import s from './search.module.scss'
 
 export interface SearchProps extends TextFieldProps {
+  className?: string
   clearValue?: () => void
   onSearch?: () => void
   variant?: 'big' | 'default'
 }
 
-export const Search = ({ clearValue, onSearch, value, ...rest }: SearchProps) => {
+export const Search = ({ className, clearValue, onSearch, value, ...rest }: SearchProps) => {
   return (
-    <span className={s.wrapper}>
+    <span className={clsx(s.wrapper, className)}>
       <SearchIcon className={s.searchIcon} onClick={onSearch} />
       {value && <CloseIcon className={s.clearIcon} onClick={clearValue} />}
-      <TextField
-        className={s.textField}
-        classNameWrapper={s.textFieldWrapper}
-        value={value}
-        {...rest}
-      />
+      <TextField className={s.textField} value={value} {...rest} />
     </span>
   )
 }

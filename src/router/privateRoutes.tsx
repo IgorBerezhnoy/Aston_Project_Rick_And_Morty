@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { Outlet, RouteObject } from 'react-router-dom'
 
-import { urlPaths } from '@/enum'
+import { urlPaths } from '@/enums'
 import { selectAuth } from '@/features/auth/authSlice'
 
 export const privateRoutes: RouteObject[] = [
