@@ -3,6 +3,7 @@ import { Outlet, RouteObject } from 'react-router-dom'
 
 import { urlPaths } from '@/enums'
 import { selectAuth } from '@/features/auth/authSlice'
+import { FavoritesPage } from '@/page/favorites-page/favorites-page'
 
 export const privateRoutes: RouteObject[] = [
   {
@@ -10,7 +11,7 @@ export const privateRoutes: RouteObject[] = [
     path: urlPaths.history,
   },
   {
-    element: <h1>favorites</h1>,
+    element: <FavoritesPage />,
     path: urlPaths.favorites,
   },
 ]

@@ -3,7 +3,6 @@ import { Control } from 'react-hook-form'
 
 import { Button } from '@/components/button'
 import { CardBg } from '@/components/cardBg'
-
 import { ControlledTextField } from '@/components/controlled-textField'
 import { AuthFooter } from '@/page/sign-up-page/auth-footer'
 import { SignInData } from '@/utils/validators/schemes'

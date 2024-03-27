@@ -1,20 +1,13 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { GENDER, STATUS } from '@/constants'
+import { GENDER, STATUS, baseInfo } from '@/constants'
 import { useQuery } from '@/hooks/use-query'
 import { useResourceFiltering } from '@/hooks/use-resource-filtering'
 import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
 
 import { SearchPage } from './search-page'
-
-const baseInfo = {
-  count: 0,
-  next: null,
-  pages: 0,
-  prev: null,
-}
 
 export const SearchPageContainer: FC = () => {
   const [chars, setChars] = useState<Character[]>([])

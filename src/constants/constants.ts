@@ -3,6 +3,13 @@ export const statuses = ['alive', 'dead', 'unknown', 'all']
 export const GENDER = 'gender'
 export const STATUS = 'status'
 
+export const baseInfo = {
+  count: 0,
+  next: null,
+  pages: 0,
+  prev: null,
+}
+
 export const testChars = [
   {
     created: '2017-11-04T18:48:46.250Z',
