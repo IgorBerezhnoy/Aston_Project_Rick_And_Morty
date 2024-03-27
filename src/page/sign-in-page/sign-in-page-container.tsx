@@ -1,58 +1,38 @@
-import { ChangeEvent, MouseEvent, useCallback, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
 
 import { urlPaths } from '@/enums/enums'
 import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-appDispatch'
 import { SignInPage } from '@/page/sign-in-page/sign-in-page'
+import { SignInData, schemaSignInData } from '@/utils/validators/schemes'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export const SignInPageContainer = () => {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
   const dispatch = useAppDispatch()
   const { isAuth } = useAppSelector(selectAuth)
+  const { control, handleSubmit } = useForm<SignInData>({
+    resolver: zodResolver(schemaSignInData),
+  })
 
-  const onChangeEmail = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setEmail(e.currentTarget.value)
-    },
-    [setEmail]
-  )
-  const onChangePassword = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setPassword(e.currentTarget.value)
-    },
-    [setPassword]
-  )
-  const signInHandler = useCallback(
-    (e: MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault()
-      const user = localStorage.getItem(email)
+  const signInHandler = handleSubmit((data: SignInData) => {
+    const { email, password } = data
+    const user = localStorage.getItem(email)
 
-      if (!user) {
-        return null
-      }
-      const userObj = JSON.parse(user)
+    if (!user) {
+      return null
+    }
+    const userObj = JSON.parse(user)
 
-      if (userObj.email === email && userObj.password === password) {
-        dispatch(login({ email }))
-        localStorage.setItem('currentUser', JSON.stringify({ email, password }))
-      }
-    },
-    [email, password, dispatch]
-  )
+    if (userObj.email === email && userObj.password === password) {
+      dispatch(login({ email }))
+      localStorage.setItem('currentUser', JSON.stringify({ email, password }))
+    }
+  })
 
   if (isAuth) {
     return <Navigate to={urlPaths.root} />
   }
 
-  return (
-    <SignInPage
-      email={email}
-      onChangeEmail={onChangeEmail}
-      onChangePassword={onChangePassword}
-      password={password}
-      signInHandler={signInHandler}
-    />
-  )
+  return <SignInPage control={control} onSubmit={signInHandler} />
 }

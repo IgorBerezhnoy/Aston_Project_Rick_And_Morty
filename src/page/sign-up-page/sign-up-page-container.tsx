@@ -1,43 +1,31 @@
-import { ChangeEvent, useCallback, useState } from 'react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
 import { urlPaths } from '@/enums'
 import { selectAuth } from '@/features/auth/authSlice'
 import { SignUpPage } from '@/page/sign-up-page/sign-up-page'
+import { SignUpData, schemaSignUpData } from '@/utils/validators/schemes'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export const SignUpPageContainer = () => {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [secondPassword, setSecondPassword] = useState<string>('')
   const [isRegister, setIsRegister] = useState<boolean>(false)
   const { isAuth } = useSelector(selectAuth)
 
-  const onChangeEmail = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setEmail(e.currentTarget.value)
-    },
-    [setEmail]
-  )
-  const onChangePassword = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setPassword(e.currentTarget.value)
-    },
-    [setPassword]
-  )
-  const onSecondChangePassword = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setSecondPassword(e.currentTarget.value)
-    },
-    [setSecondPassword]
-  )
-  const signUpHandler = useCallback(() => {
-    if (password !== secondPassword) {
+  const { control, handleSubmit } = useForm<SignUpData>({
+    resolver: zodResolver(schemaSignUpData),
+  })
+
+  const signUpHandler = handleSubmit((data: SignUpData) => {
+    const { confirmPassword, email, password } = data
+
+    if (password !== confirmPassword) {
       return // TODO Пока заглушка
     }
     localStorage.setItem(email, JSON.stringify({ email, password }))
     setIsRegister(true)
-  }, [email, password, secondPassword])
+  })
 
   if (isRegister) {
     return <Navigate to={urlPaths.signIn} />
@@ -46,15 +34,5 @@ export const SignUpPageContainer = () => {
     return <Navigate to={urlPaths.root} />
   }
 
-  return (
-    <SignUpPage
-      email={email}
-      onChangeEmail={onChangeEmail}
-      onChangePassword={onChangePassword}
-      onSecondChangePassword={onSecondChangePassword}
-      password={password}
-      secondPassword={secondPassword}
-      signUpHandler={signUpHandler}
-    />
-  )
+  return <SignUpPage control={control} onSubmit={signUpHandler} />
 }
