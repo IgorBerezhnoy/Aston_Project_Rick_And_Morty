@@ -4,10 +4,10 @@ import { MemoryRouter } from 'react-router-dom'
 
 import { testChars } from '@/constants'
 
-import { CharacterList } from './'
+import { CharactersList } from './'
 
-const meta: Meta<typeof CharacterList> = {
-  component: CharacterList,
+const meta: Meta<typeof CharactersList> = {
+  component: CharactersList,
   decorators: [
     Story => (
       <MemoryRouter initialEntries={['/']}>
@@ -16,11 +16,11 @@ const meta: Meta<typeof CharacterList> = {
     ),
   ],
   tags: ['autodocs'],
-  title: 'Components/UI/CharacterList',
-} satisfies Meta<typeof CharacterList>
+  title: 'Components/UI/CharactersList',
+} satisfies Meta<typeof CharactersList>
 
 export default meta
-type Story = StoryObj<typeof CharacterList>
+type Story = StoryObj<typeof CharactersList>
 
 export const Default: Story = {
   args: {

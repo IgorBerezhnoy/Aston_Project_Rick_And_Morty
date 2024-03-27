@@ -1,82 +1,82 @@
-import { ChangeEvent, FC, useState } from 'react'
+import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import { Button } from '@/components/button'
-import { CharacterContainer } from '@/components/characterContainer'
-import { Filters } from '@/components/filters'
-import { FiltersContainer } from '@/components/filtersContainer'
-import { Search } from '@/components/search'
-import { SearchProps } from '@/hooks/use-resource-filtering'
-import { Character } from '@/service/ResoursesService/CharactersApi'
+import { GENDER, STATUS } from '@/constants'
+import { useQuery } from '@/hooks/use-query'
+import { useResourceFiltering } from '@/hooks/use-resource-filtering'
+import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
 
-import s from './search-page.module.scss'
+import { SearchPage } from './search-page'
 
-type SearchPageContainerProps = {
-  chars: Character[]
-  currPage: number
-  handleButtonClear: () => void
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void
-  handleSearch: (name: string, value: string) => void
-  info: Info
-  search: SearchProps
-  setAnotherPage: (nextPage: number) => void
+const baseInfo = {
+  count: 0,
+  next: null,
+  pages: 0,
+  prev: null,
 }
 
-export const SearchPageContainer: FC<SearchPageContainerProps> = ({
-  chars,
-  currPage,
-  handleButtonClear,
-  handleChange,
-  handleSearch,
-  info,
-  search,
-  setAnotherPage,
-}) => {
-  const [isPopup, setIsPopup] = useState<boolean>(false)
+export const SearchPageContainer: FC = () => {
+  const [chars, setChars] = useState<Character[]>([])
+  const [info, setInfo] = useState<Info>(baseInfo)
+  const query = useQuery()
+  const navigate = useNavigate()
 
-  const handleFilterPopup = () => {
-    setIsPopup(!isPopup)
-  }
+  const { handleButtonClear, handleChange, handleSearch, search, urlParams } = useResourceFiltering(
+    {
+      gender: query.get(GENDER) || 'all',
+      name: query.get('name') || '',
+      status: query.get(STATUS) || 'all',
+    }
+  )
+
+  const currPage = useMemo(() => {
+    const page = query.get('page')
+
+    if (page === null) {
+      return 1
+    }
+
+    return +page
+  }, [query])
+
+  const setAnotherPage = useCallback(
+    (nextPage: number) => {
+      navigate(`/search/?page=${nextPage}${urlParams}`)
+    },
+    [navigate, urlParams]
+  )
+
+  const setCharacters = useCallback(async (params: string) => {
+    const resObject = await CharactersApi.getCharacterPage(params)
+
+    if (resObject.data) {
+      setChars(resObject.data.results)
+      setInfo(resObject.data.info)
+    } else {
+      setChars([])
+      setInfo(baseInfo)
+    }
+  }, [])
+
+  useEffect(() => {
+    setCharacters(query.toString())
+  }, [setCharacters, query])
+
+  useEffect(() => {
+    setAnotherPage(1)
+  }, [setAnotherPage])
 
   return (
-    <>
-      <section className={`${s.page__section} ${s.page__section_search}`}>
-        <Search
-          className={s.page__search}
-          clearValue={handleButtonClear}
-          onChange={handleChange}
-          value={search.name}
-        />
-      </section>
-      <div className={s.page__container}>
-        <Filters
-          cbClear={handleButtonClear}
-          cbRadio={handleSearch}
-          className={s.page__filters}
-          state={search}
-        />
-        <CharacterContainer
-          chars={chars}
-          currPage={currPage}
-          info={info}
-          setAnotherPage={setAnotherPage}
-        />
-      </div>
-      <Button
-        className={s.page__button}
-        disabled={false}
-        onClick={handleFilterPopup}
-        variant={'secondary'}
-      >
-        Filters
-      </Button>
-      <FiltersContainer
-        cbClear={handleButtonClear}
-        cbPopup={handleFilterPopup}
-        cbRadio={handleSearch}
-        isPopup={isPopup}
-        state={search}
-      />
-    </>
+    <SearchPage
+      chars={chars}
+      currPage={currPage}
+      handleButtonClear={handleButtonClear}
+      handleChange={handleChange}
+      handleSearch={handleSearch}
+      info={info}
+      search={search}
+      setAnotherPage={setAnotherPage}
+    />
   )
 }

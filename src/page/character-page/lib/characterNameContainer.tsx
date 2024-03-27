@@ -1,4 +1,4 @@
-import s from '../characterPage.module.scss'
+import s from '../character-page.module.scss'
 type Props = {
   name: string
 }

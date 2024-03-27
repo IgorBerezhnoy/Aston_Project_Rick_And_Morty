@@ -1,7 +1,7 @@
 import { CharacterLabel } from '@/components/characterLabel'
 import { Character } from '@/service/ResoursesService/CharactersApi'
 
-import s from '../characterPage.module.scss'
+import s from '../character-page.module.scss'
 
 type Props = {
   char: Character

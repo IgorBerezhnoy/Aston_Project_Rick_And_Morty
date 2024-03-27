@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { CharacterPage } from '@/page/character-page/character-page'
 import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
-
-import { CharacterPage } from './characterPage'
 
 export const CharacterPageContainer = () => {
   const { id } = useParams()
@@ -16,10 +15,10 @@ export const CharacterPageContainer = () => {
   }, [])
 
   if (!id || +id > 828) {
-    return <>Error</>
+    return <></>
   }
   if (!state) {
-    return <>Error</>
+    return <></>
   }
 
   // TODO пока заглушка

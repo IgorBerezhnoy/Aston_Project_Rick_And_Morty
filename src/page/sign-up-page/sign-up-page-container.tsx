@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
@@ -17,15 +17,17 @@ export const SignUpPageContainer = () => {
     resolver: zodResolver(schemaSignUpData),
   })
 
-  const signUpHandler = handleSubmit((data: SignUpData) => {
-    const { confirmPassword, email, password } = data
+  const signUpHandler = handleSubmit(
+    useCallback((data: SignUpData) => {
+      const { confirmPassword, email, password } = data
 
-    if (password !== confirmPassword) {
-      return // TODO Пока заглушка
-    }
-    localStorage.setItem(email, JSON.stringify({ email, password }))
-    setIsRegister(true)
-  })
+      if (password !== confirmPassword) {
+        return // TODO Пока заглушка
+      }
+      localStorage.setItem(email, JSON.stringify({ email, password }))
+      setIsRegister(true)
+    }, [])
+  )
 
   if (isRegister) {
     return <Navigate to={urlPaths.signIn} />

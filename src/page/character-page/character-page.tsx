@@ -1,11 +1,10 @@
+import { CharacterPlaceholder } from '@/components/characterPlaceholder'
+import { CharacterImageContainer } from '@/page/character-page/lib/characterImageContainer'
+import { CharacterLabels } from '@/page/character-page/lib/characterLabels'
+import { CharacterNameContainer } from '@/page/character-page/lib/characterNameContainer'
 import { Character } from '@/service/ResoursesService/CharactersApi'
 
-import s from './characterPage.module.scss'
-
-import { CharacterPlaceholder } from '../characterPlaceholder'
-import { CharacterImageContainer } from './lib/characterImageContainer'
-import { CharacterLabels } from './lib/characterLabels'
-import { CharacterNameContainer } from './lib/characterNameContainer'
+import s from './character-page.module.scss'
 
 type CharacterPageProps = {
   char: Character

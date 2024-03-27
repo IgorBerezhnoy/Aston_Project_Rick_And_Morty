@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { CharacterPage } from './'
+import { CharacterPage } from '@/page/character-page/character-page'
 
 const meta: Meta<typeof CharacterPage> = {
   component: CharacterPage,

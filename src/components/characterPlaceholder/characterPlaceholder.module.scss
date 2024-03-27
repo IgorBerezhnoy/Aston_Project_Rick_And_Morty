@@ -1,26 +1,23 @@
 .placeholder {
   &Conteiner {
-    overflow: hidden;
     position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
+    z-index: -1;
+    inset: 0;
+    overflow: hidden;
   }
 
   &Name {
-    color: rgba(0, 0, 0, 0.1);
-    font-size: 600px;
-    text-transform: uppercase;
-    justify-content: center;
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+
     display: flex;
     align-items: center;
-    z-index: 1;
+    justify-content: center;
+
+    font-size: 600px;
+    color: rgb(0 0 0 / 10%);
+    text-transform: uppercase;
     white-space: nowrap;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
   }
 }

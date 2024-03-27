@@ -4,9 +4,9 @@ import { Character } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
 import { getPageSize } from '@/utils'
 
-import s from './characterContainer.module.scss'
+import s from './charactersContainer.module.scss'
 
-import { CharacterList } from '../characterList'
+import { CharactersList } from '../charactersList'
 import { Pagination } from '../pagination'
 
 const stepValue = 5
@@ -18,7 +18,7 @@ type CharacterContainerProps = {
   setAnotherPage: (page: number) => void
 }
 
-export const CharacterContainer: FC<CharacterContainerProps> = ({
+export const CharactersContainer: FC<CharacterContainerProps> = ({
   chars,
   currPage,
   info,
@@ -29,7 +29,7 @@ export const CharacterContainer: FC<CharacterContainerProps> = ({
 
   return (
     <section className={s.page__section}>
-      <CharacterList chars={chars} className={s.page__list} />
+      <CharactersList chars={chars} className={s.page__list} />
       {pages > 1 && (
         <Pagination
           currentPage={currPage}

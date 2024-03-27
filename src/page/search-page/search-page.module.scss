@@ -6,12 +6,12 @@
       display: flex;
       justify-content: center;
 
-      background-image: url('../../assets/background/search.jpg');
-      background-position: bottom;
-      background-repeat: no-repeat;
-      background-size: cover;
+      padding: 12vw 0;
 
-      padding: 8vw 0;
+      background-image: url('../../assets/background/search.jpg');
+      background-repeat: no-repeat;
+      background-position: bottom;
+      background-size: cover;
     }
   }
 
@@ -21,19 +21,17 @@
   }
 
   &__button {
-    display: none;
-
     position: fixed;
+    z-index: 2;
     bottom: 60px;
     left: 50vw;
-
     transform: translateX(-60%);
 
-    z-index: 2;
+    display: none;
   }
 }
 
-@media screen and (max-width: 910px) {
+@media screen and (width <= 910px) {
   .page {
     &__search {
       max-width: 90%;

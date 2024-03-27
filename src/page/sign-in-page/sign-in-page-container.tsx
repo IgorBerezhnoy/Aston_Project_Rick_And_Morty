@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
 
@@ -15,20 +16,22 @@ export const SignInPageContainer = () => {
     resolver: zodResolver(schemaSignInData),
   })
 
-  const signInHandler = handleSubmit((data: SignInData) => {
-    const { email, password } = data
-    const user = localStorage.getItem(email)
+  const signInHandler = handleSubmit(
+    useCallback((data: SignInData) => {
+      const { email, password } = data
+      const user = localStorage.getItem(email)
 
-    if (!user) {
-      return null
-    }
-    const userObj = JSON.parse(user)
+      if (!user) {
+        return null
+      }
+      const userObj = JSON.parse(user)
 
-    if (userObj.email === email && userObj.password === password) {
-      dispatch(login({ email }))
-      localStorage.setItem('currentUser', JSON.stringify({ email, password }))
-    }
-  })
+      if (userObj.email === email && userObj.password === password) {
+        dispatch(login({ email }))
+        localStorage.setItem('currentUser', JSON.stringify({ email, password }))
+      }
+    }, [])
+  )
 
   if (isAuth) {
     return <Navigate to={urlPaths.root} />
