@@ -1,14 +1,13 @@
 import { FC } from 'react'
 
-import { Character } from '@/service/ResoursesService/CharactersApi'
 import clsx from 'clsx'
 
 import s from './charactersList.module.scss'
 
-import { CharacterCard } from '../characterCard'
+import { CharacterCard, CharacterCardWithState } from '../characterCard'
 
 type CharacterListProps = {
-  chars: Character[]
+  chars: CharacterCardWithState[]
   className?: string
 }
 

@@ -1,18 +1,17 @@
 import { FC } from 'react'
 
-import { Character } from '@/service/ResoursesService/CharactersApi'
-import { Info } from '@/service/ServicePrototype'
 import { getPageSize } from '@/utils'
 
 import s from './charactersContainer.module.scss'
 
+import { CharacterCardWithState } from '../characterCard'
 import { CharactersList } from '../charactersList'
 import { Pagination } from '../pagination'
 
 const stepValue = 5
 
 type CharacterContainerProps = {
-  chars: Character[]
+  chars: CharacterCardWithState[]
   count: number
   currPage: number
   pages: number

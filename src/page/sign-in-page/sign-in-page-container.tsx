@@ -28,7 +28,7 @@ export const SignInPageContainer = () => {
 
       if (userObj.email === email && userObj.password === password) {
         dispatch(login({ email }))
-        localStorage.setItem('currentUser', JSON.stringify({ ...userObj }))
+        localStorage.setItem('currentUser', JSON.stringify(user))
       }
     }, [])
   )

@@ -29,6 +29,7 @@ const rickData = {
   gender: 'Male',
   id: 1,
   image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+  isFavorite: true,
   location: {
     name: 'Earth',
     url: 'https://rickandmortyapi.com/api/location/20',

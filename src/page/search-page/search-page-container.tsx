@@ -1,16 +1,23 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import { CharacterCardWithState } from '@/components/characterCard'
 import { GENDER, STATUS, baseInfo } from '@/constants'
+import { selectAuth, setResourceUpdate } from '@/features/auth/authSlice'
+import { useAppDispatch } from '@/hooks/use-appDispatch'
+import { useDatabaseUpdate } from '@/hooks/use-database-update'
 import { useQuery } from '@/hooks/use-query'
 import { useResourceFiltering } from '@/hooks/use-resource-filtering'
-import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
+import { CharactersApi } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
 
 import { SearchPage } from './search-page'
 
 export const SearchPageContainer: FC = () => {
-  const [chars, setChars] = useState<Character[]>([])
+  const dispatch = useAppDispatch()
+  const [chars, setChars] = useState<CharacterCardWithState[]>([])
+  const { favoriteIds } = useSelector(selectAuth)
   const [info, setInfo] = useState<Info>(baseInfo)
   const query = useQuery()
   const navigate = useNavigate()
@@ -40,17 +47,26 @@ export const SearchPageContainer: FC = () => {
     [navigate, urlParams]
   )
 
-  const setCharacters = useCallback(async (params: string) => {
-    const resObject = await CharactersApi.getCharacterPage(params)
+  const setCharacters = useCallback(
+    async (params: string) => {
+      const resObject = await CharactersApi.getCharacterPage(params)
 
-    if (resObject.data) {
-      setChars(resObject.data.results)
-      setInfo(resObject.data.info)
-    } else {
-      setChars([])
-      setInfo(baseInfo)
-    }
-  }, [])
+      if (resObject.data) {
+        const charsWithState = resObject.data.results.map(char => {
+          const isFavorite = favoriteIds.includes(char.id)
+
+          return { ...char, isFavorite }
+        })
+
+        setChars(charsWithState)
+        setInfo(resObject.data.info)
+      } else {
+        setChars([])
+        setInfo(baseInfo)
+      }
+    },
+    [favoriteIds]
+  )
 
   useEffect(() => {
     setCharacters(query.toString())
@@ -59,6 +75,12 @@ export const SearchPageContainer: FC = () => {
   useEffect(() => {
     setAnotherPage(1)
   }, [setAnotherPage])
+
+  useEffect(() => {
+    dispatch(setResourceUpdate({ isUpdate: false }))
+  }, [chars])
+
+  useDatabaseUpdate(favoriteIds)
 
   return (
     <SearchPage

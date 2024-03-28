@@ -1,18 +1,18 @@
 import { ChangeEvent, FC, useState } from 'react'
 
 import { Button } from '@/components/button'
+import { CharacterCardWithState } from '@/components/characterCard'
 import { CharactersContainer } from '@/components/charactersContainer'
 import { Filters } from '@/components/filters'
 import { FiltersContainer } from '@/components/filtersContainer'
 import { Search } from '@/components/search'
 import { SearchProps } from '@/hooks/use-resource-filtering'
-import { Character } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
 
 import s from './search-page.module.scss'
 
 type SearchPageContainerProps = {
-  chars: Character[]
+  chars: CharacterCardWithState[]
   currPage: number
   handleButtonClear: () => void
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void

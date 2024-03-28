@@ -2,16 +2,20 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { CharacterCardWithState } from '@/components/characterCard'
 import { CharactersContainer } from '@/components/charactersContainer'
 import { urlPaths } from '@/enums'
-import { selectAuth } from '@/features/auth/authSlice'
-import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
+import { selectAuth, setResourceUpdate } from '@/features/auth/authSlice'
+import { useAppDispatch } from '@/hooks/use-appDispatch'
+import { useDatabaseUpdate } from '@/hooks/use-database-update'
+import { CharactersApi } from '@/service/ResoursesService/CharactersApi'
 
 const baseCount = 20
 
 export const FavoritesPage: FC = () => {
+  const dispatch = useAppDispatch()
   const { favoriteIds } = useSelector(selectAuth)
-  const [chars, setChars] = useState<Character[]>([])
+  const [chars, setChars] = useState<CharacterCardWithState[]>([])
   const navigate = useNavigate()
   const { page } = useParams()
 
@@ -41,11 +45,17 @@ export const FavoritesPage: FC = () => {
 
       return
     }
-
     const resObject = await CharactersApi.getCharactersById(currFavoriteIds)
 
     if (resObject.data) {
-      setChars(resObject.data.results)
+      if (!Array.isArray(resObject.data)) {
+        resObject.data = [resObject.data]
+      }
+      const charsWithState = resObject.data.map(char => {
+        return { ...char, isFavorite: true }
+      })
+
+      setChars(charsWithState)
     } else {
       //Пробросить ошибку в обработчик
       setChars([])
@@ -57,6 +67,12 @@ export const FavoritesPage: FC = () => {
   useEffect(() => {
     setCharacters()
   }, [setCharacters])
+
+  useEffect(() => {
+    dispatch(setResourceUpdate({ isUpdate: false }))
+  }, [chars, dispatch])
+
+  useDatabaseUpdate(favoriteIds)
 
   return (
     <CharactersContainer

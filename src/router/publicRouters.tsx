@@ -2,7 +2,6 @@ import { RouteObject } from 'react-router-dom'
 
 import { urlPaths } from '@/enums'
 import { CharacterPageContainer } from '@/page/character-page/character-page-container'
-import { SearchPageContainer } from '@/page/search-page'
 import { SignInPageContainer } from '@/page/sign-in-page'
 import { SignUpPageContainer } from '@/page/sign-up-page'
 
@@ -20,16 +19,12 @@ export const publicRouters: RouteObject[] = [
     path: urlPaths.error,
   },
   {
-    element: <SearchPageContainer />,
+    element: <h1>Main</h1>,
     path: urlPaths.root,
   },
 
   {
     element: <CharacterPageContainer />,
     path: urlPaths.chapterId,
-  },
-  {
-    element: <SearchPageContainer />,
-    path: urlPaths.search,
   },
 ]
