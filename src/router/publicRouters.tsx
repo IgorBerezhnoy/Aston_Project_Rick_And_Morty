@@ -2,6 +2,7 @@ import { RouteObject } from 'react-router-dom'
 
 import { urlPaths } from '@/enums'
 import { CharacterPageContainer } from '@/page/character-page/character-page-container'
+import { Page404 } from '@/page/page-404/page-404'
 import { SearchPageContainer } from '@/page/search-page'
 import { SignInPageContainer } from '@/page/sign-in-page'
 import { SignUpPageContainer } from '@/page/sign-up-page'
@@ -16,7 +17,7 @@ export const publicRouters: RouteObject[] = [
     path: urlPaths.signUp,
   },
   {
-    element: <h1>404</h1>,
+    element: <Page404 />,
     path: urlPaths.error,
   },
   {
