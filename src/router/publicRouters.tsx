@@ -1,43 +1,63 @@
+import { Suspense, lazy } from 'react'
 import { RouteObject } from 'react-router-dom'
 
+import { Loader } from '@/components/loader'
 import { urlPaths } from '@/enums'
-import CharacterPageContainer from '@/page/character-page/character-page-container'
-import Page404 from '@/page/page-404/page-404'
-import SearchPageContainer from '@/page/search-page/search-page-container'
-import SignInPageContainer from '@/page/sign-in-page/sign-in-page-container'
-import SignUpPageContainer from '@/page/sign-up-page/sign-up-page-container'
 
-// const SignInPageContainer = lazy(() => import('@/page/sign-in-page/sign-in-page-container'))
-// const SignUpPageContainer = lazy(() => import('@/page/sign-up-page/sign-up-page-container'))
-// const Page404 = lazy(() => import('@/page/page-404/page-404'))
-// const CharacterPageContainer = lazy(() => import('@/page/character-page/character-page-container'))
-//Todo доработать
-// когда идёт переход возникает ошибка
-// установить лоадер
+const SignInPageContainer = lazy(() => import('@/page/sign-in-page/sign-in-page-container'))
+const SignUpPageContainer = lazy(() => import('@/page/sign-up-page/sign-up-page-container'))
+const Page404 = lazy(() => import('@/page/page-404/page-404'))
+const CharacterPageContainer = lazy(() => import('@/page/character-page/character-page-container'))
+const SearchPageContainer = lazy(() => import('@/page/search-page/search-page-container'))
+
 export const publicRouters: RouteObject[] = [
   {
-    element: <SignInPageContainer />,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <SignInPageContainer />
+      </Suspense>
+    ),
     path: urlPaths.signIn,
   },
   {
-    element: <SignUpPageContainer />,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <SignUpPageContainer />
+      </Suspense>
+    ),
     path: urlPaths.signUp,
   },
   {
-    element: <Page404 />,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <Page404 />
+      </Suspense>
+    ),
     path: urlPaths.error,
   },
   {
-    element: <SearchPageContainer />,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <SearchPageContainer />
+      </Suspense>
+    ),
     path: urlPaths.root,
   },
 
   {
-    element: <CharacterPageContainer />,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <CharacterPageContainer />
+      </Suspense>
+    ),
     path: urlPaths.chapterId,
   },
   {
-    element: <SearchPageContainer />,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <SearchPageContainer />
+      </Suspense>
+    ),
     path: urlPaths.search,
   },
 ]

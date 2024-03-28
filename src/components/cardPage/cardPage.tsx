@@ -8,13 +8,19 @@ import s from './cardPage.module.scss'
 
 import img from '../../../public/pageNotFound.gif'
 
+type Props = {
+  imgTag?: ReactNode
+  subtitle?: ReactNode
+  title: string
+}
+
 export const CardPage = ({
-  imgTag = <img alt={'Sorry this page is not found'} src={img} />,
+  imgTag = <ImgTag />,
   subtitle = (
     <h3>
       You can return to the{' '}
       <Link className={s.link} to={urlPaths.root}>
-        main page
+        main page main page
       </Link>
     </h3>
   ),
@@ -28,9 +34,4 @@ export const CardPage = ({
     </CardBg>
   )
 }
-
-type Props = {
-  imgTag?: ReactNode
-  subtitle?: ReactNode
-  title: string
-}
+const ImgTag = () => <img alt={'Sorry this page is not found'} src={img} />
