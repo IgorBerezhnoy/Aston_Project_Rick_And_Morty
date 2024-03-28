@@ -1,10 +1,10 @@
 import { CloseIcon, SearchIcon } from '@/assets/icons'
-import { TextField, TextFieldProps } from '@/components/textField'
+import { DebounceInput, DebouncedInput } from '@/utils/debounce'
 import clsx from 'clsx'
 
 import s from './search.module.scss'
 
-export interface SearchProps extends TextFieldProps {
+export type SearchProps = DebounceInput & {
   className?: string
   clearValue?: () => void
   onSearch?: () => void
@@ -16,7 +16,7 @@ export const Search = ({ className, clearValue, onSearch, value, ...rest }: Sear
     <span className={clsx(s.wrapper, className)}>
       <SearchIcon className={s.searchIcon} onClick={onSearch} />
       {value && <CloseIcon className={s.clearIcon} onClick={clearValue} />}
-      <TextField className={s.textField} value={value} {...rest} />
+      <DebouncedInput className={s.textField} value={value} {...rest} />
     </span>
   )
 }
