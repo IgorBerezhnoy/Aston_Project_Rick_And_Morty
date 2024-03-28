@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { ErrorBoundary } from '@/components/errorBoundary/errorBoundary'
 import { CharacterPage } from '@/page/character-page/character-page'
 import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
 
@@ -22,5 +23,9 @@ export const CharacterPageContainer = () => {
   }
 
   // TODO пока заглушка
-  return <CharacterPage char={state} />
+  return (
+    <ErrorBoundary>
+      <CharacterPage char={state} />
+    </ErrorBoundary>
+  )
 }
