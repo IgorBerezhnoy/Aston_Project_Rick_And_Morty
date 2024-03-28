@@ -1,5 +1,7 @@
 import { CardPage } from '@/components/cardPage'
 
-export const Page404 = () => {
+const Page404 = () => {
   return <CardPage title={'Sorry this page is not found'} />
 }
+
+export default Page404

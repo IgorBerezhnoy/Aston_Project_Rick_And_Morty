@@ -5,7 +5,7 @@ import { ErrorBoundary } from '@/components/errorBoundary/errorBoundary'
 import { CharacterPage } from '@/page/character-page/character-page'
 import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
 
-export const CharacterPageContainer = () => {
+const CharacterPageContainer = () => {
   const { id } = useParams()
   const [state, setState] = useState<Character | null>(null)
 
@@ -29,3 +29,5 @@ export const CharacterPageContainer = () => {
     </ErrorBoundary>
   )
 }
+
+export default CharacterPageContainer
