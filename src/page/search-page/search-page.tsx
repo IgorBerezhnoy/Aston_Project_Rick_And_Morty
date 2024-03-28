@@ -2,6 +2,7 @@ import { ChangeEvent, FC, useState } from 'react'
 
 import { Button } from '@/components/button'
 import { CharactersContainer } from '@/components/charactersContainer'
+import { ErrorBoundary } from '@/components/errorBoundary/errorBoundary'
 import { Filters } from '@/components/filters'
 import { FiltersContainer } from '@/components/filtersContainer'
 import { Search } from '@/components/search'
@@ -55,12 +56,14 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
           className={s.page__filters}
           state={search}
         />
-        <CharactersContainer
-          chars={chars}
-          currPage={currPage}
-          info={info}
-          setAnotherPage={setAnotherPage}
-        />
+        <ErrorBoundary>
+          <CharactersContainer
+            chars={chars}
+            currPage={currPage}
+            info={info}
+            setAnotherPage={setAnotherPage}
+          />
+        </ErrorBoundary>
       </div>
       <Button
         className={s.page__button}

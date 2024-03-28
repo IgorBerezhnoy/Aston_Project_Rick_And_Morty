@@ -16,7 +16,7 @@ const baseInfo = {
   prev: null,
 }
 
-export const SearchPageContainer: FC = () => {
+const SearchPageContainer: FC = () => {
   const [chars, setChars] = useState<Character[]>([])
   const [info, setInfo] = useState<Info>(baseInfo)
   const query = useQuery()
@@ -80,3 +80,5 @@ export const SearchPageContainer: FC = () => {
     />
   )
 }
+
+export default SearchPageContainer
