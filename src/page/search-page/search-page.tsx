@@ -57,8 +57,9 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
         />
         <CharactersContainer
           chars={chars}
+          count={info.count}
           currPage={currPage}
-          info={info}
+          pages={info.pages}
           setAnotherPage={setAnotherPage}
         />
       </div>

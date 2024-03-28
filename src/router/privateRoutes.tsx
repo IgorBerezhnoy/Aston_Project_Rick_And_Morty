@@ -12,7 +12,7 @@ export const privateRoutes: RouteObject[] = [
   },
   {
     element: <FavoritesPage />,
-    path: urlPaths.favorites,
+    path: urlPaths.favoritesRoute,
   },
 ]
 

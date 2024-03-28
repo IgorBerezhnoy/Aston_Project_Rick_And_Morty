@@ -1,45 +1,48 @@
-import { FC, useCallback, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 
-import { CharactersList } from '@/components/charactersList'
+import { CharactersContainer } from '@/components/charactersContainer'
 import { urlPaths } from '@/enums'
+import { selectAuth } from '@/features/auth/authSlice'
 import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
 
+const baseCount = 20
+
 export const FavoritesPage: FC = () => {
+  const { favoriteIds } = useSelector(selectAuth)
   const [chars, setChars] = useState<Character[]>([])
   const navigate = useNavigate()
+  const { page } = useParams()
 
-  const getFavoriteIds = useCallback(() => {
-    const userJson = localStorage.getItem('currentUser')
-
-    if (userJson === null) {
-      return null
+  const currPage = useMemo(() => {
+    if (page === undefined) {
+      return 1
     }
 
-    const userData = JSON.parse(userJson)
+    return +page
+  }, [page])
 
-    if (userData.favorite === undefined) {
-      return []
-    }
+  const currFavoriteIds = useMemo(
+    () => favoriteIds.slice((currPage - 1) * baseCount, currPage * baseCount),
+    [currPage, favoriteIds]
+  )
 
-    return userData.favorite
-  }, [])
+  const setAnotherPage = useCallback(
+    (nextPage: number) => {
+      navigate(`${urlPaths.favorites}${nextPage}`)
+    },
+    [navigate]
+  )
 
   const setCharacters = useCallback(async () => {
-    const favoriteIds = getFavoriteIds()
-
-    if (favoriteIds === null) {
-      //Пробросить ошибку в обработчик
-      navigate(urlPaths.signIn)
-    }
-
-    if (favoriteIds.length === 0) {
+    if (currFavoriteIds.length === 0) {
       setChars([])
 
       return
     }
 
-    const resObject = await CharactersApi.getCharactersById(favoriteIds)
+    const resObject = await CharactersApi.getCharactersById(currFavoriteIds)
 
     if (resObject.data) {
       setChars(resObject.data.results)
@@ -47,11 +50,21 @@ export const FavoritesPage: FC = () => {
       //Пробросить ошибку в обработчик
       setChars([])
     }
-  }, [getFavoriteIds, navigate])
+  }, [currFavoriteIds])
+
+  const pages = Math.ceil(favoriteIds.length / baseCount)
 
   useEffect(() => {
     setCharacters()
   }, [setCharacters])
 
-  return <CharactersList chars={chars} />
+  return (
+    <CharactersContainer
+      chars={chars}
+      count={currFavoriteIds.length}
+      currPage={currPage}
+      pages={pages}
+      setAnotherPage={setAnotherPage}
+    />
+  )
 }

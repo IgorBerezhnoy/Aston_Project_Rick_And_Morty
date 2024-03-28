@@ -29,7 +29,6 @@ export const SignInPageContainer = () => {
       if (userObj.email === email && userObj.password === password) {
         dispatch(login({ email }))
         localStorage.setItem('currentUser', JSON.stringify({ ...userObj }))
-        //Нужны сразу все данные, включая favorite и history
       }
     }, [])
   )

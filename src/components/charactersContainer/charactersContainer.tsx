@@ -13,18 +13,19 @@ const stepValue = 5
 
 type CharacterContainerProps = {
   chars: Character[]
+  count: number
   currPage: number
-  info: Info
+  pages: number
   setAnotherPage: (page: number) => void
 }
 
 export const CharactersContainer: FC<CharacterContainerProps> = ({
   chars,
+  count,
   currPage,
-  info,
+  pages,
   setAnotherPage,
 }) => {
-  const { count, pages } = info
   const pageSize = getPageSize(count, pages)
 
   return (
