@@ -16,19 +16,25 @@ const baseInfo = {
   prev: null,
 }
 
-export const SearchPageContainer: FC = () => {
+const SearchPageContainer: FC = () => {
   const [chars, setChars] = useState<Character[]>([])
   const [info, setInfo] = useState<Info>(baseInfo)
   const query = useQuery()
   const navigate = useNavigate()
 
-  const { handleButtonClear, handleChange, handleSearch, search, urlParams } = useResourceFiltering(
-    {
-      gender: query.get(GENDER) || 'all',
-      name: query.get('name') || '',
-      status: query.get(STATUS) || 'all',
-    }
-  )
+  const {
+    handleButtonClear,
+    handleChange,
+    handleChangeInputValue,
+    handleSearch,
+    search,
+    urlParams,
+    valueInput,
+  } = useResourceFiltering({
+    gender: query.get(GENDER) || 'all',
+    name: query.get('name') || '',
+    status: query.get(STATUS) || 'all',
+  })
 
   const currPage = useMemo(() => {
     const page = query.get('page')
@@ -73,10 +79,14 @@ export const SearchPageContainer: FC = () => {
       currPage={currPage}
       handleButtonClear={handleButtonClear}
       handleChange={handleChange}
+      handleChangeInputValue={handleChangeInputValue}
       handleSearch={handleSearch}
       info={info}
       search={search}
       setAnotherPage={setAnotherPage}
+      valueInput={valueInput}
     />
   )
 }
+
+export default SearchPageContainer
