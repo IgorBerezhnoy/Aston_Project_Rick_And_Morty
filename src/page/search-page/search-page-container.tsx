@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { CharacterCardWithState } from '@/components/characterCard'
 import { GENDER, STATUS, baseInfo } from '@/constants'
-import { selectAuth, setResourceUpdate } from '@/features/auth/authSlice'
-import { useAppDispatch } from '@/hooks/use-appDispatch'
+import { selectAuth } from '@/features/auth/authSlice'
 import { useDatabaseUpdate } from '@/hooks/use-database-update'
 import { useQuery } from '@/hooks/use-query'
 import { useResourceFiltering } from '@/hooks/use-resource-filtering'
@@ -15,7 +14,6 @@ import { Info } from '@/service/ServicePrototype'
 import { SearchPage } from './search-page'
 
 export const SearchPageContainer: FC = () => {
-  const dispatch = useAppDispatch()
   const [chars, setChars] = useState<CharacterCardWithState[]>([])
   const { favoriteIds } = useSelector(selectAuth)
   const [info, setInfo] = useState<Info>(baseInfo)
@@ -75,12 +73,6 @@ export const SearchPageContainer: FC = () => {
   useEffect(() => {
     setAnotherPage(1)
   }, [setAnotherPage])
-
-  useEffect(() => {
-    dispatch(setResourceUpdate({ isUpdate: false }))
-  }, [chars])
-
-  useDatabaseUpdate(favoriteIds)
 
   return (
     <SearchPage

@@ -4,7 +4,6 @@ import { Outlet, RouteObject } from 'react-router-dom'
 import { urlPaths } from '@/enums'
 import { selectAuth } from '@/features/auth/authSlice'
 import { FavoritesPage } from '@/page/favorites-page/favorites-page'
-import { SearchPageContainer } from '@/page/search-page'
 
 export const privateRoutes: RouteObject[] = [
   {
@@ -14,10 +13,6 @@ export const privateRoutes: RouteObject[] = [
   {
     element: <FavoritesPage />,
     path: urlPaths.favoritesRoute,
-  },
-  {
-    element: <SearchPageContainer />,
-    path: urlPaths.search,
   },
 ]
 

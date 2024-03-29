@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom'
 import { MainHeader } from '@/components/header/mainHeader'
 import { Page } from '@/components/page'
 import { selectApp } from '@/features/app/appSlice'
-import { login, selectAuth, setFavoriteIds } from '@/features/auth/authSlice'
+import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch } from '@/hooks/use-appDispatch'
 
 export function Layout() {
@@ -21,16 +21,11 @@ export function Layout() {
     } // TODO Пока заглушка
     const currentUserObj = JSON.parse(currentUser)
     const email = currentUserObj?.email
-    const favoriteIds = currentUserObj?.favoriteIds
 
     if (!currentUserObj || !email) {
       return
     } // TODO Пока заглушка
     dispatch(login({ email: email }))
-    if (favoriteIds === undefined) {
-      return
-    }
-    dispatch(setFavoriteIds({ favoriteIds: favoriteIds }))
   }, [])
 
   return (

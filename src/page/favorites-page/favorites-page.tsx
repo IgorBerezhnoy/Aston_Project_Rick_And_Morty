@@ -5,15 +5,13 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { CharacterCardWithState } from '@/components/characterCard'
 import { CharactersContainer } from '@/components/charactersContainer'
 import { urlPaths } from '@/enums'
-import { selectAuth, setResourceUpdate } from '@/features/auth/authSlice'
-import { useAppDispatch } from '@/hooks/use-appDispatch'
+import { selectAuth } from '@/features/auth/authSlice'
 import { useDatabaseUpdate } from '@/hooks/use-database-update'
 import { CharactersApi } from '@/service/ResoursesService/CharactersApi'
 
 const baseCount = 20
 
 export const FavoritesPage: FC = () => {
-  const dispatch = useAppDispatch()
   const { favoriteIds } = useSelector(selectAuth)
   const [chars, setChars] = useState<CharacterCardWithState[]>([])
   const navigate = useNavigate()
@@ -67,10 +65,6 @@ export const FavoritesPage: FC = () => {
   useEffect(() => {
     setCharacters()
   }, [setCharacters])
-
-  useEffect(() => {
-    dispatch(setResourceUpdate({ isUpdate: false }))
-  }, [chars, dispatch])
 
   useDatabaseUpdate(favoriteIds)
 

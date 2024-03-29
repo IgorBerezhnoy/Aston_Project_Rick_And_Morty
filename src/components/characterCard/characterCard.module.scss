@@ -72,19 +72,14 @@ button {
     right: 10px;
 
     width: 15%;
-    opacity: 0.5;
 
     z-index: 1;
 
     transition: transform 0.4s ease-in-out;
 
-    &_notDisabled {
-      opacity: 1;
-
-      &:hover {
-        cursor: pointer;
-        transform: scale(1.4);
-      }
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.4);
     }
   }
 
