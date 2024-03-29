@@ -1,15 +1,21 @@
 import { Link } from 'react-router-dom'
 
-import { urlPaths } from '@/enums'
-
 import s from '@/page/sign-up-page/sign-up-page.module.scss'
 
-export const AuthFooter = ({ linkText, text }: { linkText: string; text: string }) => {
+export const AuthFooter = ({
+  linkText,
+  path,
+  text,
+}: {
+  linkText: string
+  path: string
+  text: string
+}) => {
   return (
     <div className={s.footer}>
       <div className={s.text}>{text}</div>
       <div className={s.signUp}>
-        <Link to={linkText === 'Sign In' ? urlPaths.signIn : urlPaths.signUp}>
+        <Link to={path}>
           <span>{linkText}</span>
         </Link>
       </div>

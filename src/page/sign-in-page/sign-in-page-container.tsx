@@ -9,7 +9,7 @@ import { SignInPage } from '@/page/sign-in-page/sign-in-page'
 import { SignInData, schemaSignInData } from '@/utils/validators/schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-export const SignInPageContainer = () => {
+const SignInPageContainer = () => {
   const dispatch = useAppDispatch()
   const { isAuth } = useAppSelector(selectAuth)
   const { control, handleSubmit } = useForm<SignInData>({
@@ -39,3 +39,5 @@ export const SignInPageContainer = () => {
 
   return <SignInPage control={control} onSubmit={signInHandler} />
 }
+
+export default SignInPageContainer

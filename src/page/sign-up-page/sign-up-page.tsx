@@ -4,6 +4,7 @@ import { Control } from 'react-hook-form'
 import { Button } from '@/components/button'
 import { CardBg } from '@/components/cardBg'
 import { ControlledTextField } from '@/components/controlled-textField'
+import { urlPaths } from '@/enums'
 import { AuthFooter } from '@/page/sign-up-page/auth-footer'
 import { SignUpData } from '@/utils/validators/schemes'
 
@@ -41,7 +42,7 @@ export const SignUpPage = memo(({ control, onSubmit }: Props) => {
         />
         <Button>Sign Up</Button>
       </form>
-      <AuthFooter linkText={'Sign In'} text={'Already have an account?'} />
+      <AuthFooter linkText={'Sign In'} path={urlPaths.signIn} text={'Already have an account?'} />
     </CardBg>
   )
 })

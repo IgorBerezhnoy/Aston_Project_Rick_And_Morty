@@ -11,7 +11,7 @@ import { CharactersApi } from '@/service/ResoursesService/CharactersApi'
 
 const baseCount = 20
 
-export const FavoritesPage: FC = () => {
+const FavoritesPage: FC = () => {
   const { user } = useSelector(selectAuth)
   const [chars, setChars] = useState<CharacterCardWithState[]>([])
   const navigate = useNavigate()
@@ -81,3 +81,5 @@ export const FavoritesPage: FC = () => {
     />
   )
 }
+
+export default FavoritesPage

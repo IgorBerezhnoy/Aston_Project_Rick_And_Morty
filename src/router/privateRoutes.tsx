@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux'
 import { Outlet, RouteObject } from 'react-router-dom'
 
+import { CardPage } from '@/components/cardPage'
 import { urlPaths } from '@/enums'
 import { selectAuth } from '@/features/auth/authSlice'
-import { FavoritesPage } from '@/page/favorites-page/favorites-page'
+import FavoritesPage from '@/page/favorites-page/favorites-page'
 
 export const privateRoutes: RouteObject[] = [
   {
@@ -22,6 +23,6 @@ export function PrivateAppRoutes() {
   return isAuth ? (
     <Outlet />
   ) : (
-    <h1>Данный раздел доступен только зарегистрированным пользователям </h1>
+    <CardPage title={'This section is available only to registered users'} />
   ) // TODO Пока заглушка
 }

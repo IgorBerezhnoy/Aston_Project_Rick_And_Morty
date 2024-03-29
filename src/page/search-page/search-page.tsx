@@ -3,6 +3,7 @@ import { ChangeEvent, FC, useState } from 'react'
 import { Button } from '@/components/button'
 import { CharacterCardWithState } from '@/components/characterCard'
 import { CharactersContainer } from '@/components/charactersContainer'
+import { ErrorBoundary } from '@/components/errorBoundary/errorBoundary'
 import { Filters } from '@/components/filters'
 import { FiltersContainer } from '@/components/filtersContainer'
 import { Search } from '@/components/search'
@@ -15,11 +16,13 @@ type SearchPageContainerProps = {
   chars: CharacterCardWithState[]
   currPage: number
   handleButtonClear: () => void
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleChange: (e: string) => void
+  handleChangeInputValue: (e: ChangeEvent<HTMLInputElement>) => void
   handleSearch: (name: string, value: string) => void
   info: Info
   search: SearchProps
   setAnotherPage: (nextPage: number) => void
+  valueInput: string
 }
 
 export const SearchPage: FC<SearchPageContainerProps> = ({
@@ -27,10 +30,12 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
   currPage,
   handleButtonClear,
   handleChange,
+  handleChangeInputValue,
   handleSearch,
   info,
   search,
   setAnotherPage,
+  valueInput,
 }) => {
   const [isPopup, setIsPopup] = useState<boolean>(false)
 
@@ -44,8 +49,9 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
         <Search
           className={s.page__search}
           clearValue={handleButtonClear}
-          onChange={handleChange}
-          value={search.name}
+          onChange={handleChangeInputValue}
+          onDebouncedChange={handleChange}
+          value={valueInput}
         />
       </section>
       <div className={s.page__container}>
@@ -55,13 +61,15 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
           className={s.page__filters}
           state={search}
         />
-        <CharactersContainer
-          chars={chars}
-          count={info.count}
-          currPage={currPage}
-          pages={info.pages}
-          setAnotherPage={setAnotherPage}
-        />
+        <ErrorBoundary>
+          <CharactersContainer
+            chars={chars}
+            count={info.count}
+            currPage={currPage}
+            pages={info.pages}
+            setAnotherPage={setAnotherPage}
+          />
+        </ErrorBoundary>
       </div>
       <Button
         className={s.page__button}
