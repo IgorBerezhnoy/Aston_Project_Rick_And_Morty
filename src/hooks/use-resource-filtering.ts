@@ -26,6 +26,8 @@ export const useResourceFiltering = (query = baseSearch) => {
   )
 
   const handleButtonClear = useCallback(() => {
+    setValueInput('')
+
     setSearch(baseSearch)
   }, [])
 
