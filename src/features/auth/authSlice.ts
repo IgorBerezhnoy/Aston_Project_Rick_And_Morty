@@ -1,7 +1,7 @@
 import { RootState } from '@/app/store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-interface AuthState {
+export interface AuthState {
   email: null | string
   error: null | string
   isAuth: boolean
@@ -37,4 +37,4 @@ export const selectAuth = (state: RootState) => state.auth
 
 export default authSlice.reducer
 type LoginActionType = { email: string }
-type ErrorActionType = { error: string }
+type ErrorActionType = { error: null | string }
