@@ -16,11 +16,13 @@ type SearchPageContainerProps = {
   chars: Character[]
   currPage: number
   handleButtonClear: () => void
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleChange: (e: string) => void
+  handleChangeInputValue: (e: ChangeEvent<HTMLInputElement>) => void
   handleSearch: (name: string, value: string) => void
   info: Info
   search: SearchProps
   setAnotherPage: (nextPage: number) => void
+  valueInput: string
 }
 
 export const SearchPage: FC<SearchPageContainerProps> = ({
@@ -28,10 +30,12 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
   currPage,
   handleButtonClear,
   handleChange,
+  handleChangeInputValue,
   handleSearch,
   info,
   search,
   setAnotherPage,
+  valueInput,
 }) => {
   const [isPopup, setIsPopup] = useState<boolean>(false)
 
@@ -45,8 +49,9 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
         <Search
           className={s.page__search}
           clearValue={handleButtonClear}
-          onChange={handleChange}
-          value={search.name}
+          onChange={handleChangeInputValue}
+          onDebouncedChange={handleChange}
+          value={valueInput}
         />
       </section>
       <div className={s.page__container}>
