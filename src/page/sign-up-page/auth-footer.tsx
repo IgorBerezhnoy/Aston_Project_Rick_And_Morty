@@ -9,7 +9,7 @@ export const AuthFooter = ({ linkText, text }: { linkText: string; text: string 
     <div className={s.footer}>
       <div className={s.text}>{text}</div>
       <div className={s.signUp}>
-        <Link to={urlPaths.signIn}>
+        <Link to={linkText === 'Sign In' ? urlPaths.signIn : urlPaths.signUp}>
           <span>{linkText}</span>
         </Link>
       </div>

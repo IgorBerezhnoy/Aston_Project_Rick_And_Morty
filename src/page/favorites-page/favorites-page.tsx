@@ -12,7 +12,7 @@ import { CharactersApi } from '@/service/ResoursesService/CharactersApi'
 const baseCount = 20
 
 export const FavoritesPage: FC = () => {
-  const { favoriteIds } = useSelector(selectAuth)
+  const { user } = useSelector(selectAuth)
   const [chars, setChars] = useState<CharacterCardWithState[]>([])
   const navigate = useNavigate()
   const { page } = useParams()
@@ -26,12 +26,12 @@ export const FavoritesPage: FC = () => {
   }, [page])
 
   const currFavoriteIds = useMemo(() => {
-    if (favoriteIds === null) {
+    if (user === null) {
       return []
     }
 
-    return favoriteIds.slice((currPage - 1) * baseCount, currPage * baseCount)
-  }, [currPage, favoriteIds])
+    return user.favoriteIds.slice((currPage - 1) * baseCount, currPage * baseCount)
+  }, [currPage, user])
 
   const setAnotherPage = useCallback(
     (nextPage: number) => {
@@ -63,13 +63,13 @@ export const FavoritesPage: FC = () => {
     }
   }, [currFavoriteIds])
 
-  const pages = favoriteIds === null ? 0 : Math.ceil(favoriteIds.length / baseCount)
+  const pages = user === null ? 0 : Math.ceil(user.favoriteIds.length / baseCount)
 
   useEffect(() => {
     setCharacters()
   }, [setCharacters])
 
-  useDatabaseUpdate(favoriteIds)
+  useDatabaseUpdate(user)
 
   return (
     <CharactersContainer

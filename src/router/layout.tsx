@@ -5,11 +5,11 @@ import { Outlet } from 'react-router-dom'
 import { MainHeader } from '@/components/header/mainHeader'
 import { Page } from '@/components/page'
 import { selectApp } from '@/features/app/appSlice'
-import { login, selectAuth, setFavoriteIds } from '@/features/auth/authSlice'
+import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch } from '@/hooks/use-appDispatch'
 
 export function Layout() {
-  const { email, isAuth } = useSelector(selectAuth)
+  const { isAuth, user } = useSelector(selectAuth)
   const { isLoading } = useSelector(selectApp)
   const dispatch = useAppDispatch()
 
@@ -26,13 +26,12 @@ export function Layout() {
     if (!currentUserObj || !email) {
       return
     } // TODO Пока заглушка
-    dispatch(login({ email: email }))
-    dispatch(setFavoriteIds({ favoriteIds: favoriteIds }))
+    dispatch(login({ email, favoriteIds }))
   }, [])
 
   return (
     <>
-      <MainHeader isAuth={isAuth} isLoading={isLoading} name={email ?? ''} />
+      <MainHeader isAuth={isAuth} isLoading={isLoading} name={user ? user.email : ''} />
       <Page>
         <Outlet />
       </Page>

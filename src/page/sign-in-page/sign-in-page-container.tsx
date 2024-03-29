@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
 
 import { urlPaths } from '@/enums/enums'
-import { login, selectAuth, setFavoriteIds } from '@/features/auth/authSlice'
+import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-appDispatch'
 import { SignInPage } from '@/page/sign-in-page/sign-in-page'
 import { SignInData, schemaSignInData } from '@/utils/validators/schemes'
@@ -27,8 +27,7 @@ export const SignInPageContainer = () => {
       const userObj = JSON.parse(user)
 
       if (userObj.email === email && userObj.password === password) {
-        dispatch(login({ email }))
-        dispatch(setFavoriteIds({ favoriteIds: userObj.favoriteIds }))
+        dispatch(login({ email, favoriteIds: userObj.favoriteIds }))
         localStorage.setItem('currentUser', JSON.stringify({ ...userObj }))
       }
     }, [])

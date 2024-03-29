@@ -15,7 +15,7 @@ import { SearchPage } from './search-page'
 
 export const SearchPageContainer: FC = () => {
   const [chars, setChars] = useState<CharacterCardWithState[]>([])
-  const { favoriteIds } = useSelector(selectAuth)
+  const { user } = useSelector(selectAuth)
   const [info, setInfo] = useState<Info>(baseInfo)
   const query = useQuery()
   const navigate = useNavigate()
@@ -45,7 +45,7 @@ export const SearchPageContainer: FC = () => {
     [navigate, urlParams]
   )
 
-  useDatabaseUpdate(favoriteIds)
+  useDatabaseUpdate(user)
 
   const setCharacters = useCallback(
     async (params: string) => {
@@ -53,7 +53,7 @@ export const SearchPageContainer: FC = () => {
 
       if (resObject.data) {
         const charsWithState = resObject.data.results.map(char => {
-          const isFavorite = favoriteIds === null ? false : favoriteIds.includes(char.id)
+          const isFavorite = user === null ? false : user.favoriteIds.includes(char.id)
 
           return { ...char, isFavorite }
         })
@@ -65,7 +65,7 @@ export const SearchPageContainer: FC = () => {
         setInfo(baseInfo)
       }
     },
-    [favoriteIds]
+    [user]
   )
 
   useEffect(() => {

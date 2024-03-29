@@ -1,18 +1,21 @@
 import { useEffect } from 'react'
 
-export const useDatabaseUpdate = (favoriteIds: null | number[]) => {
+import { User } from '@/features/auth/authSlice'
+
+export const useDatabaseUpdate = (user: User | null) => {
   useEffect(() => {
-    if (favoriteIds === null) {
+    if (user === null) {
       return
     }
-    const user = localStorage.getItem('currentUser')
+    const userDB = localStorage.getItem('currentUser')
 
-    if (!user) {
+    if (userDB === null) {
       return
     }
-    const dataUser = JSON.parse(user)
+    const userDBData = JSON.parse(userDB)
+    const userJson = JSON.stringify({ ...userDBData, ...user })
 
-    localStorage.setItem('currentUser', JSON.stringify({ ...dataUser, favoriteIds }))
-    localStorage.setItem(dataUser.email, JSON.stringify({ ...dataUser, favoriteIds }))
-  }, [favoriteIds])
+    localStorage.setItem('currentUser', userJson)
+    localStorage.setItem(user.email, userJson)
+  }, [user])
 }
