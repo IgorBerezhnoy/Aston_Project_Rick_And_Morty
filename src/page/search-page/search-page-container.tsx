@@ -45,13 +45,15 @@ export const SearchPageContainer: FC = () => {
     [navigate, urlParams]
   )
 
+  useDatabaseUpdate(favoriteIds)
+
   const setCharacters = useCallback(
     async (params: string) => {
       const resObject = await CharactersApi.getCharacterPage(params)
 
       if (resObject.data) {
         const charsWithState = resObject.data.results.map(char => {
-          const isFavorite = favoriteIds.includes(char.id)
+          const isFavorite = favoriteIds === null ? false : favoriteIds.includes(char.id)
 
           return { ...char, isFavorite }
         })

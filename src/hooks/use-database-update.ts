@@ -1,17 +1,18 @@
 import { useEffect } from 'react'
 
-export const useDatabaseUpdate = (favoriteIds: number[]) => {
+export const useDatabaseUpdate = (favoriteIds: null | number[]) => {
   useEffect(() => {
-    const dataUser = JSON.parse(localStorage.getItem('currentUser') || '')
-
-    if (!dataUser) {
+    if (favoriteIds === null) {
       return
-      //Прокинуть ошибку
     }
+    const user = localStorage.getItem('currentUser')
 
-    const newDataUser = JSON.stringify({ ...dataUser, favoriteIds })
+    if (!user) {
+      return
+    }
+    const dataUser = JSON.parse(user)
 
-    localStorage.setItem('currentUser', newDataUser)
-    localStorage.setItem(dataUser.email, newDataUser)
+    localStorage.setItem('currentUser', JSON.stringify({ ...dataUser, favoriteIds }))
+    localStorage.setItem(dataUser.email, JSON.stringify({ ...dataUser, favoriteIds }))
   }, [favoriteIds])
 }

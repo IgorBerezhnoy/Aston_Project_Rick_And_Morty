@@ -25,10 +25,13 @@ export const FavoritesPage: FC = () => {
     return +page
   }, [page])
 
-  const currFavoriteIds = useMemo(
-    () => favoriteIds.slice((currPage - 1) * baseCount, currPage * baseCount),
-    [currPage, favoriteIds]
-  )
+  const currFavoriteIds = useMemo(() => {
+    if (favoriteIds === null) {
+      return []
+    }
+
+    return favoriteIds.slice((currPage - 1) * baseCount, currPage * baseCount)
+  }, [currPage, favoriteIds])
 
   const setAnotherPage = useCallback(
     (nextPage: number) => {
@@ -60,7 +63,7 @@ export const FavoritesPage: FC = () => {
     }
   }, [currFavoriteIds])
 
-  const pages = Math.ceil(favoriteIds.length / baseCount)
+  const pages = favoriteIds === null ? 0 : Math.ceil(favoriteIds.length / baseCount)
 
   useEffect(() => {
     setCharacters()

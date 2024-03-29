@@ -4,14 +4,14 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 interface AuthState {
   email: null | string
   error: null | string
-  favoriteIds: number[]
+  favoriteIds: null | number[]
   isAuth: boolean
 }
 
 const initialState: AuthState = {
   email: null,
   error: null,
-  favoriteIds: [],
+  favoriteIds: null,
   isAuth: false,
 }
 
@@ -20,9 +20,15 @@ export const authSlice = createSlice({
   name: 'auth',
   reducers: {
     addFavoriteById: (state, action: PayloadAction<FavotiteActionType>) => {
+      if (state.favoriteIds === null) {
+        return
+      }
       state.favoriteIds.push(action.payload.favoriteId)
     },
     deleteFavoriteById: (state, action: PayloadAction<FavotiteActionType>) => {
+      if (state.favoriteIds === null) {
+        return
+      }
       state.favoriteIds = state.favoriteIds.filter(el => el !== action.payload.favoriteId)
     },
     login: (state, action: PayloadAction<LoginActionType>) => {
@@ -31,6 +37,7 @@ export const authSlice = createSlice({
     },
     logout: state => {
       state.email = null
+      state.favoriteIds = null
       state.isAuth = false
     },
     setError: (state, action: PayloadAction<ErrorActionType>) => {
