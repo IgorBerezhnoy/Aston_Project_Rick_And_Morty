@@ -1,24 +1,25 @@
 import { ChangeEvent, FC, useState } from 'react'
 
 import { Button } from '@/components/button'
+import { CharacterCardWithState } from '@/components/characterCard'
 import { CharactersContainer } from '@/components/charactersContainer'
 import { ErrorBoundary } from '@/components/errorBoundary/errorBoundary'
 import { Filters } from '@/components/filters'
 import { FiltersContainer } from '@/components/filtersContainer'
 import { Search } from '@/components/search'
 import { SearchProps } from '@/hooks/use-resource-filtering'
-import { Character } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
 
 import s from './search-page.module.scss'
 
 type SearchPageContainerProps = {
-  chars: Character[]
+  chars: CharacterCardWithState[]
   currPage: number
-  handleButtonClear: () => void
   handleChange: (e: string) => void
   handleChangeInputValue: (e: ChangeEvent<HTMLInputElement>) => void
+  handleFiltersClear: () => void
   handleSearch: (name: string, value: string) => void
+  handleSearchClear: () => void
   info: Info
   search: SearchProps
   setAnotherPage: (nextPage: number) => void
@@ -28,10 +29,11 @@ type SearchPageContainerProps = {
 export const SearchPage: FC<SearchPageContainerProps> = ({
   chars,
   currPage,
-  handleButtonClear,
   handleChange,
   handleChangeInputValue,
+  handleFiltersClear,
   handleSearch,
+  handleSearchClear,
   info,
   search,
   setAnotherPage,
@@ -48,7 +50,7 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
       <section className={`${s.page__section} ${s.page__section_search}`}>
         <Search
           className={s.page__search}
-          clearValue={handleButtonClear}
+          clearValue={handleSearchClear}
           onChange={handleChangeInputValue}
           onDebouncedChange={handleChange}
           value={valueInput}
@@ -56,7 +58,7 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
       </section>
       <div className={s.page__container}>
         <Filters
-          cbClear={handleButtonClear}
+          cbClear={handleFiltersClear}
           cbRadio={handleSearch}
           className={s.page__filters}
           state={search}
@@ -64,8 +66,9 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
         <ErrorBoundary>
           <CharactersContainer
             chars={chars}
+            count={info.count}
             currPage={currPage}
-            info={info}
+            pages={info.pages}
             setAnotherPage={setAnotherPage}
           />
         </ErrorBoundary>
@@ -79,7 +82,7 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
         Filters
       </Button>
       <FiltersContainer
-        cbClear={handleButtonClear}
+        cbClear={handleFiltersClear}
         cbPopup={handleFilterPopup}
         cbRadio={handleSearch}
         isPopup={isPopup}

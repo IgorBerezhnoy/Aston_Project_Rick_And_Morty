@@ -43,6 +43,10 @@ export const publicRouters: RouteObject[] = [
     ),
     path: urlPaths.root,
   },
+  {
+    element: <SearchPageContainer />,
+    path: urlPaths.search,
+  },
 
   {
     element: (

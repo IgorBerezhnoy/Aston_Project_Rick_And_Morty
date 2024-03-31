@@ -14,9 +14,9 @@ export default meta
 type Story = StoryObj<typeof Filters>
 
 const FilterWithState = () => {
-  const { handleButtonClear, handleSearch, search } = useResourceFiltering()
+  const { handleFiltersClear, handleSearch, search } = useResourceFiltering()
 
-  return <Filters cbClear={handleButtonClear} cbRadio={handleSearch} state={search} />
+  return <Filters cbClear={handleFiltersClear} cbRadio={handleSearch} state={search} />
 }
 
 export const WithState: Story = {

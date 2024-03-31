@@ -14,7 +14,7 @@ export type SearchProps = {
 
 export const useResourceFiltering = (query = baseSearch) => {
   const [search, setSearch] = useState(query)
-  const [valueInput, setValueInput] = useState('')
+  const [valueInput, setValueInput] = useState(query.name)
   const handleSearch = useCallback(
     (name: string, value: string) => {
       setSearch({
@@ -25,11 +25,21 @@ export const useResourceFiltering = (query = baseSearch) => {
     [search]
   )
 
-  const handleButtonClear = useCallback(() => {
-    setValueInput('')
+  const handleFiltersClear = useCallback(() => {
+    setSearch({
+      ...search,
+      gender: 'all',
+      status: 'all',
+    })
+  }, [search])
 
-    setSearch(baseSearch)
-  }, [])
+  const handleSearchClear = useCallback(() => {
+    setValueInput('')
+    setSearch({
+      ...search,
+      name: '',
+    })
+  }, [search])
 
   const urlParams = useMemo(() => {
     let str = ''
@@ -49,18 +59,16 @@ export const useResourceFiltering = (query = baseSearch) => {
     },
     [handleSearch]
   )
-  const handleChangeInputValue = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setValueInput(e.currentTarget.value)
-    },
-    [handleSearch]
-  )
+  const handleChangeInputValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setValueInput(e.currentTarget.value)
+  }, [])
 
   return {
-    handleButtonClear,
     handleChange,
     handleChangeInputValue,
+    handleFiltersClear,
     handleSearch,
+    handleSearchClear,
     search,
     urlParams,
     valueInput,

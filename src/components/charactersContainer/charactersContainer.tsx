@@ -1,31 +1,36 @@
 import { FC } from 'react'
 
-import { Character } from '@/service/ResoursesService/CharactersApi'
-import { Info } from '@/service/ServicePrototype'
 import { getPageSize } from '@/utils'
 
 import s from './charactersContainer.module.scss'
 
+import { CardPage } from '../cardPage'
+import { CharacterCardWithState } from '../characterCard'
 import { CharactersList } from '../charactersList'
 import { Pagination } from '../pagination'
 
 const stepValue = 5
 
 type CharacterContainerProps = {
-  chars: Character[]
+  chars: CharacterCardWithState[]
+  count: number
   currPage: number
-  info: Info
+  pages: number
   setAnotherPage: (page: number) => void
 }
 
 export const CharactersContainer: FC<CharacterContainerProps> = ({
   chars,
+  count,
   currPage,
-  info,
+  pages,
   setAnotherPage,
 }) => {
-  const { count, pages } = info
   const pageSize = getPageSize(count, pages)
+
+  if (chars.length === 0) {
+    return <CardPage title={'Characters not Found'} />
+  }
 
   return (
     <section className={s.page__section}>

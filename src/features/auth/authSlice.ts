@@ -1,28 +1,47 @@
 import { RootState } from '@/app/store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-interface AuthState {
-  email: null | string
+export type User = {
+  email: string
+  favoriteIds: number[]
+}
+
+type AuthState = {
   error: null | string
   isAuth: boolean
+  user: User | null
 }
 
 const initialState: AuthState = {
-  email: null,
   error: null,
   isAuth: false,
+  user: null,
 }
 
 export const authSlice = createSlice({
   initialState,
   name: 'auth',
   reducers: {
+    addFavoriteById: (state, action: PayloadAction<FavotiteActionType>) => {
+      if (state.user === null) {
+        return
+      }
+      state.user.favoriteIds.push(action.payload.favoriteId)
+    },
+    deleteFavoriteById: (state, action: PayloadAction<FavotiteActionType>) => {
+      if (state.user === null) {
+        return
+      }
+      state.user.favoriteIds = state.user.favoriteIds.filter(el => el !== action.payload.favoriteId)
+    },
     login: (state, action: PayloadAction<LoginActionType>) => {
-      state.email = action.payload.email
+      state.user = {
+        ...action.payload,
+      }
       state.isAuth = true
     },
     logout: state => {
-      state.email = null
+      state.user = null
       state.isAuth = false
     },
     setError: (state, action: PayloadAction<ErrorActionType>) => {
@@ -31,10 +50,11 @@ export const authSlice = createSlice({
   },
 })
 
-export const { login, logout, setError } = authSlice.actions
+export const { addFavoriteById, deleteFavoriteById, login, logout, setError } = authSlice.actions
 
 export const selectAuth = (state: RootState) => state.auth
 
 export default authSlice.reducer
-type LoginActionType = { email: string }
+type LoginActionType = { email: string; favoriteIds: number[] }
 type ErrorActionType = { error: string }
+type FavotiteActionType = { favoriteId: number }

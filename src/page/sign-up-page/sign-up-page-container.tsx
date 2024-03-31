@@ -24,7 +24,7 @@ const SignUpPageContainer = () => {
       if (password !== confirmPassword) {
         return // TODO Пока заглушка
       }
-      localStorage.setItem(email, JSON.stringify({ email, password }))
+      localStorage.setItem(email, JSON.stringify({ email, favoriteIds: [], password }))
       setIsRegister(true)
     }, [])
   )

@@ -34,4 +34,4 @@ export const CardPage = ({
     </CardBg>
   )
 }
-const ImgTag = () => <img alt={'Sorry this page is not found'} src={img} />
+const ImgTag = () => <img alt={'Sorry this page is not found'} className={s.img} src={img} />
