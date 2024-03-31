@@ -14,7 +14,7 @@ export type SearchProps = {
 
 export const useResourceFiltering = (query = baseSearch) => {
   const [search, setSearch] = useState(query)
-  const [valueInput, setValueInput] = useState('')
+  const [valueInput, setValueInput] = useState(query.name)
   const handleSearch = useCallback(
     (name: string, value: string) => {
       setSearch({
@@ -25,7 +25,7 @@ export const useResourceFiltering = (query = baseSearch) => {
     [search]
   )
 
-  const handleButtonClear = useCallback(() => {
+  const handleFiltersClear = useCallback(() => {
     setSearch({
       ...search,
       gender: 'all',
@@ -64,9 +64,9 @@ export const useResourceFiltering = (query = baseSearch) => {
   }, [])
 
   return {
-    handleButtonClear,
     handleChange,
     handleChangeInputValue,
+    handleFiltersClear,
     handleSearch,
     handleSearchClear,
     search,

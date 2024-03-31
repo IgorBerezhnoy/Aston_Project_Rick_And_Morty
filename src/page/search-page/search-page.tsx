@@ -15,9 +15,9 @@ import s from './search-page.module.scss'
 type SearchPageContainerProps = {
   chars: CharacterCardWithState[]
   currPage: number
-  handleButtonClear: () => void
   handleChange: (e: string) => void
   handleChangeInputValue: (e: ChangeEvent<HTMLInputElement>) => void
+  handleFiltersClear: () => void
   handleSearch: (name: string, value: string) => void
   handleSearchClear: () => void
   info: Info
@@ -29,9 +29,9 @@ type SearchPageContainerProps = {
 export const SearchPage: FC<SearchPageContainerProps> = ({
   chars,
   currPage,
-  handleButtonClear,
   handleChange,
   handleChangeInputValue,
+  handleFiltersClear,
   handleSearch,
   handleSearchClear,
   info,
@@ -58,7 +58,7 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
       </section>
       <div className={s.page__container}>
         <Filters
-          cbClear={handleButtonClear}
+          cbClear={handleFiltersClear}
           cbRadio={handleSearch}
           className={s.page__filters}
           state={search}
@@ -82,7 +82,7 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
         Filters
       </Button>
       <FiltersContainer
-        cbClear={handleButtonClear}
+        cbClear={handleFiltersClear}
         cbPopup={handleFilterPopup}
         cbRadio={handleSearch}
         isPopup={isPopup}

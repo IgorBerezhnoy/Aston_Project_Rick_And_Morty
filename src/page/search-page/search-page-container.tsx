@@ -21,9 +21,9 @@ const SearchPageContainer: FC = () => {
   const navigate = useNavigate()
 
   const {
-    handleButtonClear,
     handleChange,
     handleChangeInputValue,
+    handleFiltersClear,
     handleSearch,
     handleSearchClear,
     search,
@@ -87,9 +87,9 @@ const SearchPageContainer: FC = () => {
     <SearchPage
       chars={chars}
       currPage={currPage}
-      handleButtonClear={handleButtonClear}
       handleChange={handleChange}
       handleChangeInputValue={handleChangeInputValue}
+      handleFiltersClear={handleFiltersClear}
       handleSearch={handleSearch}
       handleSearchClear={handleSearchClear}
       info={info}
