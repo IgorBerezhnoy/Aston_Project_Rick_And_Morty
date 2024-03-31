@@ -59,12 +59,9 @@ export const useResourceFiltering = (query = baseSearch) => {
     },
     [handleSearch]
   )
-  const handleChangeInputValue = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setValueInput(e.currentTarget.value)
-    },
-    [handleSearch]
-  )
+  const handleChangeInputValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setValueInput(e.currentTarget.value)
+  }, [])
 
   return {
     handleButtonClear,
