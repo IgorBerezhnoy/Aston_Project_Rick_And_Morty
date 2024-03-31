@@ -1,5 +1,3 @@
-import FavoritesPage from '@/page/favorites-page/favorites-page'
-
 export const genders = ['female', 'male', 'genderless', 'unknown', 'all']
 export const statuses = ['alive', 'dead', 'unknown', 'all']
 export const GENDER = 'gender'
@@ -103,5 +101,5 @@ const dataChars = [
 ]
 
 export const testChars = dataChars.map(char => {
-  return { ...char, favoriteIds: true }
+  return { ...char, isFavorite: true }
 })

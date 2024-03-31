@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
+
+import { store } from '@/app/store'
 
 import { CharacterCard } from '.'
 
@@ -8,9 +11,11 @@ const meta: Meta<typeof CharacterCard> = {
   component: CharacterCard,
   decorators: [
     Story => (
-      <MemoryRouter initialEntries={['/']}>
-        <Story />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <Story />
+        </MemoryRouter>
+      </Provider>
     ),
   ],
   tags: ['autodocs'],

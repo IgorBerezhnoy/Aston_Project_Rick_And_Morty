@@ -19,6 +19,7 @@ type SearchPageContainerProps = {
   handleChange: (e: string) => void
   handleChangeInputValue: (e: ChangeEvent<HTMLInputElement>) => void
   handleSearch: (name: string, value: string) => void
+  handleSearchClear: () => void
   info: Info
   search: SearchProps
   setAnotherPage: (nextPage: number) => void
@@ -32,6 +33,7 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
   handleChange,
   handleChangeInputValue,
   handleSearch,
+  handleSearchClear,
   info,
   search,
   setAnotherPage,
@@ -48,7 +50,7 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
       <section className={`${s.page__section} ${s.page__section_search}`}>
         <Search
           className={s.page__search}
-          clearValue={handleButtonClear}
+          clearValue={handleSearchClear}
           onChange={handleChangeInputValue}
           onDebouncedChange={handleChange}
           value={valueInput}

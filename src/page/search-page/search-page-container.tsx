@@ -25,6 +25,7 @@ const SearchPageContainer: FC = () => {
     handleChange,
     handleChangeInputValue,
     handleSearch,
+    handleSearchClear,
     search,
     urlParams,
     valueInput,
@@ -90,6 +91,7 @@ const SearchPageContainer: FC = () => {
       handleChange={handleChange}
       handleChangeInputValue={handleChangeInputValue}
       handleSearch={handleSearch}
+      handleSearchClear={handleSearchClear}
       info={info}
       search={search}
       setAnotherPage={setAnotherPage}

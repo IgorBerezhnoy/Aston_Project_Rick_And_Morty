@@ -26,10 +26,20 @@ export const useResourceFiltering = (query = baseSearch) => {
   )
 
   const handleButtonClear = useCallback(() => {
-    setValueInput('')
+    setSearch({
+      ...search,
+      gender: 'all',
+      status: 'all',
+    })
+  }, [search])
 
-    setSearch(baseSearch)
-  }, [])
+  const handleSearchClear = useCallback(() => {
+    setValueInput('')
+    setSearch({
+      ...search,
+      name: '',
+    })
+  }, [search])
 
   const urlParams = useMemo(() => {
     let str = ''
@@ -61,6 +71,7 @@ export const useResourceFiltering = (query = baseSearch) => {
     handleChange,
     handleChangeInputValue,
     handleSearch,
+    handleSearchClear,
     search,
     urlParams,
     valueInput,
