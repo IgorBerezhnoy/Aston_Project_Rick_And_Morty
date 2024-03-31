@@ -19,14 +19,9 @@ export function Layout() {
     if (!currentUser) {
       return
     } // TODO Пока заглушка
-    const currentUserObj = JSON.parse(currentUser)
-    const email = currentUserObj?.email
-    const favoriteIds = currentUserObj?.favoriteIds
+    const { email, favoriteIds, stories } = JSON.parse(currentUser)
 
-    if (!currentUserObj || !email) {
-      return
-    } // TODO Пока заглушка
-    dispatch(login({ email, favoriteIds }))
+    dispatch(login({ email, favoriteIds, stories }))
   }, [])
 
   return (
