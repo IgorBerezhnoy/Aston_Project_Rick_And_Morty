@@ -1,0 +1,42 @@
+.pageContainer {
+  margin: 1% 5% 5% 5%;
+  transition: opacity 0.5s;
+}
+.title {
+  &Container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2%;
+    margin-bottom: 0.5%;
+    background: #4b4b4b;
+    border-radius: 10px;
+    padding: 2%;
+  }
+  &Name {
+    color: aliceblue;
+    margin: 0 auto;
+  }
+}
+
+.history {
+  &Container {
+    display: block;
+  }
+  &Item {
+    &:first-child {
+      border-radius: 10px 10px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 10px 10px;
+    }
+    background: #4b4b4b;
+    padding-left: 10%;
+    color: aliceblue;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}

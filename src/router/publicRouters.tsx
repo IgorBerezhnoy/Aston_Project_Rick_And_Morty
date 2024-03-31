@@ -1,5 +1,6 @@
 import { RouteObject } from 'react-router-dom'
 
+import HistoryContainer from '@/components/history/historyContainer'
 import { urlPaths } from '@/enums'
 import { CharacterPageContainer } from '@/page/character-page/character-page-container'
 import { SearchPageContainer } from '@/page/search-page'
@@ -10,6 +11,10 @@ export const publicRouters: RouteObject[] = [
   {
     element: <SignInPageContainer />,
     path: urlPaths.signIn,
+  },
+  {
+    element: <HistoryContainer />,
+    path: urlPaths.history,
   },
   {
     element: <SignUpPageContainer />,

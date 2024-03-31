@@ -6,6 +6,8 @@ import { Character } from '@/service/ResoursesService/CharactersApi'
 
 import s from './character-page.module.scss'
 
+import { CharacterShare } from './lib/characterShare'
+
 type CharacterPageProps = {
   char: Character
 }
@@ -21,6 +23,7 @@ export const CharacterPage = ({ char }: CharacterPageProps) => {
         <CharacterImageContainer img={char.image} name={char.name} />
 
         <CharacterLabels char={char} />
+        <CharacterShare />
       </div>
     </div>
   )
