@@ -31,7 +31,7 @@ const FavoritesPage: FC = () => {
     }
 
     return user.favoriteIds.slice((currPage - 1) * baseCount, currPage * baseCount)
-  }, [currPage, user])
+  }, [currPage, user?.favoriteIds])
 
   const setAnotherPage = useCallback(
     (nextPage: number) => {

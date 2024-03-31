@@ -58,7 +58,7 @@ const SearchPageContainer: FC = () => {
 
       return { ...char, isFavorite }
     },
-    [user]
+    [user?.favoriteIds]
   )
 
   const setCharacters = useCallback(

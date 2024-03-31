@@ -59,18 +59,16 @@ export const useResourceFiltering = (query = baseSearch) => {
 
   const urlParams = useMemo(() => createUrlParams(search), [createUrlParams, search])
 
-  const handleChange = useCallback(
-    (value: string) => {
-      handleSearch('name', value)
-      const path = createUrlParams({
-        ...search,
-        name: value,
-      })
+  const handleChange = (value: string) => {
+    handleSearch('name', value)
+    const path = createUrlParams({
+      ...search,
+      name: value,
+    })
 
-      dispatch(addHistory({ name: value, path }))
-    },
-    [createUrlParams, search, handleSearch]
-  )
+    dispatch(addHistory({ name: value, path }))
+  }
+
   const handleChangeInputValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setValueInput(e.currentTarget.value)
   }, [])
