@@ -14,11 +14,11 @@ export default meta
 type Story = StoryObj<typeof FiltersContainer>
 
 const FilterWithState = () => {
-  const { handleButtonClear, handleSearch, search } = useResourceFiltering()
+  const { handleFiltersClear, handleSearch, search } = useResourceFiltering()
 
   return (
     <FiltersContainer
-      cbClear={handleButtonClear}
+      cbClear={handleFiltersClear}
       cbPopup={() => null}
       cbRadio={handleSearch}
       isPopup

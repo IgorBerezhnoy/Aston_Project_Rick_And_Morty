@@ -1,32 +1,31 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { GENDER, STATUS } from '@/constants'
+import { CharacterCardWithState } from '@/components/characterCard'
+import { GENDER, STATUS, baseInfo } from '@/constants'
+import { selectAuth } from '@/features/auth/authSlice'
+import { useDatabaseUpdate } from '@/hooks/use-database-update'
 import { useQuery } from '@/hooks/use-query'
 import { useResourceFiltering } from '@/hooks/use-resource-filtering'
-import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
+import { CharactersApi } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
 
 import { SearchPage } from './search-page'
 
-const baseInfo = {
-  count: 0,
-  next: null,
-  pages: 0,
-  prev: null,
-}
-
 const SearchPageContainer: FC = () => {
-  const [chars, setChars] = useState<Character[]>([])
+  const [chars, setChars] = useState<CharacterCardWithState[]>([])
+  const { user } = useSelector(selectAuth)
   const [info, setInfo] = useState<Info>(baseInfo)
   const query = useQuery()
   const navigate = useNavigate()
 
   const {
-    handleButtonClear,
     handleChange,
     handleChangeInputValue,
+    handleFiltersClear,
     handleSearch,
+    handleSearchClear,
     search,
     urlParams,
     valueInput,
@@ -53,17 +52,28 @@ const SearchPageContainer: FC = () => {
     [navigate, urlParams]
   )
 
-  const setCharacters = useCallback(async (params: string) => {
-    const resObject = await CharactersApi.getCharacterPage(params)
+  useDatabaseUpdate(user)
 
-    if (resObject.data) {
-      setChars(resObject.data.results)
-      setInfo(resObject.data.info)
-    } else {
-      setChars([])
-      setInfo(baseInfo)
-    }
-  }, [])
+  const setCharacters = useCallback(
+    async (params: string) => {
+      const resObject = await CharactersApi.getCharacterPage(params)
+
+      if (resObject.data) {
+        const charsWithState = resObject.data.results.map(char => {
+          const isFavorite = user === null ? false : user.favoriteIds.includes(char.id)
+
+          return { ...char, isFavorite }
+        })
+
+        setChars(charsWithState)
+        setInfo(resObject.data.info)
+      } else {
+        setChars([])
+        setInfo(baseInfo)
+      }
+    },
+    [user]
+  )
 
   useEffect(() => {
     setCharacters(query.toString())
@@ -77,10 +87,11 @@ const SearchPageContainer: FC = () => {
     <SearchPage
       chars={chars}
       currPage={currPage}
-      handleButtonClear={handleButtonClear}
       handleChange={handleChange}
       handleChangeInputValue={handleChangeInputValue}
+      handleFiltersClear={handleFiltersClear}
       handleSearch={handleSearch}
+      handleSearchClear={handleSearchClear}
       info={info}
       search={search}
       setAnotherPage={setAnotherPage}

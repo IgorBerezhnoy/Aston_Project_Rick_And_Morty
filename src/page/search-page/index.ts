@@ -1,1 +1,1 @@
-export * from './search-page-container'
+export * from './search-page'
