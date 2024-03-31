@@ -12,7 +12,7 @@ export type User = {
   stories: History[]
 }
 
-type AuthState = {
+export type AuthState = {
   error: null | string
   isAuth: boolean
   user: User | null
@@ -28,7 +28,7 @@ export const authSlice = createSlice({
   initialState,
   name: 'auth',
   reducers: {
-    addFavoriteById: (state, action: PayloadAction<FavotiteActionType>) => {
+    addFavoriteById: (state, action: PayloadAction<FavoriteActionType>) => {
       if (state.user === null) {
         return
       }
@@ -38,9 +38,12 @@ export const authSlice = createSlice({
       if (state.user === null) {
         return
       }
+      if (state.user.stories.length === 50) {
+        state.user.stories.shift()
+      }
       state.user.stories.push({ ...action.payload })
     },
-    deleteFavoriteById: (state, action: PayloadAction<FavotiteActionType>) => {
+    deleteFavoriteById: (state, action: PayloadAction<FavoriteActionType>) => {
       if (state.user === null) {
         return
       }
@@ -69,6 +72,6 @@ export const selectAuth = (state: RootState) => state.auth
 
 export default authSlice.reducer
 type LoginActionType = User
-type ErrorActionType = { error: string }
-type FavotiteActionType = { favoriteId: number }
+type ErrorActionType = { error: null | string }
+type FavoriteActionType = { favoriteId: number }
 type HistoryActionType = History

@@ -1,5 +1,6 @@
 import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 
+import { genders, statuses } from '@/enums'
 import { addHistory } from '@/features/auth/authSlice'
 
 import { useAppDispatch } from './use-appDispatch'
@@ -34,8 +35,8 @@ export const useResourceFiltering = (query = baseSearch) => {
   const handleFiltersClear = useCallback(() => {
     setSearch({
       ...search,
-      gender: 'all',
-      status: 'all',
+      gender: genders.all,
+      status: statuses.all,
     })
   }, [search])
 

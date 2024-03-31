@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 import { MainHeader } from '@/components/header/mainHeader'
 import { Page } from '@/components/page'
+import { localStorageKeys } from '@/enums'
 import { selectApp } from '@/features/app/appSlice'
 import { login, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch } from '@/hooks/use-appDispatch'
@@ -14,7 +15,7 @@ export function Layout() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    const currentUser = localStorage.getItem('currentUser')
+    const currentUser = localStorage.getItem(localStorageKeys.currentUser)
 
     if (!currentUser) {
       return
