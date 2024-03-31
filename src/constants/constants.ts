@@ -3,7 +3,14 @@ export const statuses = ['alive', 'dead', 'unknown', 'all']
 export const GENDER = 'gender'
 export const STATUS = 'status'
 
-export const testChars = [
+export const baseInfo = {
+  count: 0,
+  next: null,
+  pages: 0,
+  prev: null,
+}
+
+const dataChars = [
   {
     created: '2017-11-04T18:48:46.250Z',
     episode: [
@@ -92,3 +99,7 @@ export const testChars = [
     url: 'https://rickandmortyapi.com/api/character/361',
   },
 ]
+
+export const testChars = dataChars.map(char => {
+  return { ...char, isFavorite: true }
+})

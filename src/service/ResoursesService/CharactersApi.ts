@@ -67,14 +67,14 @@ export class CharactersApi extends ServicePrototype {
   }
 
   static async getCharactersById(id: number[]) {
-    const result: Result<Response<Character[]>> = {
+    const result: Result<Character | Character[]> = {
       data: null,
       errorMessage: '',
       hasError: false,
     }
 
     try {
-      const response = await api.get<Response<Character[]>>(`${apiPaths.character}${id}`)
+      const response = await api.get<Character | Character[]>(`${apiPaths.character}${id}`)
       const character = response.data
 
       result.data = character
