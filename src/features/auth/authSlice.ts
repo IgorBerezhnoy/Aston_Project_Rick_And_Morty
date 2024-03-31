@@ -1,6 +1,7 @@
 import { RootState } from '@/app/store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
+
 export type User = {
   email: string
   favoriteIds: number[]
@@ -54,7 +55,7 @@ export const { addFavoriteById, deleteFavoriteById, login, logout, setError } = 
 
 export const selectAuth = (state: RootState) => state.auth
 
-export default authSlice.reducer
+
 type LoginActionType = { email: string; favoriteIds: number[] }
 type ErrorActionType = { error: string }
 type FavotiteActionType = { favoriteId: number }
