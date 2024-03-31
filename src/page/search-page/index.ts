@@ -1,1 +1,1 @@
-export * from './search-page-container'
+export { SearchPageContainer } from './search-page-container'

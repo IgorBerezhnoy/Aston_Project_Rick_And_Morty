@@ -13,7 +13,7 @@ import { Info } from '@/service/ServicePrototype'
 
 import { SearchPage } from './search-page'
 
-const SearchPageContainer: FC = () => {
+export const SearchPageContainer: FC = () => {
   const [chars, setChars] = useState<CharacterCardWithState[]>([])
   const { user } = useSelector(selectAuth)
   const [info, setInfo] = useState<Info>(baseInfo)
@@ -97,5 +97,3 @@ const SearchPageContainer: FC = () => {
     />
   )
 }
-
-export default SearchPageContainer

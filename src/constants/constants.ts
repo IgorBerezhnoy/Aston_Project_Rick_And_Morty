@@ -1,3 +1,5 @@
+import FavoritesPage from '@/page/favorites-page/favorites-page'
+
 export const genders = ['female', 'male', 'genderless', 'unknown', 'all']
 export const statuses = ['alive', 'dead', 'unknown', 'all']
 export const GENDER = 'gender'
@@ -10,7 +12,7 @@ export const baseInfo = {
   prev: null,
 }
 
-export const testChars = [
+const dataChars = [
   {
     created: '2017-11-04T18:48:46.250Z',
     episode: [
@@ -99,3 +101,7 @@ export const testChars = [
     url: 'https://rickandmortyapi.com/api/character/361',
   },
 ]
+
+export const testChars = dataChars.map(char => {
+  return { ...char, favoriteIds: true }
+})
