@@ -9,7 +9,7 @@ import { SignUpPage } from '@/page/sign-up-page/sign-up-page'
 import { SignUpData, schemaSignUpData } from '@/utils/validators/schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-export const SignUpPageContainer = () => {
+const SignUpPageContainer = () => {
   const [isRegister, setIsRegister] = useState<boolean>(false)
   const { isAuth } = useSelector(selectAuth)
 
@@ -24,7 +24,7 @@ export const SignUpPageContainer = () => {
       if (password !== confirmPassword) {
         return // TODO Пока заглушка
       }
-      localStorage.setItem(email, JSON.stringify({ email, password }))
+      localStorage.setItem(email, JSON.stringify({ email, favoriteIds: [], password, stories: [] }))
       setIsRegister(true)
     }, [])
   )
@@ -38,3 +38,5 @@ export const SignUpPageContainer = () => {
 
   return <SignUpPage control={control} onSubmit={signUpHandler} />
 }
+
+export default SignUpPageContainer

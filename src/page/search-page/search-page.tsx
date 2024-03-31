@@ -1,36 +1,43 @@
 import { ChangeEvent, FC, useState } from 'react'
 
 import { Button } from '@/components/button'
+import { CharacterCardWithState } from '@/components/characterCard'
 import { CharactersContainer } from '@/components/charactersContainer'
+import { ErrorBoundary } from '@/components/errorBoundary/errorBoundary'
 import { Filters } from '@/components/filters'
 import { FiltersContainer } from '@/components/filtersContainer'
 import { Search } from '@/components/search'
 import { SearchProps } from '@/hooks/use-resource-filtering'
-import { Character } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
 
 import s from './search-page.module.scss'
 
 type SearchPageContainerProps = {
-  chars: Character[]
+  chars: CharacterCardWithState[]
   currPage: number
-  handleButtonClear: () => void
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleChange: (e: string) => void
+  handleChangeInputValue: (e: ChangeEvent<HTMLInputElement>) => void
+  handleFiltersClear: () => void
   handleSearch: (name: string, value: string) => void
+  handleSearchClear: () => void
   info: Info
   search: SearchProps
   setAnotherPage: (nextPage: number) => void
+  valueInput: string
 }
 
 export const SearchPage: FC<SearchPageContainerProps> = ({
   chars,
   currPage,
-  handleButtonClear,
   handleChange,
+  handleChangeInputValue,
+  handleFiltersClear,
   handleSearch,
+  handleSearchClear,
   info,
   search,
   setAnotherPage,
+  valueInput,
 }) => {
   const [isPopup, setIsPopup] = useState<boolean>(false)
 
@@ -43,24 +50,28 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
       <section className={`${s.page__section} ${s.page__section_search}`}>
         <Search
           className={s.page__search}
-          clearValue={handleButtonClear}
-          onChange={handleChange}
-          value={search.name}
+          clearValue={handleSearchClear}
+          onChange={handleChangeInputValue}
+          onDebouncedChange={handleChange}
+          value={valueInput}
         />
       </section>
       <div className={s.page__container}>
         <Filters
-          cbClear={handleButtonClear}
+          cbClear={handleFiltersClear}
           cbRadio={handleSearch}
           className={s.page__filters}
           state={search}
         />
-        <CharactersContainer
-          chars={chars}
-          currPage={currPage}
-          info={info}
-          setAnotherPage={setAnotherPage}
-        />
+        <ErrorBoundary>
+          <CharactersContainer
+            chars={chars}
+            count={info.count}
+            currPage={currPage}
+            pages={info.pages}
+            setAnotherPage={setAnotherPage}
+          />
+        </ErrorBoundary>
       </div>
       <Button
         className={s.page__button}
@@ -71,7 +82,7 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
         Filters
       </Button>
       <FiltersContainer
-        cbClear={handleButtonClear}
+        cbClear={handleFiltersClear}
         cbPopup={handleFilterPopup}
         cbRadio={handleSearch}
         isPopup={isPopup}

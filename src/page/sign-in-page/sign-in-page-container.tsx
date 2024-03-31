@@ -9,7 +9,7 @@ import { SignInPage } from '@/page/sign-in-page/sign-in-page'
 import { SignInData, schemaSignInData } from '@/utils/validators/schemes'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-export const SignInPageContainer = () => {
+const SignInPageContainer = () => {
   const dispatch = useAppDispatch()
   const { isAuth } = useAppSelector(selectAuth)
   const { control, handleSubmit } = useForm<SignInData>({
@@ -26,9 +26,11 @@ export const SignInPageContainer = () => {
       }
       const userObj = JSON.parse(user)
 
-      if (userObj.email === email && userObj.password === password) {
-        dispatch(login({ email }))
-        localStorage.setItem('currentUser', JSON.stringify({ email, password }))
+      if (userObj.password === password) {
+        const { favoriteIds, stories } = userObj
+
+        dispatch(login({ email, favoriteIds, stories }))
+        localStorage.setItem('currentUser', JSON.stringify({ ...userObj }))
       }
     }, [])
   )
@@ -39,3 +41,5 @@ export const SignInPageContainer = () => {
 
   return <SignInPage control={control} onSubmit={signInHandler} />
 }
+
+export default SignInPageContainer

@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { useState } from 'react'
+import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
+import { store } from '@/app/store/store'
 import { testChars } from '@/constants'
 
 import { CharactersContainer } from './'
@@ -11,9 +13,11 @@ const meta: Meta<typeof CharactersContainer> = {
   component: CharactersContainer,
   decorators: [
     Story => (
-      <MemoryRouter initialEntries={['/']}>
-        <Story />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <Story />
+        </MemoryRouter>
+      </Provider>
     ),
   ],
   tags: ['autodocs'],
@@ -40,8 +44,9 @@ const ContainerWithState = () => {
   return (
     <CharactersContainer
       chars={testChars}
+      count={info.count}
       currPage={currPage}
-      info={info}
+      pages={info.pages}
       setAnotherPage={setAnotherPage}
     />
   )

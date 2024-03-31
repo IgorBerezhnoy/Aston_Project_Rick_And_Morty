@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
+
+import { store } from '@/app/store/store'
 
 import { CharacterCard } from '.'
 
@@ -8,9 +11,11 @@ const meta: Meta<typeof CharacterCard> = {
   component: CharacterCard,
   decorators: [
     Story => (
-      <MemoryRouter initialEntries={['/']}>
-        <Story />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <Story />
+        </MemoryRouter>
+      </Provider>
     ),
   ],
   tags: ['autodocs'],
@@ -29,6 +34,7 @@ const rickData = {
   gender: 'Male',
   id: 1,
   image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+  isFavorite: true,
   location: {
     name: 'Earth',
     url: 'https://rickandmortyapi.com/api/location/20',

@@ -1,7 +1,7 @@
-import { RootState } from '@/app/store'
+import { RootState } from '@/app/store/store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-interface AppState {
+export interface AppState {
   error: null | string
   initialized: boolean
   isLoading: boolean
@@ -34,6 +34,6 @@ export const { setError, setInitialized, setLoading } = appSlice.actions
 export const selectApp = (state: RootState) => state.app
 
 export default appSlice.reducer
-type ErrorActionType = { error: string }
+type ErrorActionType = { error: null | string }
 type InitializedActionType = { status: boolean }
 type IsLoadingActionType = { status: boolean }

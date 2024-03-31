@@ -1,17 +1,35 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 
+import { Star, StarOutline } from '@/assets/icons'
 import { urlPaths } from '@/enums'
+import { addFavoriteById, deleteFavoriteById, selectAuth } from '@/features/auth/authSlice'
+import { useAppDispatch, useAppSelector } from '@/hooks/use-appDispatch'
 import { Character } from '@/service/ResoursesService/CharactersApi'
+import clsx from 'clsx'
 
 import s from './characterCard.module.scss'
 
+export interface CharacterCardWithState extends Character {
+  isFavorite: boolean
+}
+
 type CharacterCardProps = {
-  char: Character
+  char: CharacterCardWithState
 }
 
 export const CharacterCard: FC<CharacterCardProps> = ({ char }) => {
-  const { id, image, name, origin, species } = char
+  const { isAuth } = useAppSelector(selectAuth)
+  const dispatch = useAppDispatch()
+  const { id, image, isFavorite, name, origin, species } = char
+
+  function handleButtonClick() {
+    if (isFavorite) {
+      dispatch(deleteFavoriteById({ favoriteId: id }))
+    } else {
+      dispatch(addFavoriteById({ favoriteId: id }))
+    }
+  }
 
   return (
     <li className={s.card}>
@@ -21,6 +39,19 @@ export const CharacterCard: FC<CharacterCardProps> = ({ char }) => {
       <h3 className={s.card__title}>{name}</h3>
       <p className={s.card__text}>{species}</p>
       <p className={s.card__text}>{origin.name}</p>
+      {isAuth && (
+        <button
+          className={clsx(s.card__button, s.button)}
+          onClick={handleButtonClick}
+          type={'button'}
+        >
+          {isFavorite ? (
+            <Star className={s.card__icon} />
+          ) : (
+            <StarOutline className={s.card__icon} />
+          )}
+        </button>
+      )}
     </li>
   )
 }
