@@ -8,7 +8,7 @@ import { selectAuth } from '@/features/auth/authSlice'
 import { useDatabaseUpdate } from '@/hooks/use-database-update'
 import { useQuery } from '@/hooks/use-query'
 import { useResourceFiltering } from '@/hooks/use-resource-filtering'
-import { CharactersApi } from '@/service/ResoursesService/CharactersApi'
+import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
 import { Info } from '@/service/ServicePrototype'
 
 import { SearchPage } from './search-page'
@@ -52,18 +52,21 @@ const SearchPageContainer: FC = () => {
     [navigate, urlParams]
   )
 
-  useDatabaseUpdate(user)
+  const addIsFavoriteForChar = useCallback(
+    (char: Character) => {
+      const isFavorite = user === null ? false : user.favoriteIds.includes(char.id)
+
+      return { ...char, isFavorite }
+    },
+    [user?.favoriteIds]
+  )
 
   const setCharacters = useCallback(
     async (params: string) => {
       const resObject = await CharactersApi.getCharacterPage(params)
 
       if (resObject.data) {
-        const charsWithState = resObject.data.results.map(char => {
-          const isFavorite = user === null ? false : user.favoriteIds.includes(char.id)
-
-          return { ...char, isFavorite }
-        })
+        const charsWithState = resObject.data.results.map(char => addIsFavoriteForChar(char))
 
         setChars(charsWithState)
         setInfo(resObject.data.info)
@@ -72,7 +75,7 @@ const SearchPageContainer: FC = () => {
         setInfo(baseInfo)
       }
     },
-    [user]
+    [addIsFavoriteForChar]
   )
 
   useEffect(() => {
@@ -82,6 +85,8 @@ const SearchPageContainer: FC = () => {
   useEffect(() => {
     setAnotherPage(1)
   }, [setAnotherPage])
+
+  useDatabaseUpdate(user)
 
   return (
     <SearchPage

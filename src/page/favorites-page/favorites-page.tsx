@@ -7,7 +7,7 @@ import { CharactersContainer } from '@/components/charactersContainer'
 import { urlPaths } from '@/enums'
 import { selectAuth } from '@/features/auth/authSlice'
 import { useDatabaseUpdate } from '@/hooks/use-database-update'
-import { CharactersApi } from '@/service/ResoursesService/CharactersApi'
+import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
 
 const baseCount = 20
 
@@ -31,7 +31,7 @@ const FavoritesPage: FC = () => {
     }
 
     return user.favoriteIds.slice((currPage - 1) * baseCount, currPage * baseCount)
-  }, [currPage, user])
+  }, [currPage, user?.favoriteIds])
 
   const setAnotherPage = useCallback(
     (nextPage: number) => {
@@ -39,6 +39,10 @@ const FavoritesPage: FC = () => {
     },
     [navigate]
   )
+
+  const addIsFavoriteForChar = useCallback((char: Character) => {
+    return { ...char, isFavorite: true }
+  }, [])
 
   const setCharacters = useCallback(async () => {
     if (currFavoriteIds.length === 0) {
@@ -52,16 +56,14 @@ const FavoritesPage: FC = () => {
       if (!Array.isArray(resObject.data)) {
         resObject.data = [resObject.data]
       }
-      const charsWithState = resObject.data.map(char => {
-        return { ...char, isFavorite: true }
-      })
+      const charsWithState = resObject.data.map(char => addIsFavoriteForChar(char))
 
       setChars(charsWithState)
     } else {
       //Пробросить ошибку в обработчик
       setChars([])
     }
-  }, [currFavoriteIds])
+  }, [currFavoriteIds, addIsFavoriteForChar])
 
   const pages = user === null ? 0 : Math.ceil(user.favoriteIds.length / baseCount)
 
