@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
-import { store } from '@/app/store'
+import { store } from '@/app/store/store'
 import { testChars } from '@/constants'
 
 import { CharactersContainer } from './'

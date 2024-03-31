@@ -1,4 +1,4 @@
-import { RootState } from '@/app/store'
+import { RootState } from '@/app/store/store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 type History = {
