@@ -6,24 +6,27 @@ let startState: AuthState
 
 beforeEach(() => {
   startState = {
-    email: null,
     error: null,
     isAuth: false,
+    user: null,
   }
 })
 describe('Work with auth slice ', () => {
   test('should be login', () => {
     const email = '1@1.ru'
-    const endState = authSlice.reducer(startState, login({ email }))
+    const endState = authSlice.reducer(startState, login({ email, favoriteIds: [] }))
 
-    expect(endState.email).toBe(email)
+    expect(endState.user).toEqual({ email, favoriteIds: [] })
     expect(endState.isAuth).toBe(true)
   })
   test('should be logOut', () => {
     const endState = authSlice.reducer(startState, logout())
 
-    expect(endState.email).toBe(null)
-    expect(endState.isAuth).toBe(false)
+    expect(endState).toEqual({
+      error: null,
+      isAuth: false,
+      user: null,
+    })
   })
   test('correct error should be set', () => {
     const error = 'This is big error'

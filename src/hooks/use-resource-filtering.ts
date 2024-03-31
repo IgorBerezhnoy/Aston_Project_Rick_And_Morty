@@ -1,5 +1,7 @@
 import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 
+import { genders, statuses } from '@/enums'
+
 const baseSearch = {
   gender: 'all',
   name: '',
@@ -28,8 +30,8 @@ export const useResourceFiltering = (query = baseSearch) => {
   const handleFiltersClear = useCallback(() => {
     setSearch({
       ...search,
-      gender: 'all',
-      status: 'all',
+      gender: genders.all,
+      status: statuses.all,
     })
   }, [search])
 

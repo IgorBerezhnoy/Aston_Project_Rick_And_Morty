@@ -1,13 +1,12 @@
 import { RootState } from '@/app/store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-
 export type User = {
   email: string
   favoriteIds: number[]
 }
 
-type AuthState = {
+export type AuthState = {
   error: null | string
   isAuth: boolean
   user: User | null
@@ -23,13 +22,13 @@ export const authSlice = createSlice({
   initialState,
   name: 'auth',
   reducers: {
-    addFavoriteById: (state, action: PayloadAction<FavotiteActionType>) => {
+    addFavoriteById: (state, action: PayloadAction<FavoriteActionType>) => {
       if (state.user === null) {
         return
       }
       state.user.favoriteIds.push(action.payload.favoriteId)
     },
-    deleteFavoriteById: (state, action: PayloadAction<FavotiteActionType>) => {
+    deleteFavoriteById: (state, action: PayloadAction<FavoriteActionType>) => {
       if (state.user === null) {
         return
       }
@@ -55,7 +54,6 @@ export const { addFavoriteById, deleteFavoriteById, login, logout, setError } = 
 
 export const selectAuth = (state: RootState) => state.auth
 
-
 type LoginActionType = { email: string; favoriteIds: number[] }
-type ErrorActionType = { error: string }
-type FavotiteActionType = { favoriteId: number }
+type ErrorActionType = { error: null | string }
+type FavoriteActionType = { favoriteId: number }
