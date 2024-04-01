@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 
+import { User } from '@/features/auth/authSlice'
+
 import s from './history.module.scss'
 type Props = {
-  history: Array<string> | null
+  history: User | null
 }
 
 export const History = ({ history }: Props) => {
@@ -10,7 +12,7 @@ export const History = ({ history }: Props) => {
 
   const randomEmodji = () => {
     const allowedEmoji = [...'😊🙃🤪🙂🤑🙁😞🥶🥵😈😂😂🤣😁😀🤓🤯😴💩👻👽🤖👾👐🖖✌️🤟🤘🤙👋🐭🦕🦖🐉']
-    const index = Math.floor(Math.random() * allowedEmoji.length)
+    const index = Math.floor(Math.random() * (allowedEmoji.length - 1))
     const emodji = allowedEmoji[index]
 
     return emodji
@@ -30,16 +32,16 @@ export const History = ({ history }: Props) => {
         <h1 className={s.titleName}>Search history</h1>
       </div>
       <div className={s.historyContainer}>
-        {history.map((item, index) => (
+        {history.stories.map((item, index) => (
           <div
             className={s.historyItem}
             key={index}
             onClick={() => {
-              navigate(`/search/?page=1&name=${history[index]}`)
+              navigate(`/search/?page=1&name=${history.stories[index].name}`)
             }}
           >
             {randomEmodji()}
-            {item}
+            {history.stories[index].name}
           </div>
         ))}
       </div>

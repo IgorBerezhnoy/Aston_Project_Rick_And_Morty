@@ -1,38 +1,15 @@
 import { useEffect, useState } from 'react'
 
+import { useAppSelector } from '@/hooks/use-appDispatch'
+
 import { History } from './history'
 
 const HistoryContainer = () => {
-  const [history, setHistory] = useState<null | string[]>(null)
+  const [history, setHistory] = useState(useAppSelector(state => state.auth.user))
 
-  useEffect(() => {
-    const currentUser = localStorage.getItem('currentUser')
+  console.log(history)
 
-    if (!currentUser) {
-      return //нет пользователя
-    }
-
-    const currentUserObj = JSON.parse(currentUser)
-
-    if (!currentUserObj?.history) {
-      setHistory(null)
-
-      return //пустая история
-    }
-
-    if (currentUserObj.history.length > 50) {
-      currentUserObj.history = currentUserObj.history.reverse()
-      currentUserObj.history.length = 50
-      currentUserObj.history = currentUserObj.history.reverse()
-
-      localStorage.removeItem('currentUser')
-      localStorage.setItem('currentUser', JSON.stringify(currentUserObj))
-    }
-
-    setHistory(currentUserObj.history.reverse())
-  }, [])
-
-  if (!history) {
+  if (!history?.stories) {
     return <History history={null} />
   }
 
