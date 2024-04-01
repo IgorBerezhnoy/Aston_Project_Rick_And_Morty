@@ -26,8 +26,10 @@ const SignInPageContainer = () => {
       }
       const userObj = JSON.parse(user)
 
-      if (userObj.email === email && userObj.password === password) {
-        dispatch(login({ email, favoriteIds: userObj.favoriteIds }))
+      if (userObj.password === password) {
+        const { favoriteIds, stories } = userObj
+
+        dispatch(login({ email, favoriteIds, stories }))
         localStorage.setItem('currentUser', JSON.stringify({ ...userObj }))
       }
     }, [])

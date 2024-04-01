@@ -1,11 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Provider } from 'react-redux'
+
+import { store } from '@/app/store'
 import { useResourceFiltering } from '@/hooks/use-resource-filtering'
 
 import { Filters } from '.'
 
 const meta: Meta<typeof Filters> = {
   component: Filters,
+  decorators: [
+    Story => (
+      <Provider store={store}>
+        <Story />
+      </Provider>
+    ),
+  ],
   tags: ['autodocs'],
   title: 'Components/UI/Filters',
 } satisfies Meta<typeof Filters>

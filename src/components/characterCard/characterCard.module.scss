@@ -1,4 +1,4 @@
-button {
+.button {
   all: unset;
 }
 
@@ -72,8 +72,6 @@ button {
     right: 10px;
 
     width: 15%;
-
-    z-index: 1;
 
     transition: transform 0.4s ease-in-out;
 

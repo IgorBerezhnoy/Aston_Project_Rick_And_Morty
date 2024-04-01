@@ -6,6 +6,7 @@ import { urlPaths } from '@/enums'
 import { addFavoriteById, deleteFavoriteById, selectAuth } from '@/features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks/use-appDispatch'
 import { Character } from '@/service/ResoursesService/CharactersApi'
+import clsx from 'clsx'
 
 import s from './characterCard.module.scss'
 
@@ -39,7 +40,11 @@ export const CharacterCard: FC<CharacterCardProps> = ({ char }) => {
       <p className={s.card__text}>{species}</p>
       <p className={s.card__text}>{origin.name}</p>
       {isAuth && (
-        <button className={s.card__button} onClick={handleButtonClick} type={'button'}>
+        <button
+          className={clsx(s.card__button, s.button)}
+          onClick={handleButtonClick}
+          type={'button'}
+        >
           {isFavorite ? (
             <Star className={s.card__icon} />
           ) : (
