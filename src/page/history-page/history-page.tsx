@@ -3,16 +3,10 @@ import { Link } from 'react-router-dom'
 import { User } from '@/features/auth/authSlice'
 
 import s from './history-page.module.scss'
+
+import { randomEmoji } from './lib/randomEmoji'
 type Props = {
   history: User | null
-}
-
-const randomEmoji = () => {
-  const allowedEmoji = [...'😊🙃🤪🙂🤑🙁😞🥶🥵😈😂😂🤣😁😀🤓🤯😴💩👻👽🤖👾👐🖖✌️🤟🤘🤙👋🐭🦕🦖🐉']
-  const index = Math.floor(Math.random() * allowedEmoji.length)
-  const emoji = allowedEmoji[index]
-
-  return emoji
 }
 
 export const History = ({ history }: Props) => {

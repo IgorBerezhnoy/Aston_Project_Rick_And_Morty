@@ -19,19 +19,19 @@ export const CharacterShare = () => {
   return (
     <div className={s.characterShare}>
       <RedditShareButton className={s.characterShareButton} url={currentPageUrl}>
-        <RedditIcon round></RedditIcon>
+        <RedditIcon round />
       </RedditShareButton>
       <TelegramShareButton className={s.characterShareButton} url={currentPageUrl}>
-        <TelegramIcon round></TelegramIcon>
+        <TelegramIcon round />
       </TelegramShareButton>
       <VKShareButton className={s.characterShareButton} url={currentPageUrl}>
-        <VKIcon round></VKIcon>
+        <VKIcon round />
       </VKShareButton>
       <ViberShareButton className={s.characterShareButton} url={currentPageUrl}>
-        <ViberIcon round></ViberIcon>
+        <ViberIcon round />
       </ViberShareButton>
       <WhatsappShareButton className={s.characterShareButton} url={currentPageUrl}>
-        <WhatsappIcon round></WhatsappIcon>
+        <WhatsappIcon round />
       </WhatsappShareButton>
     </div>
   )
