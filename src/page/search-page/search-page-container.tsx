@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { CharacterCardWithState } from '@/components/characterCard'
 import { GENDER, STATUS, baseInfo } from '@/constants'
+import { genders, statuses } from '@/enums'
 import { selectAuth } from '@/features/auth/authSlice'
 import { useDatabaseUpdate } from '@/hooks/use-database-update'
 import { useQuery } from '@/hooks/use-query'
@@ -30,9 +31,9 @@ const SearchPageContainer: FC = () => {
     urlParams,
     valueInput,
   } = useResourceFiltering({
-    gender: query.get(GENDER) || 'all',
+    gender: query.get(GENDER) || genders.all,
     name: query.get('name') || '',
-    status: query.get(STATUS) || 'all',
+    status: query.get(STATUS) || statuses.all,
   })
 
   const currPage = useMemo(() => {

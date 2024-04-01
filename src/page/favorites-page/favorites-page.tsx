@@ -7,7 +7,8 @@ import { CharactersContainer } from '@/components/charactersContainer'
 import { urlPaths } from '@/enums'
 import { selectAuth } from '@/features/auth/authSlice'
 import { useDatabaseUpdate } from '@/hooks/use-database-update'
-import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
+import { CharactersApi } from '@/service/ResoursesService/CharactersApi'
+import { addIsFavoriteForChar } from '@/utils'
 
 const baseCount = 20
 
@@ -39,10 +40,6 @@ const FavoritesPage: FC = () => {
     },
     [navigate]
   )
-
-  const addIsFavoriteForChar = useCallback((char: Character) => {
-    return { ...char, isFavorite: true }
-  }, [])
 
   const setCharacters = useCallback(async () => {
     if (currFavoriteIds.length === 0) {
