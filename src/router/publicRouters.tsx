@@ -9,6 +9,7 @@ const SignUpPageContainer = lazy(() => import('@/page/sign-up-page/sign-up-page-
 const Page404 = lazy(() => import('@/page/page-404/page-404'))
 const CharacterPageContainer = lazy(() => import('@/page/character-page/character-page-container'))
 const SearchPageContainer = lazy(() => import('@/page/search-page/search-page-container'))
+const HistoryContainer = lazy(() => import('@/page/history-page/history-page-container'))
 
 export const publicRouters: RouteObject[] = [
   {
@@ -18,6 +19,14 @@ export const publicRouters: RouteObject[] = [
       </Suspense>
     ),
     path: urlPaths.signIn,
+  },
+  {
+    element: (
+      <Suspense fallback={<Loader />}>
+        <HistoryContainer />
+      </Suspense>
+    ),
+    path: urlPaths.history,
   },
   {
     element: (

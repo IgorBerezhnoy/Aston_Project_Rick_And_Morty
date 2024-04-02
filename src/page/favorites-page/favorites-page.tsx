@@ -2,12 +2,13 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { CardPage } from '@/components/cardPage'
 import { CharacterCardWithState } from '@/components/characterCard'
 import { CharactersContainer } from '@/components/charactersContainer'
 import { urlPaths } from '@/enums'
 import { selectAuth } from '@/features/auth/authSlice'
 import { useDatabaseUpdate } from '@/hooks/use-database-update'
-import { CharactersApi } from '@/service/ResoursesService/CharactersApi'
+import { useGetCharactersByIdQuery } from '@/service/charactersApi'
 import { addIsFavoriteForChar } from '@/utils'
 
 const baseCount = 20
@@ -17,6 +18,8 @@ const FavoritesPage: FC = () => {
   const [chars, setChars] = useState<CharacterCardWithState[]>([])
   const navigate = useNavigate()
   const { page } = useParams()
+  const [favoriteIds, setFavoriteIds] = useState([1])
+  const { data } = useGetCharactersByIdQuery(favoriteIds)
 
   const currPage = useMemo(() => {
     if (page === undefined) {
@@ -41,34 +44,39 @@ const FavoritesPage: FC = () => {
     [navigate]
   )
 
-  const setCharacters = useCallback(async () => {
-    if (currFavoriteIds.length === 0) {
-      setChars([])
+  const pages = user === null ? 0 : Math.ceil(user.favoriteIds.length / baseCount)
 
-      return
-    }
-    const resObject = await CharactersApi.getCharactersById(currFavoriteIds)
+  useEffect(() => {
+    if (data) {
+      let arrData
 
-    if (resObject.data) {
-      if (!Array.isArray(resObject.data)) {
-        resObject.data = [resObject.data]
+      if (!Array.isArray(data)) {
+        arrData = [data]
+      } else {
+        arrData = data
       }
-      const charsWithState = resObject.data.map(char => addIsFavoriteForChar(char))
+      const charsWithState = arrData.map(char => addIsFavoriteForChar(char))
 
       setChars(charsWithState)
     } else {
       //Пробросить ошибку в обработчик
       setChars([])
     }
-  }, [currFavoriteIds, addIsFavoriteForChar])
-
-  const pages = user === null ? 0 : Math.ceil(user.favoriteIds.length / baseCount)
+  }, [data, addIsFavoriteForChar])
 
   useEffect(() => {
-    setCharacters()
-  }, [setCharacters])
+    if (currFavoriteIds.length === 0) {
+      setChars([])
+
+      return
+    }
+    setFavoriteIds(currFavoriteIds)
+  }, [currFavoriteIds])
 
   useDatabaseUpdate(user)
+  if (chars.length === 0) {
+    return <CardPage title={"You don't have any favorite"} />
+  }
 
   return (
     <CharactersContainer

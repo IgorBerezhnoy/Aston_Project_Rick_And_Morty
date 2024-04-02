@@ -16,6 +16,8 @@
   &Name {
     position: relative;
     font-size: 30px;
+    background-color: #fdf4e3;
+    z-index: 0;
     & h2:after {
       content: '';
       width: 87px;
@@ -40,5 +42,19 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+  }
+  &Share {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2%;
+    &Button {
+      &:hover {
+        transition: opacity 0.5s;
+        opacity: 0.5;
+      }
+      &:not(last-child) {
+        margin-left: 1%;
+      }
+    }
   }
 }
