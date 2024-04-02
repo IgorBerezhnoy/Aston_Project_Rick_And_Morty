@@ -27,12 +27,17 @@
   &Container {
     display: flex;
     flex-direction: column-reverse;
+    list-style: none;
   }
 
   &Item {
     cursor: pointer;
-    padding-left: 10%;
+
+    margin: 0;
+    padding: 0 0 0 10%;
+
     color: aliceblue;
+
     background: #4b4b4b;
 
     &:first-child {
@@ -48,6 +53,7 @@
     }
 
     &Link {
+      display: block;
       text-decoration: none;
     }
   }

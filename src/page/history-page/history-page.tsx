@@ -17,22 +17,20 @@ export const History = ({ history }: Props) => {
       <div className={s.titleContainer}>
         <h1 className={s.titleName}>Search history</h1>
       </div>
-      <div className={s.historyContainer}>
-        {history?.stories.length ? (
-          <>
-            {history.stories.map((item, index) => (
-              <div className={s.historyItem} key={index}>
-                <Link className={s.historyItemLink} to={`/search/?page=1&name=${item.name}`}>
-                  {randomEmoji()}
-                  {item.name}
-                </Link>
-              </div>
-            ))}
-          </>
-        ) : (
-          <CardPage title={"Sorry you don't have any history"} />
-        )}
-      </div>
+      {history?.stories.length ? (
+        <ul className={s.historyContainer}>
+          {history.stories.map((item, index) => (
+            <li className={s.historyItem} key={index}>
+              <Link className={s.historyItemLink} to={`/search/?page=1&name=${item.name}`}>
+                {randomEmoji()}
+                {item.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <CardPage title={"Sorry you don't have any history"} />
+      )}
     </div>
   )
 }
