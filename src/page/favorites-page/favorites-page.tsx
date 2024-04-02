@@ -9,6 +9,10 @@ import { selectAuth } from '@/features/auth/authSlice'
 import { useDatabaseUpdate } from '@/hooks/use-database-update'
 import { Character, useGetCharactersByIdQuery } from '@/service/charactersApi'
 
+import { CharactersApi } from '@/service/ResoursesService/CharactersApi'
+import { addIsFavoriteForChar } from '@/utils'
+
+
 const baseCount = 20
 
 const FavoritesPage: FC = () => {
@@ -42,11 +46,10 @@ const FavoritesPage: FC = () => {
     [navigate]
   )
 
-  const addIsFavoriteForChar = useCallback((char: Character) => {
-    return { ...char, isFavorite: true }
-  }, [])
-
   const pages = user === null ? 0 : Math.ceil(user.favoriteIds.length / baseCount)
+  const setCharacters = useCallback(async () => {
+    if (currFavoriteIds.length === 0) {
+      setChars([])
 
   useEffect(() => {
     if (data) {
