@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { urlPaths } from '@/enums'
 import { selectAuth } from '@/features/auth/authSlice'
@@ -22,8 +23,9 @@ const SignUpPageContainer = () => {
       const { confirmPassword, email, password } = data
 
       if (password !== confirmPassword) {
-        return // TODO Пока заглушка
+        toast.error('Passwords must match')
       }
+      toast('🦄 You have been registered')
       localStorage.setItem(email, JSON.stringify({ email, favoriteIds: [], password, stories: [] }))
       setIsRegister(true)
     }, [])
