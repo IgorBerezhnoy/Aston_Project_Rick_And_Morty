@@ -6,9 +6,9 @@ import { addHistory } from '@/features/auth/authSlice'
 import { useAppDispatch } from './use-appDispatch'
 
 const baseSearch = {
-  gender: 'all',
+  gender: genders.all,
   name: '',
-  status: 'all',
+  status: statuses.all,
 }
 
 export type SearchProps = {
