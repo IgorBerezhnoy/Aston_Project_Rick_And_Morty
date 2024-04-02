@@ -3,29 +3,30 @@ import { useParams } from 'react-router-dom'
 
 import { ErrorBoundary } from '@/components/errorBoundary/errorBoundary'
 import { CharacterPage } from '@/page/character-page/character-page'
-import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
+import { useGetCharacterByIdQuery } from '@/service/charactersApi'
 
 const CharacterPageContainer = () => {
   const { id } = useParams()
-  const [state, setState] = useState<Character | null>(null)
+  const [state, setState] = useState<number>(1)
+  const { data = null } = useGetCharacterByIdQuery(state)
 
   useEffect(() => {
     if (id) {
-      CharactersApi.getCharacterById(+id).then(res => setState(res.data))
+      setState(+id)
     }
-  }, [])
+  }, [id])
 
   if (!id || +id > 828) {
     return <></>
   }
-  if (!state) {
+  if (!data) {
     return <></>
   }
 
   // TODO пока заглушка
   return (
     <ErrorBoundary>
-      <CharacterPage char={state} />
+      <CharacterPage char={data} />
     </ErrorBoundary>
   )
 }

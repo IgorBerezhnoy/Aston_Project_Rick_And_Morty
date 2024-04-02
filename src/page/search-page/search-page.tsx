@@ -8,7 +8,7 @@ import { Filters } from '@/components/filters'
 import { FiltersContainer } from '@/components/filtersContainer'
 import { Search } from '@/components/search'
 import { SearchProps } from '@/hooks/use-resource-filtering'
-import { Info } from '@/service/ServicePrototype'
+import { Info } from '@/service/charactersApi'
 
 import s from './search-page.module.scss'
 

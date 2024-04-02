@@ -9,8 +9,7 @@ import { selectAuth } from '@/features/auth/authSlice'
 import { useDatabaseUpdate } from '@/hooks/use-database-update'
 import { useQuery } from '@/hooks/use-query'
 import { useResourceFiltering } from '@/hooks/use-resource-filtering'
-import { Character, CharactersApi } from '@/service/ResoursesService/CharactersApi'
-import { Info } from '@/service/ServicePrototype'
+import { Character, Info, useGetCharactersPageQuery } from '@/service/charactersApi'
 
 import { SearchPage } from './search-page'
 
@@ -19,6 +18,7 @@ const SearchPageContainer: FC = () => {
   const { user } = useSelector(selectAuth)
   const [info, setInfo] = useState<Info>(baseInfo)
   const query = useQuery()
+  const { data } = useGetCharactersPageQuery(query.toString())
   const navigate = useNavigate()
 
   const {
@@ -62,26 +62,17 @@ const SearchPageContainer: FC = () => {
     [user?.favoriteIds]
   )
 
-  const setCharacters = useCallback(
-    async (params: string) => {
-      const resObject = await CharactersApi.getCharacterPage(params)
-
-      if (resObject.data) {
-        const charsWithState = resObject.data.results.map(char => addIsFavoriteForChar(char))
-
-        setChars(charsWithState)
-        setInfo(resObject.data.info)
-      } else {
-        setChars([])
-        setInfo(baseInfo)
-      }
-    },
-    [addIsFavoriteForChar]
-  )
-
   useEffect(() => {
-    setCharacters(query.toString())
-  }, [setCharacters, query])
+    if (data) {
+      const charsWithState = data.results.map(char => addIsFavoriteForChar(char))
+
+      setChars(charsWithState)
+      setInfo(data.info)
+    } else {
+      setChars([])
+      setInfo(baseInfo)
+    }
+  }, [addIsFavoriteForChar, data])
 
   useEffect(() => {
     setAnotherPage(1)

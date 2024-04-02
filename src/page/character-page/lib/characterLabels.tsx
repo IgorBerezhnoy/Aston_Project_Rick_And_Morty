@@ -1,5 +1,5 @@
 import { CharacterLabel } from '@/components/characterLabel'
-import { Character } from '@/service/ResoursesService/CharactersApi'
+import { Character } from '@/service/charactersApi'
 
 import s from '../character-page.module.scss'
 
