@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
-import { toast } from 'react-toastify'
 
 import { MainHeader } from '@/components/header/mainHeader'
 import { Page } from '@/components/page'
@@ -19,8 +18,6 @@ export function Layout() {
     const currentUser = localStorage.getItem(localStorageKeys.currentUser)
 
     if (!currentUser) {
-      toast.error('User not found')
-
       return
     }
     const { email, favoriteIds, stories } = JSON.parse(currentUser)

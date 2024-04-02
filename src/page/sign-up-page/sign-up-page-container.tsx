@@ -22,12 +22,19 @@ const SignUpPageContainer = () => {
     useCallback((data: SignUpData) => {
       const { confirmPassword, email, password } = data
 
-      if (password !== confirmPassword) {
-        toast.error('Passwords must match')
+      if (localStorage.getItem(email)) {
+        toast.error('User with this email already exists')
+
+        return
       }
-      toast('🦄 You have been registered')
-      localStorage.setItem(email, JSON.stringify({ email, favoriteIds: [], password, stories: [] }))
-      setIsRegister(true)
+      if (password === confirmPassword) {
+        toast('🦄 You have been registered')
+        localStorage.setItem(
+          email,
+          JSON.stringify({ email, favoriteIds: [], password, stories: [] })
+        )
+        setIsRegister(true)
+      }
     }, [])
   )
 
