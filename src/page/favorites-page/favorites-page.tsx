@@ -2,16 +2,14 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { CardPage } from '@/components/cardPage'
 import { CharacterCardWithState } from '@/components/characterCard'
 import { CharactersContainer } from '@/components/charactersContainer'
 import { urlPaths } from '@/enums'
 import { selectAuth } from '@/features/auth/authSlice'
 import { useDatabaseUpdate } from '@/hooks/use-database-update'
-import { Character, useGetCharactersByIdQuery } from '@/service/charactersApi'
-
-import { CharactersApi } from '@/service/ResoursesService/CharactersApi'
+import { useGetCharactersByIdQuery } from '@/service/charactersApi'
 import { addIsFavoriteForChar } from '@/utils'
-
 
 const baseCount = 20
 
@@ -47,9 +45,6 @@ const FavoritesPage: FC = () => {
   )
 
   const pages = user === null ? 0 : Math.ceil(user.favoriteIds.length / baseCount)
-  const setCharacters = useCallback(async () => {
-    if (currFavoriteIds.length === 0) {
-      setChars([])
 
   useEffect(() => {
     if (data) {
@@ -79,6 +74,9 @@ const FavoritesPage: FC = () => {
   }, [currFavoriteIds])
 
   useDatabaseUpdate(user)
+  if (chars.length === 0) {
+    return <CardPage title={"You don't have any favorite"} />
+  }
 
   return (
     <CharactersContainer
