@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { urlPaths } from '@/enums'
 import { selectAuth } from '@/features/auth/authSlice'
@@ -21,11 +22,19 @@ const SignUpPageContainer = () => {
     useCallback((data: SignUpData) => {
       const { confirmPassword, email, password } = data
 
-      if (password !== confirmPassword) {
-        return // TODO Пока заглушка
+      if (localStorage.getItem(email)) {
+        toast.error('User with this email already exists')
+
+        return
       }
-      localStorage.setItem(email, JSON.stringify({ email, favoriteIds: [], password, stories: [] }))
-      setIsRegister(true)
+      if (password === confirmPassword) {
+        toast('🦄 You have been registered')
+        localStorage.setItem(
+          email,
+          JSON.stringify({ email, favoriteIds: [], password, stories: [] })
+        )
+        setIsRegister(true)
+      }
     }, [])
   )
 

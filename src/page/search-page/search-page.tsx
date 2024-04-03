@@ -21,6 +21,7 @@ type SearchPageContainerProps = {
   handleSearch: (name: string, value: string) => void
   handleSearchClear: () => void
   info: Info
+  isError?: boolean
   search: SearchProps
   setAnotherPage: (nextPage: number) => void
   valueInput: string
@@ -35,6 +36,7 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
   handleSearch,
   handleSearchClear,
   info,
+  isError,
   search,
   setAnotherPage,
   valueInput,
@@ -68,6 +70,7 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
             chars={chars}
             count={info.count}
             currPage={currPage}
+            isError={isError}
             pages={info.pages}
             setAnotherPage={setAnotherPage}
           />

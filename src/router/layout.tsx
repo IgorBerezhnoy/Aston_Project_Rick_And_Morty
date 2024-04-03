@@ -19,7 +19,7 @@ export function Layout() {
 
     if (!currentUser) {
       return
-    } // TODO Пока заглушка
+    }
     const { email, favoriteIds, stories } = JSON.parse(currentUser)
 
     dispatch(login({ email, favoriteIds, stories }))

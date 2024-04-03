@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { urlPaths } from '@/enums/enums'
 import { login, selectAuth } from '@/features/auth/authSlice'
@@ -22,7 +23,9 @@ const SignInPageContainer = () => {
       const user = localStorage.getItem(email)
 
       if (!user) {
-        return null
+        toast.error('User not found')
+
+        return
       }
       const userObj = JSON.parse(user)
 
@@ -31,6 +34,7 @@ const SignInPageContainer = () => {
 
         dispatch(login({ email, favoriteIds, stories }))
         localStorage.setItem('currentUser', JSON.stringify({ ...userObj }))
+        toast('🦄 Welcome', { position: 'top-center' })
       }
     }, [])
   )

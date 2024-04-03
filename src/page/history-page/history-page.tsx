@@ -5,7 +5,7 @@ import { User } from '@/features/auth/authSlice'
 
 import s from './history-page.module.scss'
 
-import { randomEmoji } from './lib/randomEmoji'
+import { randomEmoji } from '../../utils/randomEmoji'
 
 type Props = {
   history: User | null

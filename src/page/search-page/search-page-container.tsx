@@ -18,7 +18,7 @@ const SearchPageContainer: FC = () => {
   const { user } = useSelector(selectAuth)
   const [info, setInfo] = useState<Info>(baseInfo)
   const query = useQuery()
-  const { data } = useGetCharactersPageQuery(query.toString())
+  const { data, isError } = useGetCharactersPageQuery(query.toString())
   const navigate = useNavigate()
 
   const {
@@ -31,9 +31,9 @@ const SearchPageContainer: FC = () => {
     urlParams,
     valueInput,
   } = useResourceFiltering({
-    gender: query.get(GENDER) || genders.all,
+    gender: (query.get(GENDER) as genders) || genders.all,
     name: query.get('name') || '',
-    status: query.get(STATUS) || statuses.all,
+    status: (query.get(STATUS) as statuses) || statuses.all,
   })
 
   const currPage = useMemo(() => {
@@ -90,6 +90,7 @@ const SearchPageContainer: FC = () => {
       handleSearch={handleSearch}
       handleSearchClear={handleSearchClear}
       info={info}
+      isError={isError}
       search={search}
       setAnotherPage={setAnotherPage}
       valueInput={valueInput}

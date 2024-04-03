@@ -29,7 +29,7 @@ export const MainHeader = ({ isAuth, isLoading, name }: Props) => {
           <DropdownWithUserContainer name={name} />
         ) : (
           <Link className={s.link} to={urlPaths.signIn}>
-            <Button as={'span'} className={s.button} variant={'link'}>
+            <Button className={s.button} variant={'secondary'}>
               Sign In
             </Button>
           </Link>
