@@ -14,7 +14,7 @@ import {
 import s from '../character-page.module.scss'
 
 export const CharacterShare = ({ name }: { name: string }) => {
-  const url = 'https://aston-project-rick-and-morty.vercel.app/'
+  const url = window.location.href
   const title = `Hi! I'm looking for Rick and Morty character ${name} on Aston Project. Check it out! ${window.location.href}`
 
   return (
