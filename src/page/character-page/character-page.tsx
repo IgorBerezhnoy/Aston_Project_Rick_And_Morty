@@ -23,7 +23,7 @@ export const CharacterPage = ({ char }: CharacterPageProps) => {
         <CharacterImageContainer img={char.image} name={char.name} />
 
         <CharacterLabels char={char} />
-        <CharacterShare />
+        <CharacterShare name={char.name} />
       </div>
     </div>
   )
