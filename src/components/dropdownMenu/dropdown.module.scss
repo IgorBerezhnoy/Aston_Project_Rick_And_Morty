@@ -111,3 +111,9 @@
   background: transparent;
   border: none;
 }
+
+@media screen and (width <= 520px) {
+  .name {
+    display: none;
+  }
+}

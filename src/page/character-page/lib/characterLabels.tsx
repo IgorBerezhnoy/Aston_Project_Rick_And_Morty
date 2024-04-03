@@ -21,7 +21,14 @@ export const CharacterLabels = ({ char }: Props) => {
   return (
     <div className={s.characterLabels}>
       {dataFromLabel.map((props, index) => (
-        <CharacterLabel key={index} text={`${props[0]} ${props[1]}`} />
+        <CharacterLabel
+          key={index}
+          text={
+            <>
+              <b>{props[0]}</b> <span>{props[1]}</span>
+            </>
+          }
+        />
       ))}
     </div>
   )
