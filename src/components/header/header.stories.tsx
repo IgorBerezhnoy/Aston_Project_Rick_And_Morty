@@ -42,7 +42,6 @@ export const LogIn: Story = {
           </a>
         </div>
         <Avatar className={s.avatar} name={'Nick'} size={52} />
-        {/*// TODO: Чуть позже доюавлю дропдаун с навигацией */}
       </div>
     ),
   },

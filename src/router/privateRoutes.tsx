@@ -24,5 +24,5 @@ export function PrivateAppRoutes() {
     <Outlet />
   ) : (
     <CardPage title={'This section is available only to registered users'} />
-  ) // TODO Пока заглушка
+  )
 }
