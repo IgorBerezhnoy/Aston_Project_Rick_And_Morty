@@ -38,6 +38,19 @@ export const CharacterPage = ({ char }: CharacterPageProps) => {
           content={'https://i.pinimg.com/originals/6b/ba/73/6bba73ad75ca99ea30c9dfb3e24c55bf.jpg'}
           property={'og:image'}
         />
+        <meta content={'summary_large_image'} property={'twitter:card'} />
+        <meta content={window.location.href} property={'twitter:url'} />
+        <meta content={'Rick and Morty'} property={'twitter:title'} />
+        <meta
+          content={
+            'Aston Project: Rick and Morty This project is a web application that provides information about the popular TV show Rick and Morty. It utilizes various technologies and tools to create a seamless user experience.'
+          }
+          property={'twitter:description'}
+        />
+        <meta
+          content={'https://i.pinimg.com/originals/6b/ba/73/6bba73ad75ca99ea30c9dfb3e24c55bf.jpg'}
+          property={'twitter:image'}
+        />
       </Helmet>
       <CharacterPlaceholder name={char.name} />
 
