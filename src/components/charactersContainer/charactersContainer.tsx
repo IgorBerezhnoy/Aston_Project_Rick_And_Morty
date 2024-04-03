@@ -15,6 +15,7 @@ type CharacterContainerProps = {
   chars: CharacterCardWithState[]
   count: number
   currPage: number
+  isError?: boolean
   pages: number
   setAnotherPage: (page: number) => void
 }
@@ -23,26 +24,29 @@ export const CharactersContainer: FC<CharacterContainerProps> = ({
   chars,
   count,
   currPage,
+  isError,
   pages,
   setAnotherPage,
 }) => {
   const pageSize = getPageSize(count, pages)
 
-  if (chars.length === 0) {
-    return <CardPage title={'Characters not Found'} />
-  }
-
   return (
     <section className={s.page__section}>
-      <CharactersList chars={chars} className={s.page__list} />
-      {pages > 1 && (
-        <Pagination
-          currentPage={currPage}
-          onPageChange={setAnotherPage}
-          pageSize={pageSize}
-          stepValue={stepValue}
-          totalCount={count}
-        />
+      {isError ? (
+        <CardPage title={'Characters not Found'} />
+      ) : (
+        <>
+          <CharactersList chars={chars} className={s.page__list} />
+          {pages > 1 && (
+            <Pagination
+              currentPage={currPage}
+              onPageChange={setAnotherPage}
+              pageSize={pageSize}
+              stepValue={stepValue}
+              totalCount={count}
+            />
+          )}
+        </>
       )}
     </section>
   )

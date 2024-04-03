@@ -1,5 +1,12 @@
 import { RootState } from '@/app/store/store'
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import {
+  AnyAction,
+  PayloadAction,
+  createSlice,
+  isFulfilled,
+  isPending,
+  isRejected,
+} from '@reduxjs/toolkit'
 
 export interface AppState {
   error: null | string
@@ -14,6 +21,19 @@ const initialState: AppState = {
 }
 
 export const appSlice = createSlice({
+  extraReducers: builder => {
+    builder
+      .addMatcher(isPending, state => {
+        state.isLoading = true
+      })
+      .addMatcher(isRejected, (state, action: AnyAction) => {
+        state.isLoading = false
+        state.error = action.error.message
+      })
+      .addMatcher(isFulfilled, state => {
+        state.isLoading = false
+      })
+  },
   initialState,
   name: 'app',
   reducers: {

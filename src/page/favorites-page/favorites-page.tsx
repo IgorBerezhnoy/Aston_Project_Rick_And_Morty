@@ -18,8 +18,8 @@ const FavoritesPage: FC = () => {
   const [chars, setChars] = useState<CharacterCardWithState[]>([])
   const navigate = useNavigate()
   const { page } = useParams()
-  const [favoriteIds, setFavoriteIds] = useState([1])
-  const { data } = useGetCharactersByIdQuery(favoriteIds)
+  const [favoriteIds, setFavoriteIds] = useState([0])
+  const { data, isError } = useGetCharactersByIdQuery(favoriteIds)
 
   const currPage = useMemo(() => {
     if (page === undefined) {
@@ -59,7 +59,6 @@ const FavoritesPage: FC = () => {
 
       setChars(charsWithState)
     } else {
-      //Пробросить ошибку в обработчик
       setChars([])
     }
   }, [data, addIsFavoriteForChar])
@@ -74,7 +73,7 @@ const FavoritesPage: FC = () => {
   }, [currFavoriteIds])
 
   useDatabaseUpdate(user)
-  if (chars.length === 0) {
+  if (isError) {
     return <CardPage title={"You don't have any favorite"} />
   }
 
