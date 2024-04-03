@@ -1,12 +1,23 @@
 .characterLabel {
-  background: #685128;
-  padding: 5%;
   width: 36%;
-  margin-left: 5%;
   margin-right: 5%;
-  color: white;
-  border-radius: 10px;
-  text-align: left;
+  margin-left: 5%;
+  padding: 5%;
+
   font-size: 25px;
   font-weight: 400;
+  color: white;
+  text-align: left;
+
+  background: #685128;
+  border-radius: 10px;
+}
+
+@media screen and (width <= 768px) {
+  .characterLabel {
+    width: 100%;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding: 20px;
+  }
 }

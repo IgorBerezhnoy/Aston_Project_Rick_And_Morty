@@ -1,59 +1,92 @@
 .character {
   &Page {
+    overflow-x: hidden;
     margin: 0;
     font-family: system-ui;
-    overflow-x: hidden;
   }
+
   &ContentConteiner {
     max-width: 1440px;
     margin: 0 auto;
   }
+
   &NameContainer {
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
   &Name {
     position: relative;
+    z-index: 0;
     font-size: 30px;
     background-color: #fdf4e3;
-    z-index: 0;
-    & h2:after {
+
+    & h2::after {
       content: '';
+
+      position: absolute;
+      top: 50%;
+      left: calc(100% + 5px);
+
+      display: inline-flex;
+
       width: 87px;
       height: 6px;
+
       background-color: #f7391c;
-      display: inline-flex;
-      position: absolute;
-      left: calc(100% + 5px);
-      top: 50%;
     }
   }
+
   &ImageContainer {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
+
   &Image {
     max-width: 100%;
     border-radius: 50%;
   }
+
   &Labels {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
   }
+
   &Share {
     display: flex;
     justify-content: center;
     margin-bottom: 2%;
+
     &Button {
       &:hover {
-        transition: opacity 0.5s;
         opacity: 0.5;
+        transition: opacity 0.5s;
       }
+
       &:not(last-child) {
         margin-left: 1%;
+      }
+    }
+  }
+}
+
+@media screen and (width <= 768px) {
+  .character {
+    &Labels {
+      & h3 {
+        font-size: var(--font-size-m);
+        text-align: center;
+      }
+    }
+  }
+
+  .character {
+    &Name {
+      & h2::after {
+        display: none;
       }
     }
   }

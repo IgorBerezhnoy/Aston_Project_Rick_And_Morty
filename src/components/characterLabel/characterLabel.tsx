@@ -1,7 +1,9 @@
+import React from 'react'
+
 import s from './characterLabel.module.scss'
 
 type LabelProps = {
-  text: string
+  text: React.ReactNode
 }
 
 export const CharacterLabel = ({ text }: LabelProps) => {
