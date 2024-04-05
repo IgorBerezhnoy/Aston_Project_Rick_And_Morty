@@ -112,8 +112,6 @@
 
   .character {
     &Name {
-      overflow: hidden;
-
       & h2::after {
         display: none;
       }
@@ -121,10 +119,7 @@
 
     &Tittle {
       line-height: 50px;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      text-align: center;
 
       margin-left: 20px;
       margin-right: 20px;
