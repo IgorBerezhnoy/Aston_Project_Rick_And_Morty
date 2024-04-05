@@ -9,10 +9,12 @@ import s from './character-page.module.scss'
 import { CharacterShare } from './lib/characterShare'
 
 type CharacterPageProps = {
+  cbClick: () => void
   char: Character
+  isFavorite: boolean
 }
 
-export const CharacterPage = ({ char }: CharacterPageProps) => {
+export const CharacterPage = ({ cbClick, char, isFavorite }: CharacterPageProps) => {
   return (
     <div className={s.characterName}>
       <CharacterPlaceholder name={char.name} />
@@ -20,7 +22,12 @@ export const CharacterPage = ({ char }: CharacterPageProps) => {
       <div className={s.characterContentConteiner}>
         <CharacterNameContainer name={char.name} />
 
-        <CharacterImageContainer img={char.image} name={char.name} />
+        <CharacterImageContainer
+          cbClick={cbClick}
+          img={char.image}
+          isFavorite={isFavorite}
+          name={char.name}
+        />
 
         <CharacterLabels char={char} />
         <CharacterShare name={char.name} />
