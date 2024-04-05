@@ -44,9 +44,6 @@ dependencies:
   jest-environment-jsdom:
     specifier: ^29.7.0
     version: 29.7.0
-  raven:
-    specifier: ^2.6.4
-    version: 2.6.4
   react:
     specifier: ^18.2.0
     version: 18.2.0
