@@ -22,6 +22,7 @@ export const CharacterImageContainer = ({ cbClick, img, isFavorite, name }: Prop
         <button
           className={clsx(s.characterFavoriteButton, s.button)}
           onClick={cbClick}
+          title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           type={'button'}
         >
           {isFavorite ? (

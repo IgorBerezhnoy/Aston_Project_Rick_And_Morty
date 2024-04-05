@@ -43,6 +43,7 @@ export const CharacterCard: FC<CharacterCardProps> = ({ char }) => {
         <button
           className={clsx(s.card__button, s.button)}
           onClick={handleButtonClick}
+          title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           type={'button'}
         >
           {isFavorite ? (

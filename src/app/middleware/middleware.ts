@@ -1,22 +1,12 @@
-import { captureException } from 'raven'
+import { toast } from 'react-toastify'
 
-export const crashReporter =
-  (store: Store) => (next: (action: unknown) => unknown) => (action: unknown) => {
+export const errorHandlingMiddleware =
+  () => (next: (action: unknown) => unknown) => (action: unknown) => {
     try {
       return next(action)
-    } catch (err: unknown) {
-      const error = err as Error
+    } catch (error) {
+      toast('Error caught in middleware:')
 
-      console.error('Caught an exception!', err)
-      captureException(error, {
-        extra: {
-          action,
-          state: store.getState(),
-        },
-      })
-      throw error
+      return next({ payload: error, type: 'ERROR_OCCURRED' })
     }
   }
-type Store = {
-  getState: () => any
-}
