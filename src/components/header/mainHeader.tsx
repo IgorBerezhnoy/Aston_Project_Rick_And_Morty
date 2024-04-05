@@ -13,7 +13,6 @@ import s from './header.module.scss'
 type Props = {
   isAuth: boolean
   isLoading?: boolean
-
   name: string
 }
 

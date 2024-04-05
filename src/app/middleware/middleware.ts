@@ -1,11 +1,21 @@
-export const logger =
+import { captureException } from 'raven'
+
+export const crashReporter =
   (store: Store) => (next: (action: unknown) => unknown) => (action: unknown) => {
-    console.log('dispatching', action)
-    const result = next(action)
+    try {
+      return next(action)
+    } catch (err: unknown) {
+      const error = err as Error
 
-    console.log('next state', store.getState())
-
-    return result
+      console.error('Caught an exception!', err)
+      captureException(error, {
+        extra: {
+          action,
+          state: store.getState(),
+        },
+      })
+      throw error
+    }
   }
 type Store = {
   getState: () => any
