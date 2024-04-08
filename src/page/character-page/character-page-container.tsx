@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -17,7 +17,7 @@ const CharacterPageContainer = () => {
   const [isFavorite, setIsFavorite] = useState(false)
   const dispatch = useAppDispatch()
 
-  function handleButtonClick() {
+  const handleButtonClick = useCallback(() => {
     if (id) {
       if (isFavorite) {
         dispatch(deleteFavoriteById({ favoriteId: +id }))
@@ -25,7 +25,7 @@ const CharacterPageContainer = () => {
         dispatch(addFavoriteById({ favoriteId: +id }))
       }
     }
-  }
+  }, [dispatch, id, isFavorite])
 
   useEffect(() => {
     if (id) {
@@ -33,7 +33,7 @@ const CharacterPageContainer = () => {
 
       setState(numId)
       if (user) {
-        setIsFavorite(user.favoriteIds.includes(numId) ? true : false)
+        setIsFavorite(user.favoriteIds.includes(numId))
       }
     }
   }, [id, user?.favoriteIds])
