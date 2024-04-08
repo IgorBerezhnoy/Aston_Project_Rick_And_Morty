@@ -1,12 +1,12 @@
-export const logger =
-  (store: Store) => (next: (action: unknown) => unknown) => (action: unknown) => {
-    console.log('dispatching', action)
-    const result = next(action)
+import { toast } from 'react-toastify'
 
-    console.log('next state', store.getState())
+export const errorHandlingMiddleware =
+  () => (next: (action: unknown) => unknown) => (action: unknown) => {
+    try {
+      return next(action)
+    } catch (error) {
+      toast('Error caught in middleware:')
 
-    return result
+      return next({ payload: error, type: 'ERROR_OCCURRED' })
+    }
   }
-type Store = {
-  getState: () => any
-}

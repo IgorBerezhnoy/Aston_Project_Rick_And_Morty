@@ -1,3 +1,7 @@
+.button {
+  all: unset;
+}
+
 .character {
   &Page {
     overflow-x: hidden;
@@ -38,7 +42,30 @@
     }
   }
 
+  &FavoriteButton {
+    position: absolute;
+    top: 0;
+    right: calc(50% - 150px);
+
+    width: 40px;
+
+    transition: transform 0.4s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.4);
+    }
+  }
+
+  &Icon {
+    color: var(--color-danger-500);
+    width: 100%;
+    height: 100%;
+  }
+
   &ImageContainer {
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,6 +115,14 @@
       & h2::after {
         display: none;
       }
+    }
+
+    &Tittle {
+      line-height: 50px;
+      text-align: center;
+
+      margin-left: 20px;
+      margin-right: 20px;
     }
   }
 }

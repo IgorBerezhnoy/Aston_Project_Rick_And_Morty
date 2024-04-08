@@ -9,6 +9,7 @@ import { FiltersContainer } from '@/components/filtersContainer'
 import { Search } from '@/components/search'
 import { SearchProps } from '@/hooks/use-resource-filtering'
 import { Info } from '@/service/charactersApi'
+import clsx from 'clsx'
 
 import s from './search-page.module.scss'
 
@@ -49,7 +50,7 @@ export const SearchPage: FC<SearchPageContainerProps> = ({
 
   return (
     <>
-      <section className={`${s.page__section} ${s.page__section_search}`}>
+      <section className={clsx(s.page__section, s.page__section_search)}>
         <Search
           className={s.page__search}
           clearValue={handleSearchClear}
